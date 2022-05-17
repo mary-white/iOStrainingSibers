@@ -14,9 +14,7 @@ struct FlyingImg {
 }
 
 // constant
-let pi = 3.14159265                                                 // maybe constant exists?????
 let error = 0.5
-
 
 class ViewController: UIViewController {
     
@@ -157,7 +155,7 @@ class ViewController: UIViewController {
         flyingCat.image?.center = CGPoint(x: coordinateX, y: coordinateY)
         
         angle += 0.01
-        if angle >= 2 * pi {
+        if angle >= 2 * CGFloat.pi {
             angle = 0
         }
     }
