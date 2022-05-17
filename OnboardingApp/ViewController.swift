@@ -45,7 +45,6 @@ class ViewController: UIViewController {
     let fishHeight : CGFloat = 30
     let fishWidth : CGFloat = 30
     let imageNameFish = "fish.jpeg"
-    var fishNumber = 0
     
     // flying cat
     var flyingCat : FlyingImg = FlyingImg(image: nil, direction: .zero)
@@ -88,7 +87,6 @@ class ViewController: UIViewController {
             if (switchButton?.isOn)! {
                 // chaos
                 timerFly = Timer.scheduledTimer(timeInterval: timerInterval, target: self, selector: #selector(moveImgChaosAll), userInfo: nil, repeats: true)
-                
             } else {
                 // circle
                 flyingCat.image?.center = CGPoint(x: (flyingCat.image?.superview?.bounds.width)! / 2 + radius - 1, y: (flyingCat.image?.superview?.bounds.height)! / 2)
@@ -103,10 +101,7 @@ class ViewController: UIViewController {
             timerFly = nil
             
             // delete fish
-            for fish in flyingFish {
-                fish.image?.removeFromSuperview()
-            }
-            flyingFish.removeAll()
+            clearFishArray()
         }
         
         // change button state
@@ -114,11 +109,21 @@ class ViewController: UIViewController {
         isFlyState = !isFlyState
     }
     
+    func clearFishArray() {
+        for fish in flyingFish {
+            fish.image?.removeFromSuperview()
+        }
+        flyingFish.removeAll()
+    }
+    
     // image fly
     @objc func moveImgChaosAll() {
+        // fly cat
         moveImgChaos(flyingImg: &flyingCat)
+        
+        //fly fish
         var deletedFish : [Int] = []
-        for i in 0..<fishNumber {
+        for i in 0..<flyingFish.count {
             moveImgChaos(flyingImg: &flyingFish[i])
             // fix collision between cat end fish
             if isImagesCollision(cat: flyingCat.image!, fish: flyingFish[i].image!) {
@@ -139,12 +144,11 @@ class ViewController: UIViewController {
         for i in 0..<deletedFish.count {
             flyingFish.remove(at: deletedFish[i] - i)
         }
-        fishNumber = flyingFish.count
     }
     
     func moveImgChaos(flyingImg: inout FlyingImg) {
         flyingImg.image?.center = CGPoint(x: (flyingImg.image?.center.x)! + flyingImg.direction.x, y: (flyingImg.image?.center.y)! + flyingImg.direction.y)
-        fixImgBoundsdCollision(flyingImg: &flyingImg) // don't work with fish
+        fixImgBoundsdCollision(flyingImg: &flyingImg)
     }
     
     @objc func moveImgCircle() {
@@ -183,16 +187,20 @@ class ViewController: UIViewController {
     
     // create fish
     @IBAction func createFish() {
-        if isFlyState {
+        if isFlyState || !(switchButton?.isOn)!{
             return
         }
 
         // fill using fish
+        let fishNumber : Int? = Int((flyingFishNumber?.text)!)
+        // if not a number
+        if fishNumber == nil {
+            return
+        }
+        
         let bounds = flyingCat.image?.superview?.bounds
         
-        fishNumber = Int((flyingFishNumber?.text)!)!                                                                                                                    // check number or not!!!!!!
-        
-        for _ in 0..<fishNumber {
+        for _ in 0..<fishNumber! {
             var currentFish : FlyingImg = FlyingImg()
             
             // create image
@@ -203,7 +211,6 @@ class ViewController: UIViewController {
             let randomInitX : CGFloat = CGFloat.random(in: (fishWidth / 2)...((bounds?.width)! - fishWidth / 2))
             let randomInitY : CGFloat = CGFloat.random(in: (fishHeight / 2)...((bounds?.height)! - fishHeight / 2))
             imageView.frame = CGRect(x: randomInitX, y: randomInitY, width: fishWidth, height: fishHeight)
-            
             currentFish.image? = imageView
             
             // generate direction
@@ -212,7 +219,7 @@ class ViewController: UIViewController {
             currentFish.direction = CGPoint(x: xRandom, y: yRandom)
             
             // add picture
-            flyingCat.image?.superview?.addSubview(currentFish.image!)
+            flyingCat.image?.superview?.addSubview(currentFish.image!) // add into the frame with cat
             flyingFish.append(currentFish)
         }
     }
