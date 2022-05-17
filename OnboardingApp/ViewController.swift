@@ -121,7 +121,15 @@ class ViewController: UIViewController {
         for i in 0..<fishNumber {
             moveImgChaos(flyingImg: &flyingFish[i])
             // fix collision between cat end fish
-            if isImagesCollision(img1: flyingCat.image!, img2: flyingFish[i].image!) {
+            if isImagesCollision(cat: flyingCat.image!, fish: flyingFish[i].image!) {
+                // change cat direction
+                if (flyingCat.image?.frame.minX)! - (flyingFish[i].image?.frame.maxX)! <= error  || (flyingFish[i].image?.frame.minX)! - (flyingCat.image?.frame.maxX)! <= error {
+                    flyingCat.direction.x = -1 * flyingCat.direction.x
+                }
+                
+                if (flyingCat.image?.frame.minY)! - (flyingFish[i].image?.frame.maxY)! <= error  || (flyingFish[i].image?.frame.minY)! - (flyingCat.image?.frame.maxY)! <= error {
+                    flyingCat.direction.y = -1 * flyingCat.direction.y
+                }
                 // delete fish from screen
                 flyingFish[i].image?.removeFromSuperview()
                 deletedFish.append(i)
@@ -164,21 +172,11 @@ class ViewController: UIViewController {
     }
     
     // fix images collision
-    func isImagesCollision(img1: UIView, img2: UIView) -> Bool {
-        let frame1 = img1.frame
-        let frame2 = img2.frame
+    func isImagesCollision(cat: UIView, fish: UIView) -> Bool {
         // first up/down
-        if abs(img2.center.x - img1.center.x) < (img1.bounds.width + img2.bounds.width) / 2 {
-            if frame2.minY - frame1.maxY < error || // first up
-                frame1.minY - frame2.maxY < error { // fisrt down
-                return true
-            }
-        }
-        if abs(img2.center.y - img1.center.y) < (img1.bounds.height + img2.bounds.height) / 2 {
-            if frame2.minX - frame1.maxX < error || // first left
-                frame1.minX - frame2.maxX < error { // fisrt right
-                return true
-            }
+        if abs(fish.center.x - cat.center.x) < (cat.bounds.width + fish.bounds.width) / 2 &&
+            abs(fish.center.y - cat.center.y) < (cat.bounds.height + fish.bounds.height) / 2 {
+            return true
         }
         return false
     }
