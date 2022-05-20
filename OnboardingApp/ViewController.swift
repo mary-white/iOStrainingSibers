@@ -126,13 +126,17 @@ class ViewController: UIViewController {
             // fix collision between cat end fish
             if isImagesCollision(cat: flyingCat.image!, fish: flyingFish[i].image!) {
                 // change cat direction
-                if (flyingCat.image?.frame.minX)! - (flyingFish[i].image?.frame.maxX)! <= error  || (flyingFish[i].image?.frame.minX)! - (flyingCat.image?.frame.maxX)! <= error {
-                    flyingCat.direction.x = -1 * flyingCat.direction.x
+                let differenceX = (flyingCat.image?.center.x)! - (flyingFish[i].image?.center.x)!
+                let differenceY = (flyingCat.image?.center.y)! - (flyingFish[i].image?.center.y)!
+                
+                if abs(differenceY) < ((flyingCat.image?.bounds.height)! / 2 + (flyingFish[i].image?.bounds.height)! / 2) {
+                    flyingCat.direction.x = (differenceX > 0 ? 1 : -1) * abs(flyingCat.direction.x)
                 }
                 
-                if (flyingCat.image?.frame.minY)! - (flyingFish[i].image?.frame.maxY)! <= error  || (flyingFish[i].image?.frame.minY)! - (flyingCat.image?.frame.maxY)! <= error {
-                    flyingCat.direction.y = -1 * flyingCat.direction.y
+                if abs(differenceX) < ((flyingCat.image?.bounds.width)! / 2 + (flyingFish[i].image?.bounds.width)! / 2) {
+                    flyingCat.direction.y = (differenceY > 0 ? 1 : -1) * abs(flyingCat.direction.y)
                 }
+                
                 // delete fish from screen
                 flyingFish[i].image?.removeFromSuperview()
                 deletedFish.append(i)
@@ -176,11 +180,8 @@ class ViewController: UIViewController {
     // fix images collision
     func isImagesCollision(cat: UIView, fish: UIView) -> Bool {
         // first up/down
-        if abs(fish.center.x - cat.center.x) < (cat.bounds.width + fish.bounds.width) / 2 &&
-            abs(fish.center.y - cat.center.y) < (cat.bounds.height + fish.bounds.height) / 2 {
-            return true
-        }
-        return false
+        return abs(fish.center.x - cat.center.x) < (cat.bounds.width + fish.bounds.width) / 2 &&
+            abs(fish.center.y - cat.center.y) < (cat.bounds.height + fish.bounds.height) / 2
     }
     
     // create fish
