@@ -67,8 +67,8 @@
                     </view>
                     <connections>
                         <outlet property="catImg" destination="L1k-ah-nt2" id="NKl-6l-iAw"/>
+                        <outlet property="flyightStartButton" destination="eBZ-qt-UAY" id="fBG-dz-e8n"/>
                         <outlet property="flyingFishNumber" destination="dlZ-eJ-RZx" id="dtX-LK-VXW"/>
-                        <outlet property="startButton" destination="eBZ-qt-UAY" id="j9L-Ba-pnN"/>
                         <outlet property="switchButton" destination="oT3-3h-xmV" id="XeI-H2-JDz"/>
                         <outlet property="textLabel" destination="kFm-8m-N56" id="h8f-eE-7Uc"/>
                     </connections>
