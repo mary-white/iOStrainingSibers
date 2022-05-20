@@ -124,7 +124,7 @@ class ViewController: UIViewController {
         for i in 0..<flyingFish.count {
             moveImgChaotically(flyingImg: &flyingFish[i])
             // fix collision between cat end fish
-            if isImgCollision(firstImg: flyingCat.image!, secondImg: flyingFish[i].image!) {
+            if isImgCollision(firstImg: flyingCat, secondImg: flyingFish[i]) {
                 // change cat direction
                 let differenceXImgCenter = (flyingCat.image?.center.x)! - (flyingFish[i].image?.center.x)!
                 let differenceYImgCenter = (flyingCat.image?.center.y)! - (flyingFish[i].image?.center.y)!
@@ -178,9 +178,9 @@ class ViewController: UIViewController {
     }
     
     // fix images collision
-    func isImgCollision(firstImg: UIView, secondImg: UIView) -> Bool {
-        return abs(secondImg.center.x - firstImg.center.x) < (firstImg.bounds.width + secondImg.bounds.width) / 2 &&
-            abs(secondImg.center.y - firstImg.center.y) < (firstImg.bounds.height + secondImg.bounds.height) / 2
+    func isImgCollision(firstImg: FlyingImg, secondImg: FlyingImg) -> Bool {
+        return abs((secondImg.image?.center.x)! - (firstImg.image?.center.x)!) < ((firstImg.image?.bounds.width)! + (secondImg.image?.bounds.width)!) / 2 &&
+        abs((secondImg.image?.center.y)! - (firstImg.image?.center.y)!) < ((firstImg.image?.bounds.height)! + (secondImg.image?.bounds.height)!) / 2
     }
     
     // create fish
