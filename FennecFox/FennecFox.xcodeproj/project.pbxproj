@@ -9,21 +9,25 @@
 /* Begin PBXBuildFile section */
 		3FB669602837653600B7492F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6695F2837653600B7492F /* AppDelegate.swift */; };
 		3FB669622837653600B7492F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669612837653600B7492F /* SceneDelegate.swift */; };
-		3FB669642837653600B7492F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669632837653600B7492F /* ViewController.swift */; };
+		3FB669642837653600B7492F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669632837653600B7492F /* ListViewController.swift */; };
 		3FB669672837653600B7492F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB669652837653600B7492F /* Main.storyboard */; };
 		3FB669692837653900B7492F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FB669682837653900B7492F /* Assets.xcassets */; };
 		3FB6696C2837653900B7492F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6696A2837653900B7492F /* LaunchScreen.storyboard */; };
+		3FB6697A28377C7100B7492F /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6697928377C7100B7492F /* EditViewController.swift */; };
+		3FB6697E283784CB00B7492F /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6697D283784CB00B7492F /* NavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3FB6695C2837653600B7492F /* FennecFox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FennecFox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FB6695F2837653600B7492F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FB669612837653600B7492F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3FB669632837653600B7492F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3FB669632837653600B7492F /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		3FB669662837653600B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3FB669682837653900B7492F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3FB6696B2837653900B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FB6696D2837653900B7492F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FB6697928377C7100B7492F /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		3FB6697D283784CB00B7492F /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,11 +62,13 @@
 			children = (
 				3FB6695F2837653600B7492F /* AppDelegate.swift */,
 				3FB669612837653600B7492F /* SceneDelegate.swift */,
-				3FB669632837653600B7492F /* ViewController.swift */,
+				3FB669632837653600B7492F /* ListViewController.swift */,
+				3FB6697928377C7100B7492F /* EditViewController.swift */,
 				3FB669652837653600B7492F /* Main.storyboard */,
 				3FB669682837653900B7492F /* Assets.xcassets */,
 				3FB6696A2837653900B7492F /* LaunchScreen.storyboard */,
 				3FB6696D2837653900B7492F /* Info.plist */,
+				3FB6697D283784CB00B7492F /* NavigationController.swift */,
 			);
 			path = FennecFox;
 			sourceTree = "<group>";
@@ -138,7 +144,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FB669642837653600B7492F /* ViewController.swift in Sources */,
+				3FB6697A28377C7100B7492F /* EditViewController.swift in Sources */,
+				3FB669642837653600B7492F /* ListViewController.swift in Sources */,
+				3FB6697E283784CB00B7492F /* NavigationController.swift in Sources */,
 				3FB669602837653600B7492F /* AppDelegate.swift in Sources */,
 				3FB669622837653600B7492F /* SceneDelegate.swift in Sources */,
 			);
