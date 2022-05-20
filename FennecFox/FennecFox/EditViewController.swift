@@ -11,10 +11,11 @@ class EditViewController: UIViewController {
     
     @IBOutlet var saveButton : UIButton?
     @IBOutlet var textFieldOfValue : UITextField?
+    
+    var selectedCellContext = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
     

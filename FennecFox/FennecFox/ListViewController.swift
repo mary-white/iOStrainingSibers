@@ -60,10 +60,16 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
             
         // Cell content
         cell.textLabel!.text = String(tableContext[indexPath.row])
+        
         return cell
     }
     
-    @objc func actionToCellTap() {
-        reloadtableButton?.setTitle("adsffss", for: .normal)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedCellContext = tableContext[indexPath.row]
+        
+        var editViewController : EditViewController = EditViewController()
+        
+        editViewController.selectedCellContext = selectedCellContext
+        navigationController?.pushViewController(editViewController, animated: true)
     }
 }
