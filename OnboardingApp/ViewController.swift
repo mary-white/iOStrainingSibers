@@ -185,13 +185,15 @@ class ViewController: UIViewController {
     
     // create fish
     @IBAction func createFish() {
+        guard let fishNumber = Int((flyingFishNumber?.text)!) else {
+            return
+        }
+        
         if isFlightState || !(switchButton?.isOn)!{
             return
         }
 
         // fill using fish
-        let fishNumber : Int = Int((flyingFishNumber?.text)!) ?? 0
-        
         let screenBounds = flyingCat.image?.superview?.bounds
         
         for _ in 0..<fishNumber {
