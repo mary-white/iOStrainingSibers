@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  fenecFox
+//  FennecFox
 //
 //  Created by student on 20.05.2022.
 //

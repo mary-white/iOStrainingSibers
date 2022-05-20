@@ -7,27 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3FB66940283764CA00B7492F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6693F283764CA00B7492F /* AppDelegate.swift */; };
-		3FB66942283764CA00B7492F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB66941283764CA00B7492F /* SceneDelegate.swift */; };
-		3FB66944283764CA00B7492F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB66943283764CA00B7492F /* ViewController.swift */; };
-		3FB66947283764CA00B7492F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB66945283764CA00B7492F /* Main.storyboard */; };
-		3FB66949283764CB00B7492F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FB66948283764CB00B7492F /* Assets.xcassets */; };
-		3FB6694C283764CB00B7492F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6694A283764CB00B7492F /* LaunchScreen.storyboard */; };
+		3FB669602837653600B7492F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6695F2837653600B7492F /* AppDelegate.swift */; };
+		3FB669622837653600B7492F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669612837653600B7492F /* SceneDelegate.swift */; };
+		3FB669642837653600B7492F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669632837653600B7492F /* ViewController.swift */; };
+		3FB669672837653600B7492F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB669652837653600B7492F /* Main.storyboard */; };
+		3FB669692837653900B7492F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FB669682837653900B7492F /* Assets.xcassets */; };
+		3FB6696C2837653900B7492F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6696A2837653900B7492F /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3FB6693C283764CA00B7492F /* fenecFox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = fenecFox.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3FB6693F283764CA00B7492F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3FB66941283764CA00B7492F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		3FB66943283764CA00B7492F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		3FB66946283764CA00B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3FB66948283764CB00B7492F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3FB6694B283764CB00B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		3FB6694D283764CB00B7492F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3FB6695C2837653600B7492F /* FennecFox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FennecFox.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3FB6695F2837653600B7492F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		3FB669612837653600B7492F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		3FB669632837653600B7492F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3FB669662837653600B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3FB669682837653900B7492F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3FB6696B2837653900B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3FB6696D2837653900B7492F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3FB66939283764C900B7492F /* Frameworks */ = {
+		3FB669592837653600B7492F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,72 +37,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3FB66933283764C900B7492F = {
+		3FB669532837653600B7492F = {
 			isa = PBXGroup;
 			children = (
-				3FB6693E283764CA00B7492F /* fenecFox */,
-				3FB6693D283764CA00B7492F /* Products */,
+				3FB6695E2837653600B7492F /* FennecFox */,
+				3FB6695D2837653600B7492F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3FB6693D283764CA00B7492F /* Products */ = {
+		3FB6695D2837653600B7492F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3FB6693C283764CA00B7492F /* fenecFox.app */,
+				3FB6695C2837653600B7492F /* FennecFox.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3FB6693E283764CA00B7492F /* fenecFox */ = {
+		3FB6695E2837653600B7492F /* FennecFox */ = {
 			isa = PBXGroup;
 			children = (
-				3FB6693F283764CA00B7492F /* AppDelegate.swift */,
-				3FB66941283764CA00B7492F /* SceneDelegate.swift */,
-				3FB66943283764CA00B7492F /* ViewController.swift */,
-				3FB66945283764CA00B7492F /* Main.storyboard */,
-				3FB66948283764CB00B7492F /* Assets.xcassets */,
-				3FB6694A283764CB00B7492F /* LaunchScreen.storyboard */,
-				3FB6694D283764CB00B7492F /* Info.plist */,
+				3FB6695F2837653600B7492F /* AppDelegate.swift */,
+				3FB669612837653600B7492F /* SceneDelegate.swift */,
+				3FB669632837653600B7492F /* ViewController.swift */,
+				3FB669652837653600B7492F /* Main.storyboard */,
+				3FB669682837653900B7492F /* Assets.xcassets */,
+				3FB6696A2837653900B7492F /* LaunchScreen.storyboard */,
+				3FB6696D2837653900B7492F /* Info.plist */,
 			);
-			path = fenecFox;
+			path = FennecFox;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3FB6693B283764C900B7492F /* fenecFox */ = {
+		3FB6695B2837653600B7492F /* FennecFox */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3FB66950283764CB00B7492F /* Build configuration list for PBXNativeTarget "fenecFox" */;
+			buildConfigurationList = 3FB669702837653900B7492F /* Build configuration list for PBXNativeTarget "FennecFox" */;
 			buildPhases = (
-				3FB66938283764C900B7492F /* Sources */,
-				3FB66939283764C900B7492F /* Frameworks */,
-				3FB6693A283764C900B7492F /* Resources */,
+				3FB669582837653600B7492F /* Sources */,
+				3FB669592837653600B7492F /* Frameworks */,
+				3FB6695A2837653600B7492F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = fenecFox;
-			productName = fenecFox;
-			productReference = 3FB6693C283764CA00B7492F /* fenecFox.app */;
+			name = FennecFox;
+			productName = FennecFox;
+			productReference = 3FB6695C2837653600B7492F /* FennecFox.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3FB66934283764C900B7492F /* Project object */ = {
+		3FB669542837653600B7492F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
-					3FB6693B283764C900B7492F = {
+					3FB6695B2837653600B7492F = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
 				};
 			};
-			buildConfigurationList = 3FB66937283764C900B7492F /* Build configuration list for PBXProject "fenecFox" */;
+			buildConfigurationList = 3FB669572837653600B7492F /* Build configuration list for PBXProject "FennecFox" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +110,55 @@
 				en,
 				Base,
 			);
-			mainGroup = 3FB66933283764C900B7492F;
-			productRefGroup = 3FB6693D283764CA00B7492F /* Products */;
+			mainGroup = 3FB669532837653600B7492F;
+			productRefGroup = 3FB6695D2837653600B7492F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3FB6693B283764C900B7492F /* fenecFox */,
+				3FB6695B2837653600B7492F /* FennecFox */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3FB6693A283764C900B7492F /* Resources */ = {
+		3FB6695A2837653600B7492F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FB6694C283764CB00B7492F /* LaunchScreen.storyboard in Resources */,
-				3FB66949283764CB00B7492F /* Assets.xcassets in Resources */,
-				3FB66947283764CA00B7492F /* Main.storyboard in Resources */,
+				3FB6696C2837653900B7492F /* LaunchScreen.storyboard in Resources */,
+				3FB669692837653900B7492F /* Assets.xcassets in Resources */,
+				3FB669672837653600B7492F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3FB66938283764C900B7492F /* Sources */ = {
+		3FB669582837653600B7492F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FB66944283764CA00B7492F /* ViewController.swift in Sources */,
-				3FB66940283764CA00B7492F /* AppDelegate.swift in Sources */,
-				3FB66942283764CA00B7492F /* SceneDelegate.swift in Sources */,
+				3FB669642837653600B7492F /* ViewController.swift in Sources */,
+				3FB669602837653600B7492F /* AppDelegate.swift in Sources */,
+				3FB669622837653600B7492F /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		3FB66945283764CA00B7492F /* Main.storyboard */ = {
+		3FB669652837653600B7492F /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3FB66946283764CA00B7492F /* Base */,
+				3FB669662837653600B7492F /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		3FB6694A283764CB00B7492F /* LaunchScreen.storyboard */ = {
+		3FB6696A2837653900B7492F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3FB6694B283764CB00B7492F /* Base */,
+				3FB6696B2837653900B7492F /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +166,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3FB6694E283764CB00B7492F /* Debug */ = {
+		3FB6696E2837653900B7492F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -227,7 +227,7 @@
 			};
 			name = Debug;
 		};
-		3FB6694F283764CB00B7492F /* Release */ = {
+		3FB6696F2837653900B7492F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -282,7 +282,7 @@
 			};
 			name = Release;
 		};
-		3FB66951283764CB00B7492F /* Debug */ = {
+		3FB669712837653900B7492F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -290,7 +290,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = fenecFox/Info.plist;
+				INFOPLIST_FILE = FennecFox/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -301,7 +301,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = testapp.fenecFox;
+				PRODUCT_BUNDLE_IDENTIFIER = testapp.FennecFox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -309,7 +309,7 @@
 			};
 			name = Debug;
 		};
-		3FB66952283764CB00B7492F /* Release */ = {
+		3FB669722837653900B7492F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -317,7 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = fenecFox/Info.plist;
+				INFOPLIST_FILE = FennecFox/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -328,7 +328,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = testapp.fenecFox;
+				PRODUCT_BUNDLE_IDENTIFIER = testapp.FennecFox;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -339,25 +339,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3FB66937283764C900B7492F /* Build configuration list for PBXProject "fenecFox" */ = {
+		3FB669572837653600B7492F /* Build configuration list for PBXProject "FennecFox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3FB6694E283764CB00B7492F /* Debug */,
-				3FB6694F283764CB00B7492F /* Release */,
+				3FB6696E2837653900B7492F /* Debug */,
+				3FB6696F2837653900B7492F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3FB66950283764CB00B7492F /* Build configuration list for PBXNativeTarget "fenecFox" */ = {
+		3FB669702837653900B7492F /* Build configuration list for PBXNativeTarget "FennecFox" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3FB66951283764CB00B7492F /* Debug */,
-				3FB66952283764CB00B7492F /* Release */,
+				3FB669712837653900B7492F /* Debug */,
+				3FB669722837653900B7492F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 3FB66934283764C900B7492F /* Project object */;
+	rootObject = 3FB669542837653600B7492F /* Project object */;
 }
