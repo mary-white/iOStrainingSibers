@@ -23,7 +23,7 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func saveNewCellValue() {
-        guard let newCellValue = Int((textFieldOfValue?.text)!) else {
+        guard let newMean = textFieldOfValue?.text, let newCellValue = Int(newMean) else {
             return
         }
         
