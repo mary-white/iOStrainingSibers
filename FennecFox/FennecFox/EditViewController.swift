@@ -16,8 +16,6 @@ class EditViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        textFieldOfValue?.text = selectedCellContext
     }
     
     override func viewWillAppear(_ animated: Bool) {

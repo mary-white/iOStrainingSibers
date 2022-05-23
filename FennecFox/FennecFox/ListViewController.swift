@@ -15,6 +15,7 @@ class ListViewController: UIViewController {
     
     @IBOutlet var table : UITableView?
     @IBOutlet var reloadtableButton : UIButton?
+    @IBOutlet var addingNewCellButton : UIButton?
     
     // cell variables
     var cellNumber = 0
@@ -27,6 +28,7 @@ class ListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadtableButton?.setTitle("Update the table context", for: .normal)
+        addingNewCellButton?.setTitle("Add new random cell", for: .normal)
         
         // generate cell number
         cellNumber = Int.random(in: 1...maxCellNumber)
@@ -95,5 +97,11 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         table?.reloadData()
         
         editCellNumber = nil
+    }
+    
+    @IBAction func addNewCell() {
+        cellNumber += 1
+        tableContext.append(String(Int.random(in: 0...maxNumberInCell)))
+        table?.reloadData()
     }
 }
