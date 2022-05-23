@@ -47,9 +47,9 @@
         <!--Edit View Controller-->
         <scene sceneID="akT-80-14A">
             <objects>
-                <viewController id="Bwe-4f-jDe" customClass="EditViewController" customModule="FennecFox" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditViewController" id="Bwe-4f-jDe" customClass="EditViewController" customModule="FennecFox" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Fbj-Qr-3GU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Enter the new value" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7IG-Z3-a9A">
@@ -66,7 +66,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qXE-7z-ggX">
-                                <rect key="frame" x="180" y="313" width="56" height="31"/>
+                                <rect key="frame" x="169" y="314" width="76" height="31"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Save"/>
@@ -86,19 +86,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="B2B-gA-GFy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="849" y="138"/>
+            <point key="canvasLocation" x="847.82608695652175" y="137.94642857142856"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Kgh-L1-mu4">
             <objects>
-                <navigationController id="kwh-1b-r0F" customClass="NavigationController" customModule="FennecFox" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController id="kwh-1b-r0F" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b7I-qr-tyC">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="G4R-bk-qhX"/>
-                        <segue destination="Bwe-4f-jDe" kind="show" id="khI-ER-15r"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="J2m-r9-NKQ"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TmM-vs-LyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

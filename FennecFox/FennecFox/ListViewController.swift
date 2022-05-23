@@ -19,10 +19,13 @@ class ListViewController: UIViewController {
     // cell variables
     var cellNumber = 0
     var tableContext : [String] = []
+    
+    // edit cell variables
+    var editCellNumber : Int? = nil
+    var editViewController : EditViewController = EditViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         reloadtableButton?.setTitle("Update the table context", for: .normal)
         
         // generate cell number
@@ -32,6 +35,8 @@ class ListViewController: UIViewController {
         table?.dataSource = self
         table?.delegate = self
         table?.register(UITableViewCell.self, forCellReuseIdentifier: "standartCell")
+        
+        editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
     }
     
     @IBAction func updateTableData() {
@@ -46,6 +51,10 @@ class ListViewController: UIViewController {
             tableContext.append(String(Int.random(in: 0...maxNumberInCell)))
         }
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateCellContent()
+    }
 }
 
 // table generation - overload function
@@ -54,6 +63,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         return cellNumber
     }
     
+    // fill the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Ask for a cell of the appropriate type.
         let cell = tableView.dequeueReusableCell(withIdentifier: "standartCell", for: indexPath)
@@ -64,12 +74,26 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
+    // tap to a row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCellContext = tableContext[indexPath.row]
+        editCellNumber = indexPath.row
         
-        var editViewController : EditViewController = EditViewController()
-        
+        // create and configure the new view
+        //let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
         editViewController.selectedCellContext = selectedCellContext
-        navigationController?.pushViewController(editViewController, animated: true)
+        
+        self.navigationController?.pushViewController(editViewController, animated: true)
+    }
+    
+    func updateCellContent() {
+        guard let cellNumber = editCellNumber else {
+            return
+        }
+
+        tableContext[cellNumber] = (editViewController.selectedCellContext)
+        table?.reloadData()
+        
+        editCellNumber = nil
     }
 }

@@ -16,13 +16,22 @@ class EditViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        textFieldOfValue?.text = selectedCellContext
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        textFieldOfValue?.text = selectedCellContext
     }
     
     @IBAction func saveNewCellValue() {
         guard let newCellValue = Int((textFieldOfValue?.text)!) else {
             return
         }
+        
+        selectedCellContext = String(newCellValue)
+        
+        self.navigationController?.popViewController(animated: true)
     }
 
 }
