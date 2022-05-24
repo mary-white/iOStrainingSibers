@@ -76,6 +76,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         
         // create and configure the new view
         let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        editViewController.dataSource = self
         
         self.navigationController?.pushViewController(editViewController, animated: true)
     }

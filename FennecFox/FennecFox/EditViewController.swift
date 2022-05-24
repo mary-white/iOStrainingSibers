@@ -19,17 +19,21 @@ class EditViewController: UIViewController {
     @IBOutlet var greenColorComponent : UITextField?
     @IBOutlet var blueColorComponent : UITextField?
     @IBOutlet var colorUpdateButton : UIButton?
+    
+    // delegate
+    var dataSource : DataSource? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
+    
+        textFieldOfValue?.text = dataSource?.getDataToChange()
         
-        let dataSource = self.navigationController?.viewControllers[0] as! DataSource
-        textFieldOfValue?.text = dataSource.getDataToChange()
+        guard let oldColor = dataSource?.getColorToChange() else {
+            return
+        }
         
-        let oldColor = dataSource.getColorToChange()
         colorView?.backgroundColor = oldColor
         let rgb = oldColor.rgbaComponents
-        
         
         redColorComponent?.text = String(convertRGBToInt(rgb.red))
         greenColorComponent?.text = String(convertRGBToInt(rgb.green))
@@ -53,8 +57,7 @@ class EditViewController: UIViewController {
             return
         }
         
-        let dataSource = self.navigationController?.viewControllers[0] as! DataSource
-        dataSource.setChangedData(newData: newMean, newColor: UIColor(red: convertIntToRGB(rComponent), green: convertIntToRGB(gComponent), blue: convertIntToRGB(bComponent), alpha: 1))
+        dataSource?.setChangedData(newData: newMean, newColor: UIColor(red: convertIntToRGB(rComponent), green: convertIntToRGB(gComponent), blue: convertIntToRGB(bComponent), alpha: 1))
         
         self.navigationController?.popViewController(animated: true)
     }
