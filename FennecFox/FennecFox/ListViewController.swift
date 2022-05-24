@@ -37,8 +37,6 @@ class ListViewController: UIViewController, DataSource {
         table?.dataSource = self
         table?.delegate = self
         table?.register(UITableViewCell.self, forCellReuseIdentifier: "standartCell")
-        
-        //editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
     }
     
     @IBAction func updateTableData() {
