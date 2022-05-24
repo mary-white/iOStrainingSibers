@@ -119,5 +119,8 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         }
         
         tableContext[cellNumberToChange] = newData
+        table?.reloadData()
+        
+        editCellNumber = nil
     }
 }
