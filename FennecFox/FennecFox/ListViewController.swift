@@ -10,6 +10,7 @@ import UIKit
 // constants
 let maxCellNumber = 10
 let maxNumberInCell = 10
+let defaultColor = UIColor.systemRed
 
 class ColorCell : UITableViewCell {
     @IBOutlet var color : UIImageView?
@@ -34,17 +35,14 @@ class ListViewController: UIViewController, DataSource {
         addingNewCellButton?.setTitle("Add new random cell", for: .normal)
         
         // generate cell number
-        let cellNumber = Int.random(in: 1...maxCellNumber)
-        dataContainer.appendRandom(number: cellNumber)
+        dataContainer.generateRandomCells()
         
         table?.dataSource = self
         table?.delegate = self
     }
     
     @IBAction func updateTableData() {
-        let cellNumber = Int.random(in: 1...maxCellNumber)
-        dataContainer.removeAll()
-        dataContainer.appendRandom(number: cellNumber)
+        dataContainer.generateRandomCells()
         table?.reloadData()
     }
 }
@@ -107,7 +105,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     
     func getColorToChange() -> UIColor {
         guard let cellNumberToChange = editCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
-            return .systemRed
+            return defaultColor
         }
         return dataCell.color
     }

@@ -28,6 +28,12 @@ class ColorLabelContainer {
         cellArray.append(newColorLabel)
     }
     
+    func generateRandomCells() {
+        removeAll()
+        let cellNumber = Int.random(in: 1...maxCellNumber)
+        appendRandom(number: cellNumber)
+    }
+    
     func appendRandom(number : Int = 1) {
         for _ in 0..<number {
             let randomRedColorComponent = CGFloat.random(in: 0...1)
