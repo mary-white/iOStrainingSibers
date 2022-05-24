@@ -45,37 +45,34 @@ class EditViewController: UIViewController {
             return
         }
         
-        guard let newRedComponentMean = textFieldContentToInt(redColorComponent) else {
+        guard let newColor = getColorComponentsFromTextFields() else {
             return
         }
         
-        guard let newGreenComponentMean = textFieldContentToInt(greenColorComponent) else {
-            return
-        }
-        
-        guard let newBlueComponentMean = textFieldContentToInt(blueColorComponent) else {
-            return
-        }
-        
-        dataSource?.setChangedData(newData: String(newNumberMean), newColor: UIColor(red: convertIntToRGB(newRedComponentMean), green: convertIntToRGB(newGreenComponentMean), blue: convertIntToRGB(newBlueComponentMean), alpha: 1))
+        dataSource?.setChangedData(newData: String(newNumberMean), newColor: UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1))
         
         self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func updateColor() {
-        guard let newRedComponentMean = textFieldContentToInt(redColorComponent) else {
+        guard let newColor = getColorComponentsFromTextFields() else {
             return
         }
         
-        guard let newGreenComponentMean = textFieldContentToInt(greenColorComponent) else {
-            return
+        colorView?.backgroundColor = UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1)
+    }
+    
+    func getColorComponentsFromTextFields() -> (red : Int, green : Int, blue : Int)? {
+        guard let redComponentMean = textFieldContentToInt(redColorComponent) else {
+            return nil
         }
-        
-        guard let newBlueComponentMean = textFieldContentToInt(blueColorComponent) else {
-            return
+        guard let greenComponentMean = textFieldContentToInt(greenColorComponent) else {
+            return nil
         }
-        
-        colorView?.backgroundColor = UIColor(red: convertIntToRGB(newRedComponentMean), green: convertIntToRGB(newGreenComponentMean), blue: convertIntToRGB(newBlueComponentMean), alpha: 1)
+        guard let blueComponentMean = textFieldContentToInt(blueColorComponent) else {
+            return nil
+        }
+        return (red : redComponentMean, green : greenComponentMean, blue : blueComponentMean)
     }
 }
 
