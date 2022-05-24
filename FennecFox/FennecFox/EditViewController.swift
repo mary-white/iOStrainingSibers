@@ -102,7 +102,8 @@ func convertRGBToInt(_ mean : CGFloat) -> Int {
 }
 
 func convertIntToRGB(_ mean : Int) -> CGFloat {
-    return CGFloat(mean) / 255
+    let newMean = CGFloat(mean) / 255
+    return newMean < 1 ? newMean : 1
 }
 
 func textFielContentToInt(_ field : UITextField?) -> Int? {
