@@ -65,10 +65,6 @@ class ColorLabelContainer {
     
     // getter
     func index(at index : Int) -> ColorLabel? {
-        if index >= cellArray.count || index < 0 {
-            return nil
-        }
-        
-        return cellArray[index]
+        return index >= cellArray.count || index < 0 ? nil : cellArray[index]
     }
 }
