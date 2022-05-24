@@ -11,7 +11,7 @@ import UIKit
 let maxCellNumber = 30
 let maxNumberInCell = 10
 
-class ListViewController: UIViewController {
+class ListViewController: UIViewController, DataSource {
     
     @IBOutlet var table : UITableView?
     @IBOutlet var reloadtableButton : UIButton?
@@ -103,5 +103,21 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         cellNumber += 1
         tableContext.append(String(Int.random(in: 0...maxNumberInCell)))
         table?.reloadData()
+    }
+    
+    // protocol functions
+    func getDataToChange() -> String {
+        guard let cellNumberToChange = editCellNumber else {
+            return ""
+        }
+        return tableContext[cellNumberToChange]
+    }
+    
+    func setChangedData(newData : String) {
+        guard let cellNumberToChange = editCellNumber else {
+            return
+        }
+        
+        tableContext[cellNumberToChange] = newData
     }
 }

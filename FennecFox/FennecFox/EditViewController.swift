@@ -33,3 +33,8 @@ class EditViewController: UIViewController {
     }
 
 }
+
+protocol DataSource {
+    func getDataToChange() -> String;
+    func setChangedData(newData : String);
+}
