@@ -26,52 +26,52 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        textFieldOfValue?.text = dataSource?.getDataToChange()
-        
-        guard let oldColor = dataSource?.getColorToChange() else {
+        guard let oldColor = dataSource?.getColorToChange(), let textToChange = dataSource?.getDataToChange() else {
             return
         }
         
-        colorView?.backgroundColor = oldColor
-        let rgb = oldColor.rgbaComponents
+        textFieldOfValue?.text = textToChange
         
-        redColorComponent?.text = String(convertRGBToInt(rgb.red))
-        greenColorComponent?.text = String(convertRGBToInt(rgb.green))
-        blueColorComponent?.text = String(convertRGBToInt(rgb.blue))
+        colorView?.backgroundColor = oldColor
+        
+        let rgbOldColor = oldColor.rgbaComponents
+        redColorComponent?.text = String(convertRGBToInt(rgbOldColor.red))
+        greenColorComponent?.text = String(convertRGBToInt(rgbOldColor.green))
+        blueColorComponent?.text = String(convertRGBToInt(rgbOldColor.blue))
     }
     
     @IBAction func saveNewCellValue() {
-        guard let newMean = textFieldOfValue?.text, let _ = Int(newMean) else {
+        guard let newNumberMean = textFieldContentToInt(textFieldOfValue) else {
             return
         }
         
-        guard let newRedComponentMean = redColorComponent?.text, let rComponent = Int(newRedComponentMean) else {
+        guard let newRedComponentMean = textFieldContentToInt(redColorComponent) else {
             return
         }
         
-        guard let newGreenComponentMean = greenColorComponent?.text, let gComponent = Int(newGreenComponentMean) else {
+        guard let newGreenComponentMean = textFieldContentToInt(greenColorComponent) else {
             return
         }
         
-        guard let newBlueComponentMean = blueColorComponent?.text, let bComponent = Int(newBlueComponentMean) else {
+        guard let newBlueComponentMean = textFieldContentToInt(blueColorComponent) else {
             return
         }
         
-        dataSource?.setChangedData(newData: newMean, newColor: UIColor(red: convertIntToRGB(rComponent), green: convertIntToRGB(gComponent), blue: convertIntToRGB(bComponent), alpha: 1))
+        dataSource?.setChangedData(newData: String(newNumberMean), newColor: UIColor(red: convertIntToRGB(newRedComponentMean), green: convertIntToRGB(newGreenComponentMean), blue: convertIntToRGB(newBlueComponentMean), alpha: 1))
         
         self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func updateColor() {
-        guard let newRedComponentMean = textFielContentToInt(redColorComponent) else {
+        guard let newRedComponentMean = textFieldContentToInt(redColorComponent) else {
             return
         }
         
-        guard let newGreenComponentMean = textFielContentToInt(greenColorComponent) else {
+        guard let newGreenComponentMean = textFieldContentToInt(greenColorComponent) else {
             return
         }
         
-        guard let newBlueComponentMean = textFielContentToInt(blueColorComponent) else {
+        guard let newBlueComponentMean = textFieldContentToInt(blueColorComponent) else {
             return
         }
         
@@ -109,7 +109,7 @@ func convertIntToRGB(_ mean : Int) -> CGFloat {
     return newMean < 1 ? newMean : 1
 }
 
-func textFielContentToInt(_ field : UITextField?) -> Int? {
+func textFieldContentToInt(_ field : UITextField?) -> Int? {
     guard let stringValue = field?.text else {
         return nil
     }

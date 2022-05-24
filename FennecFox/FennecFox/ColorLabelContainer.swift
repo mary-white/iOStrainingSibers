@@ -14,28 +14,28 @@ struct ColorLabel {
 }
 
 class ColorLabelContainer {
-    var cellArray : Array<ColorLabel> = []
+    var colorLabelArray : Array<ColorLabel> = []
     
     var count : Int {
         get {
-            return cellArray.count
+            return colorLabelArray.count
         }
     }
     
     // insert
     func append(color : UIColor, text : String) {
         let newColorLabel = ColorLabel(color: color, text: text)
-        cellArray.append(newColorLabel)
+        colorLabelArray.append(newColorLabel)
     }
     
-    func generateRandomCells() {
+    func generateRandomNumberOfElements() {
         removeAll()
-        let cellNumber = Int.random(in: 1...maxCellNumber)
-        appendRandom(number: cellNumber)
+        let randomNumberOfElements = Int.random(in: 1...maxCellNumber)
+        appendRandomElement(numberOfElements: randomNumberOfElements)
     }
     
-    func appendRandom(number : Int = 1) {
-        for _ in 0..<number {
+    func appendRandomElement(numberOfElements : Int = 1) {
+        for _ in 0..<numberOfElements {
             let randomRedColorComponent = CGFloat.random(in: 0...1)
             let randomGreenColorComponent = CGFloat.random(in: 0...1)
             let randomBlueColorComponent = CGFloat.random(in: 0...1)
@@ -48,29 +48,29 @@ class ColorLabelContainer {
     
     func insert(color : UIColor, text : String, at index : Int) {
         let newColorlable = ColorLabel(color: color, text: text)
-        cellArray.insert(newColorlable, at: index)
+        colorLabelArray.insert(newColorlable, at: index)
     }
     
     func change(color : UIColor?, text : String?, at index : Int) {
-        if index >= cellArray.count || index < 0 {
+        if index >= colorLabelArray.count || index < 0 {
             return
         }
         
-        cellArray[index].color = color ?? cellArray[index].color
-        cellArray[index].text = text ?? cellArray[index].text
+        colorLabelArray[index].color = color ?? colorLabelArray[index].color
+        colorLabelArray[index].text = text ?? colorLabelArray[index].text
     }
     
     //remove
     func remove(at index : Int) {
-        cellArray.remove(at: index)
+        colorLabelArray.remove(at: index)
     }
     
     func removeAll() {
-        cellArray.removeAll()
+        colorLabelArray.removeAll()
     }
     
     // getter
     func index(at index : Int) -> ColorLabel? {
-        return index >= cellArray.count || index < 0 ? nil : cellArray[index]
+        return index >= colorLabelArray.count || index < 0 ? nil : colorLabelArray[index]
     }
 }

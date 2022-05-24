@@ -20,29 +20,29 @@ class ColorCell : UITableViewCell {
 class ListViewController: UIViewController, DataSource {
     
     @IBOutlet var table : UITableView?
-    @IBOutlet var reloadtableButton : UIButton?
+    @IBOutlet var reloadTableButton : UIButton?
     @IBOutlet var addingNewCellButton : UIButton?
     
     // data container
     let dataContainer : ColorLabelContainer = ColorLabelContainer()
     
     // edit cell variables
-    var editCellNumber : Int? = nil
+    var editingCellNumber : Int? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadtableButton?.setTitle("Update the table context", for: .normal)
+        reloadTableButton?.setTitle("Update the table context", for: .normal)
         addingNewCellButton?.setTitle("Add new random cell", for: .normal)
         
         // generate cell number
-        dataContainer.generateRandomCells()
+        dataContainer.generateRandomNumberOfElements()
         
         table?.dataSource = self
         table?.delegate = self
     }
     
     @IBAction func updateTableData() {
-        dataContainer.generateRandomCells()
+        dataContainer.generateRandomNumberOfElements()
         table?.reloadData()
     }
 }
@@ -70,7 +70,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     
     // tap to a row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        editCellNumber = indexPath.row
+        editingCellNumber = indexPath.row
         
         // create and configure the new view
         let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
@@ -79,32 +79,32 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
-    @IBAction func addNewCell() {
-        dataContainer.appendRandom()
+    @IBAction func addNewRandomCell() {
+        dataContainer.appendRandomElement()
         table?.reloadData()
     }
     
     // protocol functions
     func getDataToChange() -> String {
-        guard let cellNumberToChange = editCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
+        guard let cellNumberToChange = editingCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
             return ""
         }
         return dataCell.text
     }
     
     func setChangedData(newData : String?, newColor : UIColor?) {
-        guard let cellNumberToChange = editCellNumber else {
+        guard let cellNumberToChange = editingCellNumber else {
             return
         }
     
         dataContainer.change(color: newColor, text: newData, at: cellNumberToChange)
         table?.reloadData()
         
-        editCellNumber = nil
+        editingCellNumber = nil
     }
     
     func getColorToChange() -> UIColor {
-        guard let cellNumberToChange = editCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
+        guard let cellNumberToChange = editingCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
             return defaultColor
         }
         return dataCell.color

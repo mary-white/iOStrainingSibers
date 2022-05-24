@@ -79,7 +79,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
                                 <connections>
-                                    <action selector="addNewCell" destination="BYZ-38-t0r" eventType="touchDown" id="yGF-LL-UWy"/>
+                                    <action selector="addNewRandomCell" destination="BYZ-38-t0r" eventType="touchDown" id="yGF-LL-UWy"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -98,7 +98,7 @@
                     <navigationItem key="navigationItem" id="v2D-Rx-qIh"/>
                     <connections>
                         <outlet property="addingNewCellButton" destination="yQF-nc-6Nd" id="6rp-yV-g79"/>
-                        <outlet property="reloadtableButton" destination="62Z-zT-oet" id="Qul-Bc-h2K"/>
+                        <outlet property="reloadTableButton" destination="62Z-zT-oet" id="Qul-Bc-h2K"/>
                         <outlet property="table" destination="MEh-bo-mKh" id="0b1-4T-4pU"/>
                     </connections>
                 </viewController>
