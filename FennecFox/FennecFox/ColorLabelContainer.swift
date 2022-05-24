@@ -16,20 +16,28 @@ struct ColorLabel {
 class ColorLabelContainer {
     var cellArray : Array<ColorLabel> = []
     
+    var count : Int {
+        get {
+            return cellArray.count
+        }
+    }
+    
     // insert
     func append(color : UIColor, text : String) {
         let newColorLabel = ColorLabel(color: color, text: text)
         cellArray.append(newColorLabel)
     }
     
-    func appendRandom() {
-        let randomRedColorComponent = CGFloat.random(in: 0..<255)
-        let randomGreenColorComponent = CGFloat.random(in: 0..<255)
-        let randomBlueColorComponent = CGFloat.random(in: 0..<255)
-        let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
-        
-        let randomNumber = Int.random(in: 0...maxCellNumber)
-        append(color: randomColor, text: String(randomNumber))
+    func appendRandom(number : Int = 1) {
+        for _ in 0..<number {
+            let randomRedColorComponent = CGFloat.random(in: 0..<255)
+            let randomGreenColorComponent = CGFloat.random(in: 0..<255)
+            let randomBlueColorComponent = CGFloat.random(in: 0..<255)
+            let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
+            
+            let randomNumber = Int.random(in: 0...maxCellNumber)
+            append(color: randomColor, text: String(randomNumber))
+        }
     }
     
     func insert(color : UIColor, text : String, at index: Int) {

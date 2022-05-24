@@ -72,6 +72,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
             
         // Cell content
         cell.colorText?.text = String(tableContext[indexPath.row])
+        cell.colorText?.textColor = .systemRed
         cell.color?.backgroundColor = .systemRed
         
         return cell
