@@ -11,15 +11,12 @@ class EditViewController: UIViewController {
     
     @IBOutlet var saveButton : UIButton?
     @IBOutlet var textFieldOfValue : UITextField?
-    
-    var selectedCellContext = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        textFieldOfValue?.text = selectedCellContext
+        
+        let dataSource = self.navigationController?.viewControllers[0] as! DataSource
+        textFieldOfValue?.text = dataSource.getDataToChange()
     }
     
     @IBAction func saveNewCellValue() {
@@ -27,7 +24,8 @@ class EditViewController: UIViewController {
             return
         }
         
-        selectedCellContext = String(newCellValue)
+        let dataSource = self.navigationController?.viewControllers[0] as! DataSource
+        dataSource.setChangedData(newData: newMean)
         
         self.navigationController?.popViewController(animated: true)
     }

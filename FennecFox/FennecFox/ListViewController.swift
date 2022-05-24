@@ -8,7 +8,7 @@
 import UIKit
 
 // constants
-let maxCellNumber = 30
+let maxCellNumber = 10
 let maxNumberInCell = 10
 
 class ListViewController: UIViewController, DataSource {
@@ -38,7 +38,7 @@ class ListViewController: UIViewController, DataSource {
         table?.delegate = self
         table?.register(UITableViewCell.self, forCellReuseIdentifier: "standartCell")
         
-        editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        //editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
     }
     
     @IBAction func updateTableData() {
@@ -54,9 +54,6 @@ class ListViewController: UIViewController, DataSource {
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        updateCellContent()
-    }
 }
 
 // table generation - overload function
@@ -78,25 +75,12 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     
     // tap to a row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCellContext = tableContext[indexPath.row]
         editCellNumber = indexPath.row
         
         // create and configure the new view
-        //let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
-        editViewController.selectedCellContext = selectedCellContext
+        let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
         
         self.navigationController?.pushViewController(editViewController, animated: true)
-    }
-    
-    func updateCellContent() {
-        guard let cellNumber = editCellNumber else {
-            return
-        }
-
-        tableContext[cellNumber] = (editViewController.selectedCellContext)
-        table?.reloadData()
-        
-        editCellNumber = nil
     }
     
     @IBAction func addNewCell() {
