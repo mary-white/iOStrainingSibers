@@ -11,6 +11,11 @@ import UIKit
 let maxCellNumber = 10
 let maxNumberInCell = 10
 
+class ColorCell : UITableViewCell {
+    @IBOutlet var color : UIImageView?
+    @IBOutlet var colorText : UILabel?
+}
+
 class ListViewController: UIViewController, DataSource {
     
     @IBOutlet var table : UITableView?
@@ -36,7 +41,7 @@ class ListViewController: UIViewController, DataSource {
         
         table?.dataSource = self
         table?.delegate = self
-        table?.register(UITableViewCell.self, forCellReuseIdentifier: "standartCell")
+        table?.register(UITableViewCell.self, forCellReuseIdentifier: "ColorCell")
     }
     
     @IBAction func updateTableData() {
@@ -63,10 +68,10 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     // fill the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Ask for a cell of the appropriate type.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "standartCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath) as! ColorCell
             
         // Cell content
-        cell.textLabel!.text = String(tableContext[indexPath.row])
+        cell.colorText!.text = String(tableContext[indexPath.row])
         
         return cell
     }

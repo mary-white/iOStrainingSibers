@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F37E938283C9F000025183E /* ColorLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F37E937283C9F000025183E /* ColorLabelContainer.swift */; };
 		3FB669602837653600B7492F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6695F2837653600B7492F /* AppDelegate.swift */; };
 		3FB669622837653600B7492F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669612837653600B7492F /* SceneDelegate.swift */; };
 		3FB669642837653600B7492F /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB669632837653600B7492F /* ListViewController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F37E937283C9F000025183E /* ColorLabelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLabelContainer.swift; sourceTree = "<group>"; };
 		3FB6695C2837653600B7492F /* FennecFox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FennecFox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FB6695F2837653600B7492F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FB669612837653600B7492F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 				3FB669682837653900B7492F /* Assets.xcassets */,
 				3FB6696A2837653900B7492F /* LaunchScreen.storyboard */,
 				3FB6696D2837653900B7492F /* Info.plist */,
+				3F37E937283C9F000025183E /* ColorLabelContainer.swift */,
 			);
 			path = FennecFox;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 				3FB669642837653600B7492F /* ListViewController.swift in Sources */,
 				3FB669602837653600B7492F /* AppDelegate.swift in Sources */,
 				3FB669622837653600B7492F /* SceneDelegate.swift in Sources */,
+				3F37E938283C9F000025183E /* ColorLabelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
