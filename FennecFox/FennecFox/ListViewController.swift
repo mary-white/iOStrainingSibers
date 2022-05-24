@@ -41,7 +41,7 @@ class ListViewController: UIViewController, DataSource {
         
         table?.dataSource = self
         table?.delegate = self
-        table?.register(UITableViewCell.self, forCellReuseIdentifier: "ColorCell")
+        //table?.register(ColorCell.self, forCellReuseIdentifier: "colorCellType")
     }
     
     @IBAction func updateTableData() {
@@ -68,10 +68,11 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     // fill the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Ask for a cell of the appropriate type.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ColorCell", for: indexPath) as! ColorCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "colorCellType", for: indexPath) as! ColorCell
             
         // Cell content
-        cell.colorText!.text = String(tableContext[indexPath.row])
+        cell.colorText?.text = String(tableContext[indexPath.row])
+        cell.color?.backgroundColor = .systemRed
         
         return cell
     }

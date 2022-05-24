@@ -26,8 +26,7 @@ class ColorLabelContainer {
         let randomRedColorComponent = CGFloat.random(in: 0..<255)
         let randomGreenColorComponent = CGFloat.random(in: 0..<255)
         let randomBlueColorComponent = CGFloat.random(in: 0..<255)
-        let randomAlphaColorComponent = CGFloat.random(in: 0..<1)
-        let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: randomAlphaColorComponent)
+        let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
         
         let randomNumber = Int.random(in: 0...maxCellNumber)
         append(color: randomColor, text: String(randomNumber))
