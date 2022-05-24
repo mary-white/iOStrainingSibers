@@ -22,13 +22,11 @@ class ListViewController: UIViewController, DataSource {
     @IBOutlet var reloadtableButton : UIButton?
     @IBOutlet var addingNewCellButton : UIButton?
     
-    // cell variables
-    var cellNumber = 0
-    var tableContext : [String] = []
+    // data container
+    let dataContainer : ColorLabelContainer = ColorLabelContainer()
     
     // edit cell variables
     var editCellNumber : Int? = nil
-    var editViewController : EditViewController = EditViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,33 +34,25 @@ class ListViewController: UIViewController, DataSource {
         addingNewCellButton?.setTitle("Add new random cell", for: .normal)
         
         // generate cell number
-        cellNumber = Int.random(in: 1...maxCellNumber)
-        generateDataForTable()
+        let cellNumber = Int.random(in: 1...maxCellNumber)
+        dataContainer.appendRandom(number: cellNumber)
         
         table?.dataSource = self
         table?.delegate = self
-        //table?.register(ColorCell.self, forCellReuseIdentifier: "colorCellType")
     }
     
     @IBAction func updateTableData() {
-        cellNumber = Int.random(in: 1...maxCellNumber)
-        generateDataForTable()
+        let cellNumber = Int.random(in: 1...maxCellNumber)
+        dataContainer.removeAll()
+        dataContainer.appendRandom(number: cellNumber)
         table?.reloadData()
     }
-
-    func generateDataForTable() {
-        tableContext.removeAll()
-        for _ in 0..<cellNumber {
-            tableContext.append(String(Int.random(in: 0...maxNumberInCell)))
-        }
-    }
-    
 }
 
 // table generation - overload function
 extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cellNumber
+        return dataContainer.count
     }
     
     // fill the table
@@ -71,9 +61,11 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "colorCellType", for: indexPath) as! ColorCell
             
         // Cell content
-        cell.colorText?.text = String(tableContext[indexPath.row])
-        cell.colorText?.textColor = .systemRed
-        cell.color?.backgroundColor = .systemRed
+        let content = dataContainer.index(at: indexPath.row)
+        
+        cell.colorText?.text = content?.text
+        cell.colorText?.textColor = content?.color
+        cell.color?.backgroundColor = content?.color
         
         return cell
     }
@@ -89,17 +81,16 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     @IBAction func addNewCell() {
-        cellNumber += 1
-        tableContext.append(String(Int.random(in: 0...maxNumberInCell)))
+        dataContainer.appendRandom()
         table?.reloadData()
     }
     
     // protocol functions
     func getDataToChange() -> String {
-        guard let cellNumberToChange = editCellNumber else {
+        guard let cellNumberToChange = editCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
             return ""
         }
-        return tableContext[cellNumberToChange]
+        return dataCell.text
     }
     
     func setChangedData(newData : String) {
@@ -107,7 +98,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
             return
         }
         
-        tableContext[cellNumberToChange] = newData
+        dataContainer.change(color: nil, text: newData, at: cellNumberToChange)
         table?.reloadData()
         
         editCellNumber = nil

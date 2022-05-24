@@ -30,9 +30,9 @@ class ColorLabelContainer {
     
     func appendRandom(number : Int = 1) {
         for _ in 0..<number {
-            let randomRedColorComponent = CGFloat.random(in: 0..<255)
-            let randomGreenColorComponent = CGFloat.random(in: 0..<255)
-            let randomBlueColorComponent = CGFloat.random(in: 0..<255)
+            let randomRedColorComponent = CGFloat.random(in: 0...1)
+            let randomGreenColorComponent = CGFloat.random(in: 0...1)
+            let randomBlueColorComponent = CGFloat.random(in: 0...1)
             let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
             
             let randomNumber = Int.random(in: 0...maxCellNumber)
@@ -40,9 +40,18 @@ class ColorLabelContainer {
         }
     }
     
-    func insert(color : UIColor, text : String, at index: Int) {
+    func insert(color : UIColor, text : String, at index : Int) {
         let newColorlable = ColorLabel(color: color, text: text)
         cellArray.insert(newColorlable, at: index)
+    }
+    
+    func change(color : UIColor?, text : String?, at index : Int) {
+        if index >= cellArray.count || index < 0 {
+            return
+        }
+        
+        cellArray[index].color = color ?? cellArray[index].color
+        cellArray[index].text = text ?? cellArray[index].text
     }
     
     //remove
