@@ -93,14 +93,21 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         return dataCell.text
     }
     
-    func setChangedData(newData : String) {
+    func setChangedData(newData : String?, newColor : UIColor?) {
         guard let cellNumberToChange = editCellNumber else {
             return
         }
-        
-        dataContainer.change(color: nil, text: newData, at: cellNumberToChange)
+    
+        dataContainer.change(color: newColor, text: newData, at: cellNumberToChange)
         table?.reloadData()
         
         editCellNumber = nil
+    }
+    
+    func getColorToChange() -> UIColor {
+        guard let cellNumberToChange = editCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
+            return .systemRed
+        }
+        return dataCell.color
     }
 }
