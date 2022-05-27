@@ -10,7 +10,7 @@ import UIKit
 
 struct ColorLabel {
     var color : UIColor = .systemRed
-    var text : String = ""
+    var number : Int = 0
 }
 
 class ColorLabelContainer {
@@ -23,8 +23,8 @@ class ColorLabelContainer {
     }
     
     // insert
-    func append(color : UIColor, text : String) {
-        let newColorLabel = ColorLabel(color: color, text: text)
+    func append(color : UIColor, number : Int) {
+        let newColorLabel = ColorLabel(color: color, number: number)
         colorLabelArray.append(newColorLabel)
     }
     
@@ -42,22 +42,22 @@ class ColorLabelContainer {
             let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
             
             let randomNumber = Int.random(in: 0...maxCellNumber)
-            append(color: randomColor, text: String(randomNumber))
+            append(color: randomColor, number: randomNumber)
         }
     }
     
-    func insert(color : UIColor, text : String, at index : Int) {
-        let newColorlable = ColorLabel(color: color, text: text)
+    func insert(color : UIColor, number : Int, at index : Int) {
+        let newColorlable = ColorLabel(color: color, number: number)
         colorLabelArray.insert(newColorlable, at: index)
     }
     
-    func change(color : UIColor?, text : String?, at index : Int) {
+    func change(color : UIColor?, number : Int?, at index : Int) {
         if index >= colorLabelArray.count || index < 0 {
             return
         }
         
         colorLabelArray[index].color = color ?? colorLabelArray[index].color
-        colorLabelArray[index].text = text ?? colorLabelArray[index].text
+        colorLabelArray[index].number = number ?? colorLabelArray[index].number
     }
     
     //remove

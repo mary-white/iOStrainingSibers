@@ -37,7 +37,10 @@ class ViewModel {
     }
     
     func dataContainerElementText(at index: Int) -> String {
-        return dataContainer.element(at: index)?.text ?? ""
+        guard let newNumber = dataContainer.element(at: index)?.number else {
+            return ""
+        }
+        return String(newNumber)
     }
     
     func appendRandomElementToContainer() {
@@ -62,7 +65,9 @@ class ViewModel {
         guard let cellNumberToChange = editingCellNumber else {
             return
         }
-        dataContainer.change(color: newColor, text: newData, at: cellNumberToChange)
+
+        let newNumber = newData == nil ? nil : Int(newData!)
+        dataContainer.change(color: newColor, number: newNumber, at: cellNumberToChange)
         editingCellNumber = nil
     }
 }
