@@ -90,7 +90,7 @@ func stringViewOfNumber(number : Double) -> String {
     }
     
     // whole part
-    point += convert(dozens: dozens, units: units)
+    point += convertTwoDigitNumber(dozens: dozens, units: units)
     
     if tenths == 0 && hundredths == 0 {
         return point
@@ -98,8 +98,8 @@ func stringViewOfNumber(number : Double) -> String {
     
     // if the number has fraction part
     if units == 1 && dozens != 1 {
-        point.remove(at: point.index(before: point.endIndex))
-        point.remove(at: point.index(before: point.endIndex))
+        let range = point.index(point.endIndex, offsetBy: -2)..<point.endIndex
+        point.removeSubrange(range)
         point += "на целая"
     }
     else if units == 2 && dozens != 1 {
@@ -111,10 +111,10 @@ func stringViewOfNumber(number : Double) -> String {
     }
     
     // add fraction part
-    point += " " + convert(dozens: tenths, units: hundredths)
+    point += " " + convertTwoDigitNumber(dozens: tenths, units: hundredths)
     if hundredths == 1 && tenths != 1 {
-        point.remove(at: point.index(before: point.endIndex))
-        point.remove(at: point.index(before: point.endIndex))
+        let range = point.index(point.endIndex, offsetBy: -2)..<point.endIndex
+        point.removeSubrange(range)
         point += "на сотая"
     }
     else if hundredths == 2 && tenths != 1 {
@@ -128,7 +128,7 @@ func stringViewOfNumber(number : Double) -> String {
     return point
 }
 
-func convert(dozens : Int, units : Int) -> String {
+func convertTwoDigitNumber(dozens : Int, units : Int) -> String {
     let intToStringFrom0To9 : [Int: String] = [0: "ноль", 1: "один", 2: "два", 3: "три", 4: "четыре", 5: "пять", 6: "шесть", 7: "семь", 8: "восемь", 9: "девять"]
     
     var point : String = ""
