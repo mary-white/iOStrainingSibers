@@ -31,8 +31,6 @@ class ListViewController: UIViewController, EditViewControllerDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        reloadTableButton?.setTitle("Update the table context", for: .normal)
-        addNewCellButton?.setTitle("Add new random cell", for: .normal)
         
         // generate cell number
         dataContainer.generateRandomNumberOfElements()
