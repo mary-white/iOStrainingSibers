@@ -15,6 +15,7 @@
 		3FB669692837653900B7492F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3FB669682837653900B7492F /* Assets.xcassets */; };
 		3FB6696C2837653900B7492F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3FB6696A2837653900B7492F /* LaunchScreen.storyboard */; };
 		3FB6697A28377C7100B7492F /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB6697928377C7100B7492F /* EditViewController.swift */; };
+		3FE2B66528407AE2008A19B0 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FE2B66428407AE2008A19B0 /* ViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		3FB6696B2837653900B7492F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3FB6696D2837653900B7492F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3FB6697928377C7100B7492F /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
+		3FE2B66428407AE2008A19B0 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 				3FB6696A2837653900B7492F /* LaunchScreen.storyboard */,
 				3FB6696D2837653900B7492F /* Info.plist */,
 				3F37E937283C9F000025183E /* ColorLabelContainer.swift */,
+				3FE2B66428407AE2008A19B0 /* ViewModel.swift */,
 			);
 			path = FennecFox;
 			sourceTree = "<group>";
@@ -148,6 +151,7 @@
 				3FB669642837653600B7492F /* ListViewController.swift in Sources */,
 				3FB669602837653600B7492F /* AppDelegate.swift in Sources */,
 				3FB669622837653600B7492F /* SceneDelegate.swift in Sources */,
+				3FE2B66528407AE2008A19B0 /* ViewModel.swift in Sources */,
 				3F37E938283C9F000025183E /* ColorLabelContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
