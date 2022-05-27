@@ -44,7 +44,7 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func saveNewCellValue() {
-        guard let newNumberMean = textFieldContentToInt(textFieldOfValue) else {
+        guard let newNumberMean = textFieldContentToDouble(textFieldOfValue) else {
             return
         }
         
@@ -109,4 +109,11 @@ func textFieldContentToInt(_ field : UITextField?) -> Int? {
         return nil
     }
     return Int(stringValue)
+}
+
+func textFieldContentToDouble(_ field : UITextField?) -> Double? {
+    guard let stringValue = field?.text else {
+        return nil
+    }
+    return Double(stringValue) //Int(stringValue)
 }

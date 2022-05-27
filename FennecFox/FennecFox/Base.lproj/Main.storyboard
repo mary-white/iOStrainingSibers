@@ -37,8 +37,8 @@
                                                         <constraint firstAttribute="width" constant="30" id="eXS-h0-vfG"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e22-xd-tZH">
-                                                    <rect key="frame" x="60" y="11.5" width="41.5" height="20.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e22-xd-tZH">
+                                                    <rect key="frame" x="60" y="11.5" width="208" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -47,6 +47,7 @@
                                             <constraints>
                                                 <constraint firstItem="7s1-Tf-aV8" firstAttribute="leading" secondItem="DUH-bZ-7fb" secondAttribute="leading" constant="10" id="N2f-eN-Gbg"/>
                                                 <constraint firstItem="e22-xd-tZH" firstAttribute="centerY" secondItem="DUH-bZ-7fb" secondAttribute="centerY" id="Qsy-OT-F75"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="e22-xd-tZH" secondAttribute="trailing" constant="10" id="WXR-Yn-lKh"/>
                                                 <constraint firstItem="7s1-Tf-aV8" firstAttribute="centerY" secondItem="DUH-bZ-7fb" secondAttribute="centerY" id="k0g-4B-30I"/>
                                                 <constraint firstItem="e22-xd-tZH" firstAttribute="leading" secondItem="7s1-Tf-aV8" secondAttribute="trailing" constant="20" id="tq9-Zv-Tfm"/>
                                             </constraints>

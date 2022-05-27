@@ -10,7 +10,7 @@ import UIKit
 
 struct ColorLabel {
     var color : UIColor = .systemRed
-    var number : Int = 0
+    var number : Double = 0
 }
 
 class ColorLabelContainer {
@@ -23,7 +23,7 @@ class ColorLabelContainer {
     }
     
     // insert
-    func append(color : UIColor, number : Int) {
+    func append(color : UIColor, number : Double) {
         let newColorLabel = ColorLabel(color: color, number: number)
         colorLabelArray.append(newColorLabel)
     }
@@ -41,17 +41,18 @@ class ColorLabelContainer {
             let randomBlueColorComponent = CGFloat.random(in: 0...1)
             let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
             
-            let randomNumber = Int.random(in: 0...maxCellNumber)
+            let randomNumber = round(Double.random(in: -99.99...99.99) * 100) / 100
+            
             append(color: randomColor, number: randomNumber)
         }
     }
     
-    func insert(color : UIColor, number : Int, at index : Int) {
+    func insert(color : UIColor, number : Double, at index : Int) {
         let newColorlable = ColorLabel(color: color, number: number)
         colorLabelArray.insert(newColorlable, at: index)
     }
     
-    func change(color : UIColor?, number : Int?, at index : Int) {
+    func change(color : UIColor?, number : Double?, at index : Int) {
         if index >= colorLabelArray.count || index < 0 {
             return
         }
