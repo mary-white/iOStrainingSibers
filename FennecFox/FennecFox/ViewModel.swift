@@ -21,10 +21,6 @@ class ViewModel {
     
     init() {
         dataContainer.generateRandomNumberOfElements()
-        for number in stride(from: -99.99, to: 99.99, by: 0.01) {
-            print(number, terminator: " ")
-            print(stringViewOfNumber(number: number))
-        }
     }
     
     func updateDataInContainer() {
