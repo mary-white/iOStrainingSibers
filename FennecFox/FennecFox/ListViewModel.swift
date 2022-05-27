@@ -65,7 +65,7 @@ class ListViewModel {
             return
         }
 
-        let newNumber = newData == nil ? nil : Double(newData!)
+        let newNumber = Double(newData ?? "")
         dataContainer.change(color: newColor, number: newNumber, at: cellNumberToChange)
         editingCellNumber = nil
     }
