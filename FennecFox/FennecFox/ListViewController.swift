@@ -76,4 +76,8 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         viewModel.changeData(newData: newData, newColor: newColor)
         table?.reloadData()
     }
+    
+    private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
 }

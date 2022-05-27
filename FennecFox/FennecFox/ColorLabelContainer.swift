@@ -41,7 +41,7 @@ class ColorLabelContainer {
             let randomBlueColorComponent = CGFloat.random(in: 0...1)
             let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
             
-            let randomNumber = round(Double.random(in: -99.99...99.99) * 100) / 100
+            let randomNumber = floor(Double.random(in: -99.99...99.99) * 100) / 100
             
             append(color: randomColor, number: randomNumber)
         }
