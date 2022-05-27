@@ -25,10 +25,9 @@ class ViewModel {
             print(number, terminator: " ")
             print(stringViewOfNumber(number: number))
         }
-        
     }
     
-    func updateContainerData() {
+    func updateDataInContainer() {
         dataContainer.generateRandomNumberOfElements()
     }
     
@@ -84,48 +83,48 @@ func stringViewOfNumber(number : Double) -> String {
     let tenths : Int = Int(numberMod * 10) % 10
     let hundredths = Int(numberMod * 100) % 10
     
-    var point : String = ""
+    var finalNumberView : String = ""
     if number < 0 {
-        point = "минус "
+        finalNumberView = "минус "
     }
     
     // whole part
-    point += convertTwoDigitNumber(dozens: dozens, units: units)
+    finalNumberView += convertTwoDigitNumber(dozens: dozens, units: units)
     
     if tenths == 0 && hundredths == 0 {
-        return point
+        return finalNumberView
     }
     
     // if the number has fraction part
     if units == 1 && dozens != 1 {
-        let range = point.index(point.endIndex, offsetBy: -2)..<point.endIndex
-        point.removeSubrange(range)
-        point += "на целая"
+        let range = finalNumberView.index(finalNumberView.endIndex, offsetBy: -2)..<finalNumberView.endIndex
+        finalNumberView.removeSubrange(range)
+        finalNumberView += "на целая"
     }
     else if units == 2 && dozens != 1 {
-        point.remove(at: point.index(before: point.endIndex))
-        point += "е целых"
+        finalNumberView.remove(at: finalNumberView.index(before: finalNumberView.endIndex))
+        finalNumberView += "е целых"
     }
     else {
-        point += " целых"
+        finalNumberView += " целых"
     }
     
     // add fraction part
-    point += " " + convertTwoDigitNumber(dozens: tenths, units: hundredths)
+    finalNumberView += " " + convertTwoDigitNumber(dozens: tenths, units: hundredths)
     if hundredths == 1 && tenths != 1 {
-        let range = point.index(point.endIndex, offsetBy: -2)..<point.endIndex
-        point.removeSubrange(range)
-        point += "на сотая"
+        let range = finalNumberView.index(finalNumberView.endIndex, offsetBy: -2)..<finalNumberView.endIndex
+        finalNumberView.removeSubrange(range)
+        finalNumberView += "на сотая"
     }
     else if hundredths == 2 && tenths != 1 {
-        point.remove(at: point.index(before: point.endIndex))
-        point += "е сотых"
+        finalNumberView.remove(at: finalNumberView.index(before: finalNumberView.endIndex))
+        finalNumberView += "е сотых"
     }
     else {
-        point += " сотых"
+        finalNumberView += " сотых"
     }
     
-    return point
+    return finalNumberView
 }
 
 func convertTwoDigitNumber(dozens : Int, units : Int) -> String {
@@ -153,16 +152,14 @@ func convertTwoDigitNumber(dozens : Int, units : Int) -> String {
         point += intToStringFrom0To9[u]!
         
     case (let d, let u) :
-        if [2, 3].contains(d) {
+        switch d {
+        case 2, 3:
             point += intToStringFrom0To9[d]! + "дцать"
-        }
-        else if d == 4 {
+        case 4:
             point += "сорок"
-        }
-        else if d == 9 {
+        case 9:
             point += "девяносто"
-        }
-        else {
+        default:
             point += intToStringFrom0To9[d]! + "десят"
         }
         

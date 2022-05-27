@@ -28,7 +28,7 @@ class ListViewController: UIViewController, EditViewControllerDelegate {
     }
     
     @IBAction func updateTableData() {
-        viewModel.updateContainerData()
+        viewModel.updateDataInContainer()
         table?.reloadData()
     }
 }
