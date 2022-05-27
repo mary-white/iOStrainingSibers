@@ -77,7 +77,7 @@ func stringViewOfNumber(number : Double) -> String {
     let dozens : Int = Int(floor(numberMod / 10))
     let units : Int = Int(floor(numberMod)) % 10
     let tenths : Int = Int(numberMod * 10) % 10
-    let hundredths = Int(numberMod * 100) % 10
+    let hundredths = Int(round(numberMod * 100)) % 10
     
     var finalNumberView : String = ""
     if number < 0 {

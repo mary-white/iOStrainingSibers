@@ -48,7 +48,7 @@ class EditViewController: UIViewController {
             return
         }
         
-        guard let newColor = getColorComponentsFromTextFields() else {
+        guard let newColor = colorComponentsFromTextFields() else {
             return
         }
         
@@ -58,14 +58,14 @@ class EditViewController: UIViewController {
     }
 
     @IBAction func updateColor() {
-        guard let newColor = getColorComponentsFromTextFields() else {
+        guard let newColor = colorComponentsFromTextFields() else {
             return
         }
         
         colorView?.backgroundColor = UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1)
     }
     
-    func getColorComponentsFromTextFields() -> (red : Int, green : Int, blue : Int)? {
+    func colorComponentsFromTextFields() -> (red : Int, green : Int, blue : Int)? {
         guard let redComponentMean = textFieldContentToInt(redColorComponent) else {
             return nil
         }
