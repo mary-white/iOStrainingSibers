@@ -18,7 +18,7 @@ class ListViewController: UIViewController, EditViewControllerDelegate {
     @IBOutlet var reloadTableButton : UIButton?
     @IBOutlet var addNewCellButton : UIButton?
     
-    var viewModel : ViewModel = ViewModel()
+    var viewModel : ListViewModel = ListViewModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -12,7 +12,7 @@ import UIKit
 let maxCellNumber = 10
 let defaultColor = UIColor.systemRed
 
-class ViewModel {
+class ListViewModel {
     // data container
     let dataContainer : ColorLabelContainer = ColorLabelContainer()
     
