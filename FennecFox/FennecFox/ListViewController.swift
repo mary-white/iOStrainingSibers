@@ -17,11 +17,11 @@ class ColorCell : UITableViewCell {
     @IBOutlet var colorText : UILabel?
 }
 
-class ListViewController: UIViewController, DataSource {
+class ListViewController: UIViewController, EditViewControllerDelegate {
     
     @IBOutlet var table : UITableView?
     @IBOutlet var reloadTableButton : UIButton?
-    @IBOutlet var addingNewCellButton : UIButton?
+    @IBOutlet var addNewCellButton : UIButton?
     
     // data container
     let dataContainer : ColorLabelContainer = ColorLabelContainer()
@@ -32,7 +32,7 @@ class ListViewController: UIViewController, DataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         reloadTableButton?.setTitle("Update the table context", for: .normal)
-        addingNewCellButton?.setTitle("Add new random cell", for: .normal)
+        addNewCellButton?.setTitle("Add new random cell", for: .normal)
         
         // generate cell number
         dataContainer.generateRandomNumberOfElements()
@@ -59,7 +59,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "colorCellType", for: indexPath) as! ColorCell
             
         // Cell content
-        let content = dataContainer.index(at: indexPath.row)
+        let content = dataContainer.element(at: indexPath.row)
         
         cell.colorText?.text = content?.text
         cell.colorText?.textColor = content?.color
@@ -74,7 +74,10 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         
         // create and configure the new view
         let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
-        editViewController.dataSource = self
+        editViewController.delegate = self
+        let oldData = dataContainer.element(at: editingCellNumber!)
+        editViewController.textToChange = oldData?.text
+        editViewController.colorToChange = oldData?.color
         
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
@@ -86,13 +89,13 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     
     // protocol functions
     func getDataToChange() -> String {
-        guard let cellNumberToChange = editingCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
+        guard let cellNumberToChange = editingCellNumber, let dataCell = dataContainer.element(at: cellNumberToChange) else {
             return ""
         }
         return dataCell.text
     }
     
-    func setChangedData(newData : String?, newColor : UIColor?) {
+    func didChangeData(newData : String?, newColor : UIColor?) {
         guard let cellNumberToChange = editingCellNumber else {
             return
         }
@@ -104,7 +107,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     func getColorToChange() -> UIColor {
-        guard let cellNumberToChange = editingCellNumber, let dataCell = dataContainer.index(at: cellNumberToChange) else {
+        guard let cellNumberToChange = editingCellNumber, let dataCell = dataContainer.element(at: cellNumberToChange) else {
             return defaultColor
         }
         return dataCell.color

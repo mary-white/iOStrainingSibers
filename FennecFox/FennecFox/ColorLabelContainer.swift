@@ -70,7 +70,7 @@ class ColorLabelContainer {
     }
     
     // getter
-    func index(at index : Int) -> ColorLabel? {
+    func element(at index : Int) -> ColorLabel? {
         return index >= colorLabelArray.count || index < 0 ? nil : colorLabelArray[index]
     }
 }

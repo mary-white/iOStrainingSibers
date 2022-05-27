@@ -21,12 +21,15 @@ class EditViewController: UIViewController {
     @IBOutlet var colorUpdateButton : UIButton?
     
     // delegate
-    var dataSource : DataSource? = nil
+    weak var delegate : EditViewControllerDelegate? = nil
+    
+    var colorToChange : UIColor? = nil
+    var textToChange : String? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        guard let oldColor = dataSource?.getColorToChange(), let textToChange = dataSource?.getDataToChange() else {
+        guard let oldColor = colorToChange, let textToChange = textToChange else {
             return
         }
         
@@ -49,7 +52,7 @@ class EditViewController: UIViewController {
             return
         }
         
-        dataSource?.setChangedData(newData: String(newNumberMean), newColor: UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1))
+        delegate?.didChangeData(newData: String(newNumberMean), newColor: UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1))
         
         self.navigationController?.popViewController(animated: true)
     }
@@ -88,13 +91,8 @@ extension UIColor {
     }
 }
 
-protocol DataSource {
-    // getter
-    func getDataToChange() -> String;
-    func getColorToChange() -> UIColor;
-    
-    //setter
-    func setChangedData(newData : String?, newColor : UIColor?);
+protocol EditViewControllerDelegate : AnyObject {
+    func didChangeData(newData : String?, newColor : UIColor?);
 }
 
 func convertRGBToInt(_ mean : CGFloat) -> Int {
