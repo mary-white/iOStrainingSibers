@@ -48,31 +48,6 @@ class ListViewModel : EditViewModelDelegate {
         dataContainer.appendRandomElement()
     }
     
-    func dataContainerElementTextToChange() -> String {
-        guard let cellIndex = editingCellNumber, let newNumber = dataContainer.element(at: cellIndex)?.number else {
-            return ""
-        }
-        return String(newNumber)
-    }
-    
-    func dataContainerElementColorToChange() -> UIColor {
-        guard let cellIndex = editingCellNumber else {
-            return defaultColor
-        }
-        return dataContainerElementColor(at: cellIndex)
-    }
-    
-    func changeData(newData: String?, newColor: UIColor?) {
-        guard let cellNumberToChange = editingCellNumber else {
-            return
-        }
-
-        let newNumber = Double(newData ?? "")
-        dataContainer.change(color: newColor, number: newNumber, at: cellNumberToChange)
-        editingCellNumber = nil
-        editViewModel = nil
-    }
-    
     func createEditViewModel() {
         guard let _ = editingCellNumber else {
             return
