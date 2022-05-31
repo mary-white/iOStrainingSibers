@@ -44,8 +44,6 @@ class EditViewController: UIViewController {
         }
         
         delegate?.didChangeData()
-    
-        self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func updateColor() {

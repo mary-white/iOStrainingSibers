@@ -75,6 +75,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     // protocol functions
     func didChangeData() {
         table?.reloadData()
+        self.navigationController?.popViewController(animated: true)
     }
     
     /*private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
