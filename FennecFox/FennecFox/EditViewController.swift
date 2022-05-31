@@ -23,97 +23,42 @@ class EditViewController: UIViewController {
     // delegate
     weak var delegate : EditViewControllerDelegate? = nil
     
+    var viewModel : EditViewModel? = nil
+    
     var colorToChange : UIColor? = nil
     var textToChange : String? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-        guard let oldColor = colorToChange, let textToChange = textToChange else {
-            return
-        }
         
-        textFieldOfValue?.text = textToChange
+        textFieldOfValue?.text = viewModel?.dataContainerElementText()
         
-        colorView?.backgroundColor = oldColor
+        colorView?.backgroundColor = viewModel?.dataContainerElementColor()
         
-        let rgbOldColor = oldColor.rgbaComponents
-        redColorComponent?.text = String(convertRGBToInt(rgbOldColor.red))
-        greenColorComponent?.text = String(convertRGBToInt(rgbOldColor.green))
-        blueColorComponent?.text = String(convertRGBToInt(rgbOldColor.blue))
+        let rgbOldColor = viewModel?.dataContainerElementColorInRGBFormat()
+        redColorComponent?.text = rgbOldColor?.red
+        greenColorComponent?.text = rgbOldColor?.green
+        blueColorComponent?.text = rgbOldColor?.blue
     }
     
     @IBAction func saveNewCellValue() {
-        guard let newNumberMean = textFieldContentToDouble(textFieldOfValue) else {
+        if !(viewModel?.saveNewMeansToDataContainer(number: textFieldOfValue?.text, red: redColorComponent?.text, green: greenColorComponent?.text, blue: blueColorComponent?.text))! {
             return
         }
         
-        guard let newColor = colorComponentsFromTextFields() else {
-            return
-        }
-        
-        delegate?.didChangeData(newData: String(newNumberMean), newColor: UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1))
-        
+        delegate?.didChangeData()
+    
         self.navigationController?.popViewController(animated: true)
     }
 
     @IBAction func updateColor() {
-        guard let newColor = colorComponentsFromTextFields() else {
+        if !(viewModel?.setDataContainerElementColor(red: redColorComponent?.text, green: greenColorComponent?.text, blue: blueColorComponent?.text))! {
             return
         }
-        
-        colorView?.backgroundColor = UIColor(red: convertIntToRGB(newColor.red), green: convertIntToRGB(newColor.green), blue: convertIntToRGB(newColor.blue), alpha: 1)
-    }
-    
-    func colorComponentsFromTextFields() -> (red : Int, green : Int, blue : Int)? {
-        guard let redComponentMean = textFieldContentToInt(redColorComponent) else {
-            return nil
-        }
-        guard let greenComponentMean = textFieldContentToInt(greenColorComponent) else {
-            return nil
-        }
-        guard let blueComponentMean = textFieldContentToInt(blueColorComponent) else {
-            return nil
-        }
-        return (red : redComponentMean, green : greenComponentMean, blue : blueComponentMean)
-    }
-}
-
-extension UIColor {
-    var rgbaComponents: (red: CGFloat, green: CGFloat, blue: CGFloat, alpha: CGFloat) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-
-        return (red: red, green: green, blue: blue, alpha: alpha)
+        colorView?.backgroundColor = viewModel?.dataContainerElementColor()
     }
 }
 
 protocol EditViewControllerDelegate : AnyObject {
-    func didChangeData(newData : String?, newColor : UIColor?);
-}
-
-func convertRGBToInt(_ mean : CGFloat) -> Int {
-    return Int(floor(mean * 255))
-}
-
-func convertIntToRGB(_ mean : Int) -> CGFloat {
-    let newMean = CGFloat(mean) / 255
-    return newMean < 1 ? newMean : 1
-}
-
-func textFieldContentToInt(_ field : UITextField?) -> Int? {
-    guard let stringValue = field?.text else {
-        return nil
-    }
-    return Int(stringValue)
-}
-
-func textFieldContentToDouble(_ field : UITextField?) -> Double? {
-    guard let stringValue = field?.text else {
-        return nil
-    }
-    return Double(stringValue) //Int(stringValue)
+    func didChangeData();
 }

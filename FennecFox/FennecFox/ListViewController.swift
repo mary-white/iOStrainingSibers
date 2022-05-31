@@ -54,14 +54,15 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     // tap to a row
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {  // !!!!!!!!!!!!!
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.editingCellNumber = indexPath.row
         
         // create and configure the new view
         let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
         editViewController.delegate = self
-        editViewController.textToChange = viewModel.dataContainerElementTextToChange()
-        editViewController.colorToChange = viewModel.dataContainerElementColorToChange()
+        
+        viewModel.createEditViewModel()
+        editViewController.viewModel = viewModel.editViewModel
         
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
@@ -72,8 +73,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     }
     
     // protocol functions
-    func didChangeData(newData : String?, newColor : UIColor?) { // !!!!!!!!!!!!!
-        viewModel.changeData(newData: newData, newColor: newColor)
+    func didChangeData() {
         table?.reloadData()
     }
     

@@ -19,6 +19,8 @@ class ListViewModel {
     // edit cell variables
     var editingCellNumber : Int? = nil
     
+    var editViewModel : EditViewModel? = nil
+    
     init() {
         dataContainer.generateRandomNumberOfElements()
     }
@@ -68,6 +70,13 @@ class ListViewModel {
         let newNumber = Double(newData ?? "")
         dataContainer.change(color: newColor, number: newNumber, at: cellNumberToChange)
         editingCellNumber = nil
+    }
+    
+    func createEditViewModel() {
+        guard let _ = editingCellNumber else {
+            return
+        }
+        editViewModel = EditViewModel(self)
     }
 }
 
