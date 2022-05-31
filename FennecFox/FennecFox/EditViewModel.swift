@@ -9,18 +9,18 @@ import Foundation
 import UIKit
 
 class EditViewModel {
-    var listViewModel : ListViewModel = ListViewModel()
+    var listViewModel : ListViewModel? = nil
 
     var intermediateColor : UIColor = defaultColor
     
     init(_ viewModel : ListViewModel) {
         listViewModel = viewModel
-        intermediateColor =  listViewModel.dataContainerElementColorToChange()
+        intermediateColor =  (listViewModel?.dataContainerElementColorToChange())!
     }
     
     // getters
     func dataContainerElementText() -> String {
-        return listViewModel.dataContainerElementTextToChange()
+        return (listViewModel?.dataContainerElementTextToChange())!
     }
     
     func dataContainerElementColor() -> UIColor {
@@ -52,7 +52,7 @@ class EditViewModel {
         if !setDataContainerElementColor(red: red, green: green, blue: blue) {
             return false
         }
-        listViewModel.changeData(newData: String(newNumber), newColor: intermediateColor)
+        listViewModel?.changeData(newData: String(newNumber), newColor: intermediateColor)
         return true
     }
     
