@@ -70,6 +70,7 @@ class ListViewModel {
         let newNumber = Double(newData ?? "")
         dataContainer.change(color: newColor, number: newNumber, at: cellNumberToChange)
         editingCellNumber = nil
+        editViewModel = nil
     }
     
     func createEditViewModel() {

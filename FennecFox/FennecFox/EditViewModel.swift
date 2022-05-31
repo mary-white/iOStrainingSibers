@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class EditViewModel {
-    var listViewModel : ListViewModel? = nil
+    weak var listViewModel : ListViewModel? = nil
 
     var intermediateColor : UIColor = defaultColor
     
