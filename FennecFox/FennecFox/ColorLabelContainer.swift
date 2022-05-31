@@ -74,4 +74,30 @@ class ColorLabelContainer {
     func element(at index : Int) -> ColorLabel? {
         return index >= colorLabelArray.count || index < 0 ? nil : colorLabelArray[index]
     }
+    
+    func min() -> Double? {
+        guard let minValue = colorLabelArray.min(by: {$0.number < $1.number}) else {
+            return nil
+        }
+        return minValue.number
+    }
+    
+    func max() -> Double? {
+        guard let maxValue = colorLabelArray.max(by: {$0.number > $1.number}) else {
+            return nil
+        }
+        return maxValue.number
+    }
+    
+    func sum() -> Double {
+        var resultSum : Double = 0
+        for element in colorLabelArray {
+            resultSum += element.number
+        }
+        return resultSum
+    }
+    
+    func mean() -> Double? {
+        return count == 0 ? nil : sum() / count
+    }
 }

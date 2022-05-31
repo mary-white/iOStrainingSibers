@@ -39,7 +39,7 @@ class EditViewController: UIViewController {
     }
     
     @IBAction func saveNewCellValue() {
-        if !(viewModel?.saveNewMeansToDataContainer(number: textFieldOfValue?.text, red: redColorComponent?.text, green: greenColorComponent?.text, blue: blueColorComponent?.text))! {
+        if !(viewModel?.saveNewValuesToDataContainer(number: textFieldOfValue?.text, red: redColorComponent?.text, green: greenColorComponent?.text, blue: blueColorComponent?.text))! {
             return
         }
         

@@ -13,16 +13,21 @@ class EditViewModel {
     var editingCell : ColorLabel? = nil
     
     // getters
-    func textToChange() -> String {
-        return String((editingCell?.number)!)
+    func textToChange() -> String? {
+        guard let number = editingCell?.number else {
+            return nil
+        }
+        return String(number)
     }
     
-    func colorToChange() -> UIColor {
-        return (editingCell?.color)!
+    func colorToChange() -> UIColor? {
+        return editingCell?.color
     }
     
     func colorToChangeInRGBFormat() -> (red: String, green: String, blue: String) {
-        let oldColor = colorToChange()
+        guard let oldColor = colorToChange() else {
+            return (red: "", green: "", blue : "")
+        }
         let rgbOldColor = oldColor.rgbaComponents
         let red = convertRGBToInt(rgbOldColor.red)
         let green = convertRGBToInt(rgbOldColor.green)
@@ -39,7 +44,10 @@ class EditViewModel {
         return true
     }
     
-    func saveNewMeansToDataContainer(number: String?, red:String?, green: String?, blue: String?) -> Bool {
+    func saveNewValuesToDataContainer(number: String?, red:String?, green: String?, blue: String?) -> Bool {
+        guard let newCell = editingCell else {
+            return false
+        }
         guard let newNumber = Double(number ?? "") else {
             return false
         }
@@ -47,7 +55,7 @@ class EditViewModel {
             return false
         }
         editingCell?.number = newNumber
-        delegate?.didChangeData(newData: editingCell!)
+        delegate?.didChangeData(newData: newCell)
         return true
     }
     
