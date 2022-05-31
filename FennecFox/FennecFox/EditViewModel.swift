@@ -9,22 +9,16 @@ import Foundation
 import UIKit
 
 class EditViewModel {
-    weak var listViewModel : ListViewModel? = nil
-
-    var intermediateColor : UIColor = defaultColor
-    
-    init(_ viewModel : ListViewModel) {
-        listViewModel = viewModel
-        intermediateColor =  (listViewModel?.dataContainerElementColorToChange())!
-    }
+    weak var delegate : EditViewModelDelegate? = nil
+    var changingCell : ColorLabel? = nil
     
     // getters
     func dataContainerElementText() -> String {
-        return (listViewModel?.dataContainerElementTextToChange())!
+        return String((changingCell?.number)!)
     }
     
     func dataContainerElementColor() -> UIColor {
-        return intermediateColor
+        return (changingCell?.color)!
     }
     
     func dataContainerElementColorInRGBFormat() -> (red: String, green: String, blue: String) {
@@ -41,7 +35,7 @@ class EditViewModel {
         guard let r = Int(red ?? ""), let g = Int(green ?? ""), let b = Int(blue ?? "") else {
             return false
         }
-        intermediateColor = UIColor(red: convertIntToRGB(r), green: convertIntToRGB(g), blue: convertIntToRGB(b), alpha: 1)
+        changingCell?.color = UIColor(red: convertIntToRGB(r), green: convertIntToRGB(g), blue: convertIntToRGB(b), alpha: 1)
         return true
     }
     
@@ -52,7 +46,8 @@ class EditViewModel {
         if !setDataContainerElementColor(red: red, green: green, blue: blue) {
             return false
         }
-        listViewModel?.changeData(newData: String(newNumber), newColor: intermediateColor)
+        changingCell?.number = newNumber
+        delegate?.didChangeData(newData: changingCell!)
         return true
     }
     
@@ -79,3 +74,6 @@ extension UIColor {
     }
 }
 
+protocol EditViewModelDelegate : AnyObject {
+    func didChangeData(newData : ColorLabel);
+}

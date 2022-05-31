@@ -12,7 +12,7 @@ import UIKit
 let maxCellNumber = 10
 let defaultColor = UIColor.systemRed
 
-class ListViewModel {
+class ListViewModel : EditViewModelDelegate {
     // data container
     let dataContainer : ColorLabelContainer = ColorLabelContainer()
     
@@ -77,7 +77,20 @@ class ListViewModel {
         guard let _ = editingCellNumber else {
             return
         }
-        editViewModel = EditViewModel(self)
+        editViewModel = EditViewModel()
+        editViewModel?.delegate = self
+        editViewModel?.changingCell = dataContainer.element(at: editingCellNumber!)
+    }
+    
+    // protocol functions
+    func didChangeData(newData : ColorLabel) {
+        guard let cellNumber = editingCellNumber else {
+            return
+        }
+        
+        dataContainer.change(color: newData.color, number: newData.number, at: cellNumber)
+        editingCellNumber = nil
+        editViewModel = nil
     }
 }
 
