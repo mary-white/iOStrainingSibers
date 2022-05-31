@@ -83,7 +83,7 @@ class ColorLabelContainer {
     }
     
     func max() -> Double? {
-        guard let maxValue = colorLabelArray.max(by: {$0.number > $1.number}) else {
+        guard let maxValue = colorLabelArray.max(by: {$0.number < $1.number}) else {
             return nil
         }
         return maxValue.number
@@ -98,6 +98,6 @@ class ColorLabelContainer {
     }
     
     func mean() -> Double? {
-        return count == 0 ? nil : sum() / count
+        return count == 0 ? nil : sum() / Double(count)
     }
 }

@@ -72,6 +72,7 @@
 				3FB669612837653600B7492F /* SceneDelegate.swift */,
 				3FB669632837653600B7492F /* ListViewController.swift */,
 				3FB6697928377C7100B7492F /* EditViewController.swift */,
+				3F2C9E2D284602B50064EA79 /* StatisticViewController.swift */,
 				3FB669652837653600B7492F /* Main.storyboard */,
 				3FB669682837653900B7492F /* Assets.xcassets */,
 				3FB6696A2837653900B7492F /* LaunchScreen.storyboard */,
@@ -79,7 +80,6 @@
 				3F37E937283C9F000025183E /* ColorLabelContainer.swift */,
 				3FE2B66428407AE2008A19B0 /* ListViewModel.swift */,
 				3FE2B66A2840DCB2008A19B0 /* EditViewModel.swift */,
-				3F2C9E2D284602B50064EA79 /* StatisticViewController.swift */,
 				3F2C9E31284603AC0064EA79 /* StatisticViewModel.swift */,
 			);
 			path = FennecFox;

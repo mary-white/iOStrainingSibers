@@ -18,6 +18,8 @@ class StatisticViewModel {
             return (min : "", max : "", mean : "")
         }
         
-        return (min : String(resultMin), max : String(resultMax), mean : String(resultMean))
+        let roundResultMean = round(resultMean * 1000) / 1000
+        
+        return (min : String(resultMin), max : String(resultMax), mean : String(roundResultMean))
     }
 }

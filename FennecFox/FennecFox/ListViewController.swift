@@ -25,6 +25,10 @@ class ListViewController: UIViewController, EditViewControllerDelegate {
         
         table?.dataSource = self
         table?.delegate = self
+        
+        // ???????????????
+        let statisticView = (self.tabBarController?.viewControllers)![1] as! StatisticViewController
+        statisticView.viewModel.dataContainer = viewModel.dataContainer
     }
     
     @IBAction func updateTableData() {

@@ -18,6 +18,14 @@ class StatisticViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateDataLabels()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        updateDataLabels()
+    }
+    
+    func updateDataLabels() {
         let statistics = viewModel.statisticFromDataContainer()
         minValueLabel?.text = statistics.min
         maxValueLabel?.text = statistics.max
