@@ -38,10 +38,7 @@ class EditViewModel {
     
     //setters
     func setDataContainerElementColor(red : String?, green : String?, blue : String?) -> Bool {
-        guard let redComponent = red, let greenComponent = green, let blueComponent = blue else {
-            return false
-        }
-        guard let r = Int(redComponent), let g = Int(greenComponent), let b = Int(blueComponent) else {
+        guard let r = Int(red ?? ""), let g = Int(green ?? ""), let b = Int(blue ?? "") else {
             return false
         }
         intermediateColor = UIColor(red: convertIntToRGB(r), green: convertIntToRGB(g), blue: convertIntToRGB(b), alpha: 1)

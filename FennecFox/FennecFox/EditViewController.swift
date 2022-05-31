@@ -24,9 +24,6 @@ class EditViewController: UIViewController {
     weak var delegate : EditViewControllerDelegate? = nil
     
     var viewModel : EditViewModel? = nil
-    
-    var colorToChange : UIColor? = nil
-    var textToChange : String? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
