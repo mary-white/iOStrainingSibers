@@ -10,19 +10,19 @@ import UIKit
 
 class EditViewModel {
     weak var delegate : EditViewModelDelegate? = nil
-    var changingCell : ColorLabel? = nil
+    var editingCell : ColorLabel? = nil
     
     // getters
-    func dataContainerElementText() -> String {
-        return String((changingCell?.number)!)
+    func textToChange() -> String {
+        return String((editingCell?.number)!)
     }
     
-    func dataContainerElementColor() -> UIColor {
-        return (changingCell?.color)!
+    func colorToChange() -> UIColor {
+        return (editingCell?.color)!
     }
     
-    func dataContainerElementColorInRGBFormat() -> (red: String, green: String, blue: String) {
-        let oldColor = dataContainerElementColor()
+    func colorToChangeInRGBFormat() -> (red: String, green: String, blue: String) {
+        let oldColor = colorToChange()
         let rgbOldColor = oldColor.rgbaComponents
         let red = convertRGBToInt(rgbOldColor.red)
         let green = convertRGBToInt(rgbOldColor.green)
@@ -31,11 +31,11 @@ class EditViewModel {
     }
     
     //setters
-    func setDataContainerElementColor(red : String?, green : String?, blue : String?) -> Bool {
+    func setElementColor(red : String?, green : String?, blue : String?) -> Bool {
         guard let r = Int(red ?? ""), let g = Int(green ?? ""), let b = Int(blue ?? "") else {
             return false
         }
-        changingCell?.color = UIColor(red: convertIntToRGB(r), green: convertIntToRGB(g), blue: convertIntToRGB(b), alpha: 1)
+        editingCell?.color = UIColor(red: convertIntToRGB(r), green: convertIntToRGB(g), blue: convertIntToRGB(b), alpha: 1)
         return true
     }
     
@@ -43,11 +43,11 @@ class EditViewModel {
         guard let newNumber = Double(number ?? "") else {
             return false
         }
-        if !setDataContainerElementColor(red: red, green: green, blue: blue) {
+        if !setElementColor(red: red, green: green, blue: blue) {
             return false
         }
-        changingCell?.number = newNumber
-        delegate?.didChangeData(newData: changingCell!)
+        editingCell?.number = newNumber
+        delegate?.didChangeData(newData: editingCell!)
         return true
     }
     

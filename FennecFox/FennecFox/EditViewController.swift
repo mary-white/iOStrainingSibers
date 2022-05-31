@@ -28,11 +28,11 @@ class EditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        textFieldOfValue?.text = viewModel?.dataContainerElementText()
+        textFieldOfValue?.text = viewModel?.textToChange()
         
-        colorView?.backgroundColor = viewModel?.dataContainerElementColor()
+        colorView?.backgroundColor = viewModel?.colorToChange()
         
-        let rgbOldColor = viewModel?.dataContainerElementColorInRGBFormat()
+        let rgbOldColor = viewModel?.colorToChangeInRGBFormat()
         redColorComponent?.text = rgbOldColor?.red
         greenColorComponent?.text = rgbOldColor?.green
         blueColorComponent?.text = rgbOldColor?.blue
@@ -47,10 +47,10 @@ class EditViewController: UIViewController {
     }
 
     @IBAction func updateColor() {
-        if !(viewModel?.setDataContainerElementColor(red: redColorComponent?.text, green: greenColorComponent?.text, blue: blueColorComponent?.text))! {
+        if !(viewModel?.setElementColor(red: redColorComponent?.text, green: greenColorComponent?.text, blue: blueColorComponent?.text))! {
             return
         }
-        colorView?.backgroundColor = viewModel?.dataContainerElementColor()
+        colorView?.backgroundColor = viewModel?.colorToChange()
     }
 }
 

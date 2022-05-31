@@ -54,7 +54,7 @@ class ListViewModel : EditViewModelDelegate {
         }
         editViewModel = EditViewModel()
         editViewModel?.delegate = self
-        editViewModel?.changingCell = dataContainer.element(at: editingCellNumber!)
+        editViewModel?.editingCell = dataContainer.element(at: editingCellNumber!)
     }
     
     // protocol functions
