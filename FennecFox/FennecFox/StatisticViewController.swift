@@ -39,10 +39,17 @@ class StatisticViewController: UIViewController {
     }
     
     func drawHistogram() {
-        let width = 300, height = 300
+        guard let floatWidth = statisticHistogram?.bounds.width,
+                let floatHeight = statisticHistogram?.bounds.height else {
+            return
+        }
         
+        // contants
         let yIndent = 10
         let xIndent = 13
+        
+        let width = Int(floatWidth)
+        let height = Int(floatHeight)
         
         let halfLineLength = 5
         
@@ -50,22 +57,27 @@ class StatisticViewController: UIViewController {
         
         let renderer = UIGraphicsImageRenderer(size: CGSize(width: width, height: height))
         
+        let barWidth = width - 3*xIndent
+        let barHeight = height - 3*yIndent
+        
+        // get data
         let dataForBar = viewModel.statisticDistribution(barNumber: barNumber)
-        print(dataForBar)
+        //print(dataForBar)
 
         let img = renderer.image { context in
             // x axis
-            context.cgContext.addLines(between: [CGPoint(x: width, y: height - 3*yIndent), CGPoint(x: 2*xIndent, y: height - 3*yIndent)])
+            context.cgContext.addLines(between: [CGPoint(x: barWidth + 2*xIndent, y: barHeight), CGPoint(x: 2*xIndent, y: barHeight)])
             //y axis
-            context.cgContext.addLines(between: [CGPoint(x: 2*xIndent, y: height - 2*yIndent), CGPoint(x: 2*xIndent, y: 0)])
+            context.cgContext.addLines(between: [CGPoint(x: 2*xIndent, y: barHeight + yIndent), CGPoint(x: 2*xIndent, y: 0)])
             
-            let xLabelStep : Int = (width - 2*xIndent) / barNumber
+            // steps
+            let xLabelStep : Int = barWidth / barNumber
             
             guard let maxValue = dataForBar.max() else {
                 return
             }
-            let yStep : Double = Double(height - 2*yIndent) / (Double(maxValue) * 1.1)
-            let yLabelStep : Int = (height - 2*yIndent) / yStepNumber
+            let yStep : Double = Double(barHeight + yIndent) / (Double(maxValue) * 1.1)
+            let yLabelStep : Int = (barHeight + yIndent) / yStepNumber
             
             // y label
             for i in 1...yStepNumber {
@@ -89,7 +101,7 @@ class StatisticViewController: UIViewController {
                 // data
                 let dataSize = Int(Double(dataForBar[i-1]) * yStep)
                 context.cgContext.setFillColor(CGColor.init(red: 1, green: 0, blue: 0, alpha: 1))
-                context.cgContext.addRect(CGRect(x: (i-1)*xLabelStep + 2*xIndent, y: height - 3*yIndent - dataSize, width: xLabelStep, height: dataSize))
+                context.cgContext.addRect(CGRect(x: (i-1)*xLabelStep + 2*xIndent, y: barHeight - dataSize, width: xLabelStep, height: dataSize))
             }
             
             context.cgContext.drawPath(using: .fillStroke)

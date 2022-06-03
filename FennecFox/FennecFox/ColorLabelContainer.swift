@@ -14,6 +14,9 @@ struct ColorLabel {
 }
 
 class ColorLabelContainer {
+    let initMinValue : Double = -99.99
+    let initMaxValue : Double = 99.99
+    
     var colorLabelArray : Array<ColorLabel> = []
     
     var count : Int {
@@ -41,7 +44,7 @@ class ColorLabelContainer {
             let randomBlueColorComponent = CGFloat.random(in: 0...1)
             let randomColor = UIColor(red: randomRedColorComponent, green: randomGreenColorComponent, blue: randomBlueColorComponent, alpha: 1)
             
-            let randomNumber = floor(Double.random(in: -99.99...99.99) * 100) / 100
+            let randomNumber = floor(Double.random(in: initMinValue...initMaxValue) * 100) / 100
             
             append(color: randomColor, number: randomNumber)
         }
