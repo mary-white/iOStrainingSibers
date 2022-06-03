@@ -15,7 +15,7 @@ class StatisticViewController: UIViewController {
     
     @IBOutlet var statisticHistogram : UIImageView?
     
-    var viewModel : StatisticViewModel = StatisticViewModel()
+    var viewModel : StatisticViewModel?
     
     let barNumber = 10
 
@@ -30,10 +30,10 @@ class StatisticViewController: UIViewController {
     }
     
     func updateDataLabels() {
-        let statistics = viewModel.statisticFromDataContainer()
-        minValueLabel?.text = statistics.min
-        maxValueLabel?.text = statistics.max
-        meanValueLabel?.text = statistics.mean
+        let statistics = viewModel?.statisticFromDataContainer()
+        minValueLabel?.text = statistics?.min
+        maxValueLabel?.text = statistics?.max
+        meanValueLabel?.text = statistics?.mean
         
         drawHistogram()
     }
@@ -62,13 +62,13 @@ class StatisticViewController: UIViewController {
         let histHeight = histFrameHeight - 3*yIndent
         
         // get data
-        let dataForHist = viewModel.statisticDistribution(barNumber: barNumber)
+        let dataForHist = viewModel?.statisticDistribution(barNumber: barNumber)
         //print(dataForBar)
         
         // steps
         let xLabelStep : Int = histWidth / barNumber
         
-        guard let maxHistValue = dataForHist.max() else {
+        guard let maxHistValue = dataForHist?.max() else {
             return
         }
         let yStep : Double = Double(histHeight + yIndent) / (Double(maxHistValue) * 1.1)
@@ -88,17 +88,17 @@ class StatisticViewController: UIViewController {
                 yAxisLabel.draw(at: CGPoint(x: 0, y: histFrameHeight - i*yLabelStep - Int(3.5*Double(yIndent))), withAttributes: [:])
             }
             
-            let xAxisLabel = String(Int((viewModel.dataContainer?.min())!))
+            let xAxisLabel = String(Int((viewModel?.dataContainer?.min())!))
             xAxisLabel.draw(at: CGPoint(x: Int(1.5*Double(xIndent)), y: histFrameHeight - xIndent), withAttributes: [:])
             for i in 1...barNumber {
                 // x label
                 context.cgContext.addLines(between: [CGPoint(x: i*xLabelStep + xZero, y: histFrameHeight - 3*yIndent - halfLineLength), CGPoint(x: i*xLabelStep + xZero, y: histFrameHeight - 3*yIndent + halfLineLength)])
                 
-                let xAxisLabel = String(Int((viewModel.dataContainer?.min())!) + i * Int((viewModel.dataContainer?.max())! - (viewModel.dataContainer?.min())!) / barNumber)
+                let xAxisLabel = String(Int((viewModel?.dataContainer?.min())!) + i * Int((viewModel?.dataContainer?.max())! - (viewModel?.dataContainer?.min())!) / barNumber)
                 xAxisLabel.draw(at: CGPoint(x: i*xLabelStep + Int(1.5*Double(xIndent)), y: histFrameHeight - xIndent), withAttributes: [:])
                 
                 // data
-                let histDataValue = Int(Double(dataForHist[i-1]) * yStep)
+                let histDataValue = Int(Double((dataForHist)![i-1]) * yStep)
                 context.cgContext.setFillColor(CGColor.init(red: 1, green: 0, blue: 0, alpha: 1))
                 context.cgContext.addRect(CGRect(x: (i-1)*xLabelStep + xZero, y: histHeight - histDataValue, width: xLabelStep, height: histDataValue))
             }

@@ -18,21 +18,17 @@ class ListViewController: UIViewController, EditViewControllerDelegate {
     @IBOutlet var reloadTableButton : UIButton?
     @IBOutlet var addNewCellButton : UIButton?
     
-    var viewModel : ListViewModel = ListViewModel()
+    var viewModel : ListViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         table?.dataSource = self
         table?.delegate = self
-        
-        // ???????????????
-        let statisticView = (self.tabBarController?.viewControllers)![1] as! StatisticViewController
-        statisticView.viewModel.dataContainer = viewModel.dataContainer
     }
     
     @IBAction func updateTableData() {
-        viewModel.updateDataInContainer()
+        viewModel?.updateDataInContainer()
         table?.reloadData()
     }
 }
@@ -40,7 +36,10 @@ class ListViewController: UIViewController, EditViewControllerDelegate {
 // table generation - overload function
 extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.dataContainerCount()
+        guard let viewmodel = viewModel else {
+            return 0
+        }
+        return viewmodel.dataContainerCount()
     }
     
     // fill the table
@@ -49,8 +48,8 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "colorCellType", for: indexPath) as! ColorCell
             
         // Cell content
-        cell.colorText?.text = viewModel.dataContainerElementText(at: indexPath.row)
-        let color = viewModel.dataContainerElementColor(at: indexPath.row)
+        cell.colorText?.text = viewModel?.dataContainerElementText(at: indexPath.row)
+        let color = viewModel?.dataContainerElementColor(at: indexPath.row)
         cell.colorText?.textColor = color
         cell.color?.backgroundColor = color
         
@@ -59,20 +58,20 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     
     // tap to a row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel.editingCellNumber = indexPath.row
+        viewModel?.editingCellNumber = indexPath.row
         
         // create and configure the new view
         let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
         editViewController.delegate = self
         
-        viewModel.createEditViewModel()
-        editViewController.viewModel = viewModel.editViewModel
+        viewModel?.createEditViewModel()
+        editViewController.viewModel = viewModel?.editViewModel
         
         self.navigationController?.pushViewController(editViewController, animated: true)
     }
     
     @IBAction func addNewRandomCell() {
-        viewModel.appendRandomElementToContainer()
+        viewModel?.appendRandomElementToContainer()
         table?.reloadData()
     }
     

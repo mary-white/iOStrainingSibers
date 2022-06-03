@@ -10,6 +10,10 @@ import Foundation
 class StatisticViewModel {
     var dataContainer : ColorLabelContainer? = nil
     
+    init(_ data : ColorLabelContainer) {
+        self.dataContainer = data
+    }
+    
     func statisticFromDataContainer() -> (min : String, max : String, mean : String) {
         guard let data = dataContainer else {
             return (min : "", max : "", mean : "")

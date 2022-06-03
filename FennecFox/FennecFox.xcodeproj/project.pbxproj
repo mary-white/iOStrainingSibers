@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F22F2EE284A10E60017013A /* RootCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F22F2ED284A10E60017013A /* RootCoordinator.swift */; };
 		3F2C9E2E284602B50064EA79 /* StatisticViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2C9E2D284602B50064EA79 /* StatisticViewController.swift */; };
 		3F2C9E32284603AC0064EA79 /* StatisticViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F2C9E31284603AC0064EA79 /* StatisticViewModel.swift */; };
 		3F37E938283C9F000025183E /* ColorLabelContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F37E937283C9F000025183E /* ColorLabelContainer.swift */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F22F2ED284A10E60017013A /* RootCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinator.swift; sourceTree = "<group>"; };
 		3F2C9E2D284602B50064EA79 /* StatisticViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewController.swift; sourceTree = "<group>"; };
 		3F2C9E31284603AC0064EA79 /* StatisticViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticViewModel.swift; sourceTree = "<group>"; };
 		3F37E937283C9F000025183E /* ColorLabelContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLabelContainer.swift; sourceTree = "<group>"; };
@@ -81,6 +83,7 @@
 				3FE2B66A2840DCB2008A19B0 /* EditViewModel.swift */,
 				3F2C9E31284603AC0064EA79 /* StatisticViewModel.swift */,
 				3F37E937283C9F000025183E /* ColorLabelContainer.swift */,
+				3F22F2ED284A10E60017013A /* RootCoordinator.swift */,
 			);
 			path = FennecFox;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 			files = (
 				3FE2B66B2840DCB2008A19B0 /* EditViewModel.swift in Sources */,
 				3FB6697A28377C7100B7492F /* EditViewController.swift in Sources */,
+				3F22F2EE284A10E60017013A /* RootCoordinator.swift in Sources */,
 				3FB669642837653600B7492F /* ListViewController.swift in Sources */,
 				3FB669602837653600B7492F /* AppDelegate.swift in Sources */,
 				3FB669622837653600B7492F /* SceneDelegate.swift in Sources */,

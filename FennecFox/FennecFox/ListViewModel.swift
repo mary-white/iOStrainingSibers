@@ -14,38 +14,38 @@ let defaultColor = UIColor.systemRed
 
 class ListViewModel : EditViewModelDelegate {
     // data container
-    let dataContainer : ColorLabelContainer = ColorLabelContainer()
+    var dataContainer : ColorLabelContainer?
     
     // edit cell variables
     var editingCellNumber : Int? = nil
     
     var editViewModel : EditViewModel? = nil
     
-    init() {
-        dataContainer.generateRandomNumberOfElements()
+    init(_ data : ColorLabelContainer) {
+        dataContainer = data
     }
     
     func updateDataInContainer() {
-        dataContainer.generateRandomNumberOfElements()
+        dataContainer?.generateRandomNumberOfElements()
     }
     
     func dataContainerCount() -> Int {
-        return dataContainer.count
+        return dataContainer?.count ?? 0
     }
     
     func dataContainerElementColor(at index: Int) -> UIColor {
-        return dataContainer.element(at: index)?.color ?? defaultColor
+        return dataContainer?.element(at: index)?.color ?? defaultColor
     }
     
     func dataContainerElementText(at index: Int) -> String {
-        guard let newNumber = dataContainer.element(at: index)?.number else {
+        guard let newNumber = dataContainer?.element(at: index)?.number else {
             return ""
         }
         return stringViewOfNumber(number: newNumber)
     }
     
     func appendRandomElementToContainer() {
-        dataContainer.appendRandomElement()
+        dataContainer?.appendRandomElement()
     }
     
     func createEditViewModel() {
@@ -54,7 +54,7 @@ class ListViewModel : EditViewModelDelegate {
         }
         editViewModel = EditViewModel()
         editViewModel?.delegate = self
-        editViewModel?.editingCell = dataContainer.element(at: editingCellNumber!)
+        editViewModel?.editingCell = dataContainer?.element(at: editingCellNumber!)
     }
     
     // protocol functions
@@ -63,7 +63,7 @@ class ListViewModel : EditViewModelDelegate {
             return
         }
         
-        dataContainer.change(color: newData.color, number: newData.number, at: cellNumber)
+        dataContainer?.change(color: newData.color, number: newData.number, at: cellNumber)
         editingCellNumber = nil
         editViewModel = nil
     }
