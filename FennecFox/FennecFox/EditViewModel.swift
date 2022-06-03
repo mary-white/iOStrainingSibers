@@ -45,7 +45,7 @@ class EditViewModel {
     }
     
     func saveNewValuesToDataContainer(number: String?, red:String?, green: String?, blue: String?) -> Bool {
-        guard let newCell = editingCell else {
+        guard var newCell = editingCell else {
             return false
         }
         guard let newNumber = Double(number ?? "") else {
@@ -54,7 +54,8 @@ class EditViewModel {
         if !setElementColor(red: red, green: green, blue: blue) {
             return false
         }
-        editingCell?.number = newNumber
+        newCell.number = newNumber
+        newCell.color = (editingCell?.color)!
         delegate?.didChangeData(newData: newCell)
         return true
     }
