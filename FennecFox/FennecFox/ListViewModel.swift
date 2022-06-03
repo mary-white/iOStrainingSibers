@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 // constants
-let maxCellNumber = 10
+let maxCellNumber = 10000
 let defaultColor = UIColor.systemRed
 
 class ListViewModel : EditViewModelDelegate {
