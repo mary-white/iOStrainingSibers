@@ -296,6 +296,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="b4J-aU-IVy">
+                                <rect key="frame" x="10" y="403" width="394" height="310"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="310" id="0rv-0W-Ipq"/>
+                                </constraints>
+                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W15-YH-zAg">
                                 <rect key="frame" x="224.5" y="195" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -309,8 +315,11 @@
                             <constraint firstItem="4tD-ZZ-FyO" firstAttribute="leading" secondItem="mft-NU-Zat" secondAttribute="leading" constant="50" id="1f8-x9-oeZ"/>
                             <constraint firstItem="4b2-dH-0ao" firstAttribute="leading" secondItem="guK-f5-xLd" secondAttribute="leading" id="4Ui-xK-Xu1"/>
                             <constraint firstItem="4tD-ZZ-FyO" firstAttribute="top" secondItem="mft-NU-Zat" secondAttribute="top" constant="100" id="5Sd-HP-6yx"/>
+                            <constraint firstItem="mft-NU-Zat" firstAttribute="trailing" secondItem="b4J-aU-IVy" secondAttribute="trailing" constant="10" id="DzD-Pq-apG"/>
                             <constraint firstItem="4b2-dH-0ao" firstAttribute="top" secondItem="guK-f5-xLd" secondAttribute="bottom" constant="30" id="K51-kG-dNZ"/>
                             <constraint firstItem="C4p-Xi-UwC" firstAttribute="centerY" secondItem="4b2-dH-0ao" secondAttribute="centerY" id="Mtg-HB-LgM"/>
+                            <constraint firstItem="b4J-aU-IVy" firstAttribute="leading" secondItem="mft-NU-Zat" secondAttribute="leading" constant="10" id="Tzu-BW-d9R"/>
+                            <constraint firstItem="mft-NU-Zat" firstAttribute="bottom" secondItem="b4J-aU-IVy" secondAttribute="bottom" constant="100" id="YaG-il-Gn4"/>
                             <constraint firstItem="3R3-U0-Bfk" firstAttribute="leading" secondItem="4tD-ZZ-FyO" secondAttribute="trailing" constant="100" id="bab-uj-PRE"/>
                             <constraint firstItem="guK-f5-xLd" firstAttribute="top" secondItem="4tD-ZZ-FyO" secondAttribute="bottom" constant="30" id="bwJ-HI-1zx"/>
                             <constraint firstItem="guK-f5-xLd" firstAttribute="leading" secondItem="4tD-ZZ-FyO" secondAttribute="leading" id="dTF-R7-iSK"/>
@@ -325,11 +334,12 @@
                         <outlet property="maxValueLabel" destination="W15-YH-zAg" id="MUD-EZ-q8j"/>
                         <outlet property="meanValueLabel" destination="C4p-Xi-UwC" id="VfI-v8-msN"/>
                         <outlet property="minValueLabel" destination="3R3-U0-Bfk" id="vfT-4W-H0X"/>
+                        <outlet property="statisticHistogram" destination="b4J-aU-IVy" id="GBx-Ir-jyB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nqc-ug-5Rp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-713" y="833"/>
+            <point key="canvasLocation" x="-713.04347826086962" y="832.36607142857144"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="WbV-XH-yGA">
