@@ -45,9 +45,38 @@ class RootController : ListViewModelDelegate, EditViewModelDelegate {
         listViewController.viewModel?.delegate = self
     }
     
+    init() {
+        // create data container
+        dataContainer = ColorLabelContainer()
+        dataContainer.generateRandomNumberOfElements()
+        
+        // add view controllers to tabbar
+        tabBarController = UITabBarController()
+        
+        // create navigation controller
+        navigationController = UINavigationController()
+        
+        // config list view controller
+        listViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        listViewModel = ListViewModel(dataContainer)
+        listViewController.viewModel = listViewModel
+        navigationController.pushViewController(listViewController, animated: true)
+        
+        // config statistic view controller
+        statisticViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "StatisticViewController") as! StatisticViewController
+        statisticViewModel = StatisticViewModel(dataContainer)
+        statisticViewController.viewModel = statisticViewModel
+        
+        // set delegates
+        listViewController.viewModel?.delegate = self
+        
+        tabBarController.setViewControllers([navigationController, statisticViewController], animated: true)
+        tabBarController.tabBar.items?[0].title = "Data table"
+    }
+    
     func willChangeData() {
         // create and configure the new view
-        let editViewController = tabBarController.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        let editViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
         
         let editViewModel : EditViewModel = EditViewModel()
         editViewModel.editingCell = dataContainer.element(at: listViewModel.editingCellNumber!)

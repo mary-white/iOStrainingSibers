@@ -244,7 +244,6 @@
         <!--Data table-->
         <scene sceneID="Kgh-L1-mu4">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TmM-vs-LyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="kwh-1b-r0F" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Data table" id="IZv-mh-Jef"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="b7I-qr-tyC">
@@ -255,6 +254,7 @@
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="J2m-r9-NKQ"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TmM-vs-LyV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-713" y="138"/>
         </scene>
@@ -344,7 +344,6 @@
         <!--Tab Bar Controller-->
         <scene sceneID="WbV-XH-yGA">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hVo-fh-EhY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <tabBarController id="dny-dF-ydV" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xd3-Uc-Voz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
@@ -356,6 +355,7 @@
                         <segue destination="9x5-Wl-egI" kind="relationship" relationship="viewControllers" id="a2z-zv-lH0"/>
                     </connections>
                 </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hVo-fh-EhY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1523" y="485"/>
         </scene>
