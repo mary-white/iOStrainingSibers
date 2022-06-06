@@ -54,6 +54,7 @@ class EditViewModel {
         if !setElementColor(red: red, green: green, blue: blue) {
             return false
         }
+
         newCell.number = newNumber
         newCell.color = (editingCell?.color)!
         delegate?.didChangeData(newData: newCell)

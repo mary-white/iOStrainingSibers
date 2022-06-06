@@ -12,14 +12,14 @@ import UIKit
 let maxCellNumber = 10000
 let defaultColor = UIColor.systemRed
 
-class ListViewModel : EditViewModelDelegate {
+class ListViewModel {
     // data container
     var dataContainer : ColorLabelContainer?
     
     // edit cell variables
     var editingCellNumber : Int? = nil
     
-    var editViewModel : EditViewModel? = nil
+    var delegate : ListViewModelDelegate?
     
     init(_ data : ColorLabelContainer) {
         dataContainer = data
@@ -47,17 +47,7 @@ class ListViewModel : EditViewModelDelegate {
     func appendRandomElementToContainer() {
         dataContainer?.appendRandomElement()
     }
-    
-    func createEditViewModel() {
-        guard let _ = editingCellNumber else {
-            return
-        }
-        editViewModel = EditViewModel()
-        editViewModel?.delegate = self
-        editViewModel?.editingCell = dataContainer?.element(at: editingCellNumber!)
-    }
-    
-    // protocol functions
+
     func didChangeData(newData : ColorLabel) {
         guard let cellNumber = editingCellNumber else {
             return
@@ -65,8 +55,15 @@ class ListViewModel : EditViewModelDelegate {
         
         dataContainer?.change(color: newData.color, number: newData.number, at: cellNumber)
         editingCellNumber = nil
-        editViewModel = nil
     }
+    
+    func willChangeData() {
+        delegate?.willChangeData()
+    }
+}
+
+protocol ListViewModelDelegate : AnyObject {
+    func willChangeData()
 }
 
 func stringViewOfNumber(number : Double) -> String {

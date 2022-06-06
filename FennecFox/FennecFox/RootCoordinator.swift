@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RootController {
+class RootController : ListViewModelDelegate, EditViewModelDelegate {
     var dataContainer : ColorLabelContainer
     
     var listViewController : ListViewController
@@ -37,12 +37,29 @@ class RootController {
         listViewController.viewModel = listViewModel
         
         // config statistic view controller
-        statisticViewController = tabBarController.viewControllers?[1] as! StatisticViewController //storyboard.instantiateViewController(withIdentifier: "StatisticViewController") as! StatisticViewController
+        statisticViewController = tabBarController.viewControllers?[1] as! StatisticViewController
         statisticViewModel = StatisticViewModel(dataContainer)
         statisticViewController.viewModel = statisticViewModel
+        
+        // set delegates
+        listViewController.viewModel?.delegate = self
     }
     
-    func rootController() -> UITabBarController {
-        return tabBarController
+    func willChangeData() {
+        // create and configure the new view
+        let editViewController = tabBarController.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
+        
+        let editViewModel : EditViewModel = EditViewModel()
+        editViewModel.editingCell = dataContainer.element(at: listViewModel.editingCellNumber!)
+        editViewModel.delegate = self
+        editViewController.viewModel = editViewModel
+        
+        navigationController.pushViewController(editViewController, animated: true)
+    }
+    
+    func didChangeData(newData : ColorLabel) {
+        listViewController.viewModel?.didChangeData(newData: newData)
+        listViewController.didChangeData()
+        navigationController.popViewController(animated: true)
     }
 }

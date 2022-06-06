@@ -12,7 +12,7 @@ class ColorCell : UITableViewCell {
     @IBOutlet var colorText : UILabel?
 }
 
-class ListViewController: UIViewController, EditViewControllerDelegate {
+class ListViewController: UIViewController {
     
     @IBOutlet var table : UITableView?
     @IBOutlet var reloadTableButton : UIButton?
@@ -59,15 +59,7 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     // tap to a row
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel?.editingCellNumber = indexPath.row
-        
-        // create and configure the new view
-        let editViewController = self.storyboard?.instantiateViewController(withIdentifier: "EditViewController") as! EditViewController
-        editViewController.delegate = self
-        
-        viewModel?.createEditViewModel()
-        editViewController.viewModel = viewModel?.editViewModel
-        
-        self.navigationController?.pushViewController(editViewController, animated: true)
+        viewModel?.willChangeData()
     }
     
     @IBAction func addNewRandomCell() {
@@ -78,7 +70,6 @@ extension ListViewController : UITableViewDataSource, UITableViewDelegate {
     // protocol functions
     func didChangeData() {
         table?.reloadData()
-        self.navigationController?.popViewController(animated: true)
     }
     
     /*private func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
