@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class Restaurant {
+struct Restaurant {
     var title : String
     var address : String
     var description : String
@@ -18,10 +18,15 @@ class Restaurant {
     var rating : Int?
     var id : Int?
     var location : (lat : Double, lon : Double)?
+}
+
+class RestaurantContainer {
+    var container : Array<Restaurant> = []
     
-    init(title : String, address : String, description : String) {
-        self.title = title
-        self.address = address
-        self.description = description
+    func addRestaurant(title : String, address : String, description : String) {
+        var restaurant = Restaurant(title: title, address: address, description: description)
+        container.append(restaurant)
     }
+    
+    
 }

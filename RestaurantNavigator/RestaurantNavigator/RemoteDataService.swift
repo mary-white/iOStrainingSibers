@@ -6,20 +6,52 @@
 //
 
 import Foundation
+import UIKit
 
 let errorStatusCode = [404 : "Bad request", 401 : "Unauthorized", 403 : "Forbidden", 500 : "Internal Server Error", 503 : "Service Unavailable"]
 
 class RemoteDataService : DataService {
     
     var restaurantArray : Array<Restaurant> = []
-    
-    init() {
-        updateDataOfrestaurant()
-    }
+    var delegate : RestaurantListViewModel?
     
     func updateDataOfrestaurant() {
         guard let url = URL(string: "https://restaurants-f64d7.firebaseio.com/restaurants.json") else {
             return
+        }
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("URL response error: \(error)")
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, let responseError = errorStatusCode[response.statusCode] {
+                print("Response HTTP Status code: \(response.statusCode)")
+                print("Response error: " + responseError)
+                return
+            }
+            
+            if let firstData = data, let dataString = String(data: firstData, encoding: .utf8) {
+                let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
+                for restaurant in resultDictionaryOfRestaurants {
+                    self.restaurantArray.append(Restaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!)))
+                }
+                
+                print(dataString)
+                self.delegate?.dataDidLoad(loadedData: dataString)
+            }
+        }
+
+        task.resume()
+    }
+    
+    /*func imageFromURL(urlAddress : String) -> UIImage? { // not work
+        guard let url = URL(string: urlAddress) else {
+            return nil
         }
 
         var request = URLRequest(url: url)
@@ -37,15 +69,26 @@ class RemoteDataService : DataService {
                 return
             }
             
-            if let firstData = data, let dataString = String(data: firstData, encoding: .utf8) {
-                let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
-                for restaurant in resultDictionaryOfRestaurants {
-                    self.restaurantArray.append(Restaurant(title: String(describing: restaurant["name"]), address: String(describing: restaurant["address"]), description: String(describing: restaurant["description"])))
-                }
+            if let firstData = data {
+                let image = UIImage(data: firstData)
             }
         }
 
         task.resume()
+        return nil
+    }*/
+    
+    // protocol functions
+    func containerCount() -> Int {
+        return restaurantArray.count
+    }
+    
+    func containerElement(at index: Int) -> (title: String, description: String)? {
+        if index >= restaurantArray.count {
+            return nil
+        }
+        let element = restaurantArray[index]
+        return (title : element.title, description : element.description)
     }
 }
 
@@ -101,4 +144,9 @@ func convertJSONStringToDictionary(_ str : String) -> [String: Any] {
         print("Failed to load: \(error.localizedDescription)")
     }
     return [:]
+}
+
+
+protocol DataServiceDelegate : AnyObject {
+    func didDataLoad(loadedData : String)
 }

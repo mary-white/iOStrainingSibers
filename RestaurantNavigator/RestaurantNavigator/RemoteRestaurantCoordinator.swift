@@ -17,7 +17,11 @@ class RemoteRestaurantCoordinator : Coordinator {
         
         viewModel = RestaurantListViewModel()
         viewModel.dataService = RemoteDataService()
+        viewModel.delegate = viewController
+        
         viewController.viewModel = viewModel
+        viewController.viewModel?.dataService?.delegate = viewModel
+        viewController.viewModel?.dataService?.updateDataOfrestaurant()
     }
     
     func rootViewController() -> UIViewController {
