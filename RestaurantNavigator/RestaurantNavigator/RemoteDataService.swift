@@ -11,6 +11,8 @@ let errorStatusCode = [404 : "Bad request", 401 : "Unauthorized", 403 : "Forbidd
 
 class RemoteDataService : DataService {
     
+    var restaurantArray : Array<Restaurant> = []
+    
     init() {
         updateDataOfrestaurant()
     }
@@ -36,7 +38,12 @@ class RemoteDataService : DataService {
             }
             
             if let firstData = data, let dataString = String(data: firstData, encoding: .utf8) {
-                print(convertJSONStringToArrayOfDictionaries(dataString))
+                let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
+                for restaurant in resultDictionaryOfRestaurants {
+                    self.restaurantArray.append(Restaurant(title: String(describing: restaurant["name"]), address: String(describing: restaurant["address"]), description: String(describing: restaurant["description"])))
+                }
+                print(resultDictionaryOfRestaurants)
+                print(self.restaurantArray)
             }
         }
 
