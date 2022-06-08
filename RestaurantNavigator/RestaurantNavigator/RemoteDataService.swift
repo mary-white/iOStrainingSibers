@@ -42,8 +42,6 @@ class RemoteDataService : DataService {
                 for restaurant in resultDictionaryOfRestaurants {
                     self.restaurantArray.append(Restaurant(title: String(describing: restaurant["name"]), address: String(describing: restaurant["address"]), description: String(describing: restaurant["description"])))
                 }
-                print(resultDictionaryOfRestaurants)
-                print(self.restaurantArray)
             }
         }
 
@@ -54,10 +52,11 @@ class RemoteDataService : DataService {
 func parseStringToJSONElements(_ str : String) -> [String] {
     var result : [String] = []
     var data = str
-    data.remove(at: data.startIndex)
+    
+    data.remove(at: data.startIndex) // delete '['
     
     while true {
-        if let firstIndex = data.firstIndex(of: "}") {
+        if let firstIndex = data.firstIndex(of: "}") { // because we have location {}
             let dataSecondPart = String(data[data.index(after: firstIndex)..<data.endIndex])
             if let lastIndex = dataSecondPart.firstIndex(of: "}") {
                 let firstPart = String(data[..<data.index(after: firstIndex)])
@@ -66,8 +65,8 @@ func parseStringToJSONElements(_ str : String) -> [String] {
                 
                 result.append(newElement)
                 
-                data = String(dataSecondPart[data.index(after: lastIndex)...])
-                data.remove(at: data.startIndex)
+                data = String(dataSecondPart[data.index(after: lastIndex)...]) // delete added element
+                data.remove(at: data.startIndex) // delete ','
             } else {
                 break
             }
@@ -92,11 +91,11 @@ func convertJSONStringToArrayOfDictionaries(_ str : String) -> [[String : Any]] 
 }
 
 func convertJSONStringToDictionary(_ str : String) -> [String: Any] {
-    let data = Data(str.utf8)
+    let jsonData = Data(str.utf8)
     
     do {
-        if let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
-            return json
+        if let jsonDictionary = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any] {
+            return jsonDictionary
         }
     } catch let error as NSError {
         print("Failed to load: \(error.localizedDescription)")
