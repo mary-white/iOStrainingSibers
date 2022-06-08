@@ -32,7 +32,7 @@ class RootController : ListViewModelDelegate, EditViewModelDelegate {
         navigationController = tabBarController.viewControllers?[0] as! UINavigationController
         
         // config list view controller
-        listViewController = navigationController.viewControllers[0] as! ListViewController //storyboard.instantiateViewController(withIdentifier: "ListViewController") as! ListViewController
+        listViewController = navigationController.viewControllers[0] as! ListViewController
         listViewModel = ListViewModel(dataContainer)
         listViewController.viewModel = listViewModel
         
