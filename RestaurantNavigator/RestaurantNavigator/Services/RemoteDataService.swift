@@ -42,8 +42,6 @@ class RemoteDataService : DataService {
                 self.dataContainer.addRestaurant(title: String(describing: title), address: String(describing: address), description: String(describing: description), id: restaurantId)
                 
                 self.restaurantPictures(urlAddresses: (restaurant["imagePaths"])! as! [String], restaurantId: restaurantId)
-                
-                //self.dataContainer.setImageGalery(at_id: restaurantId, galery: self.restaurantPictures(urlAddresses: (restaurant["imagePaths"])! as! [String]))
             }
             
             DispatchQueue.main.async {

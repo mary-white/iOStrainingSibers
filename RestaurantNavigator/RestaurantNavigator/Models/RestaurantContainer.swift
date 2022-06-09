@@ -46,13 +46,10 @@ class RestaurantContainer {
     }
     
     func addImageToGalery(at_id id : Int, newImage : UIImage) {
-        for i in 0..<container.count {
-            if container[i].id != id {
-                continue
-            }
-            
-            container[i].galery.append(newImage)
-            break
+        guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
+            return
         }
+        
+        container[index].galery.append(newImage)
     }
 }
