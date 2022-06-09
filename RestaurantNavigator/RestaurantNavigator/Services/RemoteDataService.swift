@@ -28,10 +28,22 @@ class RemoteDataService : DataService {
     }
     
     func updateRestaurantData() {
-        stringDataFromURLAddress(requestType: URLAddresses.allRestaurants) { str in
-            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(str)
+        stringDataFromURLAddress(urlAddress: URLAddresses.allRestaurants.urlString()) { firstData in
+            guard let dataString = String(data: firstData, encoding: .utf8) else {
+                return
+            }
+            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
             for restaurant in resultDictionaryOfRestaurants {
-                self.dataContainer.addRestaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!))
+                guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"] else {
+                    continue
+                }
+                
+                let restaurantId = Int(String(describing: id_str)) ?? 0
+                self.dataContainer.addRestaurant(title: String(describing: title), address: String(describing: address), description: String(describing: description), id: restaurantId)
+                
+                self.restaurantPictures(urlAddresses: (restaurant["imagePaths"])! as! [String], restaurantId: restaurantId)
+                
+                //self.dataContainer.setImageGalery(at_id: restaurantId, galery: self.restaurantPictures(urlAddresses: (restaurant["imagePaths"])! as! [String]))
             }
             
             DispatchQueue.main.async {
@@ -40,8 +52,23 @@ class RemoteDataService : DataService {
         }
     }
     
-    func stringDataFromURLAddress(requestType : URLAddresses, requestHappened : @escaping (String) -> Void) {
-        guard let url = URL(string: requestType.urlString()) else {
+    func restaurantPictures(urlAddresses : [String], restaurantId : Int){
+        for address in urlAddresses{
+            stringDataFromURLAddress(urlAddress : address) { firstData in
+                guard let image = UIImage(data: firstData) else {
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.dataContainer.addImageToGalery(at_id: restaurantId, newImage: image)
+                    self.delegate?.dataDidLoad()
+                }
+            }
+        }
+    }
+    
+    func stringDataFromURLAddress(urlAddress : String, requestHappened : @escaping (Data) -> Void) {
+        guard let url = URL(string: urlAddress) else {
             return
         }
 
@@ -60,43 +87,58 @@ class RemoteDataService : DataService {
                 return
             }
             
-            if let firstData = data, let dataString = String(data: firstData, encoding: .utf8) {
-                requestHappened(dataString)
+            if let firstData = data {
+                requestHappened(firstData)
             }
         }
 
         task.resume()
     }
-    
-    /*func imageFromURL(urlAddress : String) -> UIImage? { // not work
-        guard let url = URL(string: urlAddress) else {
-            return nil
-        }
-
-        var request = URLRequest(url: url)
-        request.httpMethod = "GET"
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            if let error = error {
-                print("URL response error: \(error)")
-                return
-            }
-            
-            if let response = response as? HTTPURLResponse, let responseError = errorStatusCode[response.statusCode] {
-                print("Response HTTP Status code: \(response.statusCode)")
-                print("Response error: " + responseError)
-                return
-            }
-            
-            if let firstData = data {
-                let image = UIImage(data: firstData)
-            }
-        }
-
-        task.resume()
-        return nil
-    }*/
 }
+
+// json parser
+/*struct Root: Codable {
+    let result: [Result]
+    let status: Status
+}
+
+struct Result: Codable {
+    let id: Int
+    let name, description: String
+    let imagePaths : [String]
+    let location_lat : Double
+    let location_lon : Double
+    
+    let rating : Double
+
+    enum CodingKeys: String, CodingKey {
+        case id = "id"
+        case name = "name"
+        case description = "description"
+        case imagePaths = "imagePaths"
+        case location_lat = "lat"
+        case location_lon = "lon"
+        case rating = "rating"
+    }
+}
+
+struct Status: Codable {
+    let httpStatusCode: Int
+}
+
+func decode(data : Data) {
+    do {
+        let decoder = JSONDecoder()
+        let response = try decoder.decode(Root.self, from: data)
+        print("cant")
+        var allRes = response.result
+        print(allRes)
+    } catch {
+        print(error)
+    }
+}*/
+
+// my json parser
 
 func parseStringToJSONElements(_ str : String) -> [String] {
     var result : [String] = []

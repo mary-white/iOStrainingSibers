@@ -48,7 +48,7 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
         let element = viewModel?.containerElement(at: indexPath.row)
         cell.restaurantTitle?.text = (element?.title)!
         cell.restaurantDescription?.text = (element?.description)!
-        //cell.restaurantImage = UIImageView()
+        cell.restaurantImage?.image = element?.image
         
         return cell
     }

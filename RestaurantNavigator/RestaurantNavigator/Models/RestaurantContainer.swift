@@ -29,8 +29,8 @@ class RestaurantContainer {
         }
     }
     
-    func addRestaurant(title : String, address : String, description : String) {
-        let restaurant = Restaurant(title: title, address: address, description: description)
+    func addRestaurant(title : String, address : String, description : String, id : Int) {
+        let restaurant = Restaurant(title: title, address: address, description: description, id: id)
         container.append(restaurant)
     }
     
@@ -43,5 +43,16 @@ class RestaurantContainer {
     
     func removeAll() {
         container.removeAll()
+    }
+    
+    func addImageToGalery(at_id id : Int, newImage : UIImage) {
+        for i in 0..<container.count {
+            if container[i].id != id {
+                continue
+            }
+            
+            container[i].galery.append(newImage)
+            break
+        }
     }
 }

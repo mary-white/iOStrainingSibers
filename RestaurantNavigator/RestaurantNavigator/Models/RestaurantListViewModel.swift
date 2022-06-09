@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class RestaurantListViewModel  {
     var dataService : DataService?
@@ -16,11 +17,15 @@ class RestaurantListViewModel  {
         return dataContainer?.count
     }
     
-    func containerElement(at index : Int) -> (title : String, description : String) {
+    func containerElement(at index : Int) -> (title : String, description : String, image : UIImage) {
         guard let element = dataContainer?.element(at: index) else {
-            return (title : "", description : "")
+            return (title : "", description : "", image : UIImage())
         }
-        return (title : element.title, description : element.description)
+        var image = UIImage()
+        if !element.galery.isEmpty {
+            image = element.galery[0]
+        }
+        return (title : element.title, description : element.description, image : image)
     }
     
     func dataDidLoad() {
