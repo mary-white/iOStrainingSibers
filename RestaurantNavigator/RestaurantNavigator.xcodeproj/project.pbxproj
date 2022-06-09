@@ -57,6 +57,70 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F3680592851D9030066A50E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3FA341242850612E003FABB4 /* RestaurantContainer.swift */,
+				3FA3411C285054D6003FABB4 /* RestaurantListViewModel.swift */,
+				3FA3411E28505595003FABB4 /* MapViewModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		3F36805A2851D91C0066A50E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				3FA3412228505678003FABB4 /* BookmarkDataService.swift */,
+				3FA3412028505652003FABB4 /* RemoteDataService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		3F36805B2851D93F0066A50E /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3FB09FEA284E08CD00ADA6DF /* RestaurantListViewController.swift */,
+				3F36805F2851D9870066A50E /* MapFlow */,
+				3F36805E2851D97B0066A50E /* BookmarkFlow */,
+				3F36805D2851D96D0066A50E /* ListFlow */,
+				3F36805C2851D9670066A50E /* Root */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		3F36805C2851D9670066A50E /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				3FB09FFA284E0A4C00ADA6DF /* RootCordinator.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		3F36805D2851D96D0066A50E /* ListFlow */ = {
+			isa = PBXGroup;
+			children = (
+				3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */,
+			);
+			path = ListFlow;
+			sourceTree = "<group>";
+		};
+		3F36805E2851D97B0066A50E /* BookmarkFlow */ = {
+			isa = PBXGroup;
+			children = (
+				3FA3411A28505418003FABB4 /* BookmarkedRestaurantCoordinator.swift */,
+			);
+			path = BookmarkFlow;
+			sourceTree = "<group>";
+		};
+		3F36805F2851D9870066A50E /* MapFlow */ = {
+			isa = PBXGroup;
+			children = (
+				3FA3411628505279003FABB4 /* MapCoordinator.swift */,
+				3FA341182850534A003FABB4 /* MapViewController.swift */,
+			);
+			path = MapFlow;
+			sourceTree = "<group>";
+		};
 		3FB09FDA284E08CD00ADA6DF = {
 			isa = PBXGroup;
 			children = (
@@ -76,23 +140,15 @@
 		3FB09FE5284E08CD00ADA6DF /* RestaurantNavigator */ = {
 			isa = PBXGroup;
 			children = (
+				3F36805B2851D93F0066A50E /* UI */,
+				3F36805A2851D91C0066A50E /* Services */,
+				3F3680592851D9030066A50E /* Models */,
 				3FB09FE6284E08CD00ADA6DF /* AppDelegate.swift */,
 				3FB09FE8284E08CD00ADA6DF /* SceneDelegate.swift */,
-				3FB09FEA284E08CD00ADA6DF /* RestaurantListViewController.swift */,
-				3FA3411C285054D6003FABB4 /* RestaurantListViewModel.swift */,
-				3FA341182850534A003FABB4 /* MapViewController.swift */,
-				3FA3411E28505595003FABB4 /* MapViewModel.swift */,
 				3FB09FEC284E08CD00ADA6DF /* Main.storyboard */,
 				3FB09FEF284E08CF00ADA6DF /* Assets.xcassets */,
 				3FB09FF1284E08CF00ADA6DF /* LaunchScreen.storyboard */,
 				3FB09FF4284E08CF00ADA6DF /* Info.plist */,
-				3FB09FFA284E0A4C00ADA6DF /* RootCordinator.swift */,
-				3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */,
-				3FA3411628505279003FABB4 /* MapCoordinator.swift */,
-				3FA3411A28505418003FABB4 /* BookmarkedRestaurantCoordinator.swift */,
-				3FA3412028505652003FABB4 /* RemoteDataService.swift */,
-				3FA3412228505678003FABB4 /* BookmarkDataService.swift */,
-				3FA341242850612E003FABB4 /* RestaurantContainer.swift */,
 			);
 			path = RestaurantNavigator;
 			sourceTree = "<group>";
