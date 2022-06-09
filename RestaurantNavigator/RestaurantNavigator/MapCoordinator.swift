@@ -12,10 +12,11 @@ class MapCoordinator : Coordinator {
     let viewController : MapViewController
     let viewModel : MapViewModel
     
-    init() {
+    init(dataContainer : RestaurantContainer) {
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
         viewModel = MapViewModel()
+        viewModel.dataContainer = dataContainer
         viewController.viewModel = viewModel
     }
     

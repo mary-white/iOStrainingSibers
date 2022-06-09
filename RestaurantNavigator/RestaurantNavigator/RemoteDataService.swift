@@ -12,7 +12,7 @@ let errorStatusCode = [404 : "Bad request", 401 : "Unauthorized", 403 : "Forbidd
 
 class RemoteDataService : DataService {
     
-    var restaurantArray : Array<Restaurant> = []
+    var dataContainer : RestaurantContainer = RestaurantContainer()
     var delegate : RestaurantListViewModel?
     
     func updateDataOfrestaurant() {
@@ -38,7 +38,7 @@ class RemoteDataService : DataService {
             if let firstData = data, let dataString = String(data: firstData, encoding: .utf8) {
                 let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
                 for restaurant in resultDictionaryOfRestaurants {
-                    self.restaurantArray.append(Restaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!)))
+                    self.dataContainer.addRestaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!))
                 }
                 
                 DispatchQueue.main.async {
@@ -78,19 +78,6 @@ class RemoteDataService : DataService {
         task.resume()
         return nil
     }*/
-    
-    // protocol functions
-    func containerCount() -> Int {
-        return restaurantArray.count
-    }
-    
-    func containerElement(at index: Int) -> (title: String, description: String)? {
-        if index >= restaurantArray.count {
-            return nil
-        }
-        let element = restaurantArray[index]
-        return (title : element.title, description : element.description)
-    }
 }
 
 func parseStringToJSONElements(_ str : String) -> [String] {
@@ -146,7 +133,6 @@ func convertJSONStringToDictionary(_ str : String) -> [String: Any] {
     }
     return [:]
 }
-
 
 protocol DataServiceDelegate : AnyObject {
     func didDataLoad(loadedData : String)

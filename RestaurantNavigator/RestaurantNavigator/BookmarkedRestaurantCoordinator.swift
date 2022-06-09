@@ -12,10 +12,11 @@ class BookmarkedRestaurantCoordinator : Coordinator {
     let viewController : RestaurantListViewController
     let viewModel : RestaurantListViewModel
     
-    init() {
+    init(dataContainer : RestaurantContainer) {
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
         
         viewModel = RestaurantListViewModel()
+        viewModel.dataContainer = dataContainer
         viewModel.dataService = BookmarkDataService()
         viewController.viewModel = viewModel
     }

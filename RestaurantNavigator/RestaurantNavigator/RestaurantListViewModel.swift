@@ -10,9 +10,10 @@ import Foundation
 class RestaurantListViewModel  {
     var dataService : DataService?
     var delegate : DisplayRestaurantListViewModelDelegate?
+    var dataContainer : RestaurantContainer?
     
     func containerCount() -> Int? {
-        return dataService?.containerCount()
+        return dataContainer?.count
     }
     
     func dataDidLoad(loadedData: String) {
@@ -22,10 +23,8 @@ class RestaurantListViewModel  {
 
 protocol DataService {
     var delegate : RestaurantListViewModel? { get set }
+    var dataContainer : RestaurantContainer { get set }
     func updateDataOfrestaurant()
-    
-    func containerCount() -> Int // deleteThis
-    func containerElement(at index : Int) -> (title : String, description : String)? // deleteThis
 }
 
 protocol DisplayRestaurantListViewModelDelegate : AnyObject {

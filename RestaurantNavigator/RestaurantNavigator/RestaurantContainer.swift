@@ -23,10 +23,25 @@ struct Restaurant {
 class RestaurantContainer {
     var container : Array<Restaurant> = []
     
+    var count : Int {
+        get {
+            return container.count
+        }
+    }
+    
     func addRestaurant(title : String, address : String, description : String) {
-        var restaurant = Restaurant(title: title, address: address, description: description)
+        let restaurant = Restaurant(title: title, address: address, description: description)
         container.append(restaurant)
     }
     
+    func element(at index : Int) -> Restaurant? {
+        if index >= container.count || index < 0 {
+            return nil
+        }
+        return container[index]
+    }
     
+    func removeAll() {
+        container.removeAll()
+    }
 }

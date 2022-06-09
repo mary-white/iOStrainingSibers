@@ -15,7 +15,7 @@
 		3FA3411F28505595003FABB4 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3411E28505595003FABB4 /* MapViewModel.swift */; };
 		3FA3412128505652003FABB4 /* RemoteDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3412028505652003FABB4 /* RemoteDataService.swift */; };
 		3FA3412328505678003FABB4 /* BookmarkDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3412228505678003FABB4 /* BookmarkDataService.swift */; };
-		3FA341252850612E003FABB4 /* Restaurant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA341242850612E003FABB4 /* Restaurant.swift */; };
+		3FA341252850612E003FABB4 /* RestaurantContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA341242850612E003FABB4 /* RestaurantContainer.swift */; };
 		3FB09FE7284E08CD00ADA6DF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB09FE6284E08CD00ADA6DF /* AppDelegate.swift */; };
 		3FB09FE9284E08CD00ADA6DF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB09FE8284E08CD00ADA6DF /* SceneDelegate.swift */; };
 		3FB09FEB284E08CD00ADA6DF /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FB09FEA284E08CD00ADA6DF /* RestaurantListViewController.swift */; };
@@ -34,7 +34,7 @@
 		3FA3411E28505595003FABB4 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		3FA3412028505652003FABB4 /* RemoteDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteDataService.swift; sourceTree = "<group>"; };
 		3FA3412228505678003FABB4 /* BookmarkDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkDataService.swift; sourceTree = "<group>"; };
-		3FA341242850612E003FABB4 /* Restaurant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Restaurant.swift; sourceTree = "<group>"; };
+		3FA341242850612E003FABB4 /* RestaurantContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantContainer.swift; sourceTree = "<group>"; };
 		3FB09FE3284E08CD00ADA6DF /* RestaurantNavigator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RestaurantNavigator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FB09FE6284E08CD00ADA6DF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3FB09FE8284E08CD00ADA6DF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -92,7 +92,7 @@
 				3FA3411A28505418003FABB4 /* BookmarkedRestaurantCoordinator.swift */,
 				3FA3412028505652003FABB4 /* RemoteDataService.swift */,
 				3FA3412228505678003FABB4 /* BookmarkDataService.swift */,
-				3FA341242850612E003FABB4 /* Restaurant.swift */,
+				3FA341242850612E003FABB4 /* RestaurantContainer.swift */,
 			);
 			path = RestaurantNavigator;
 			sourceTree = "<group>";
@@ -168,7 +168,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3FA341252850612E003FABB4 /* Restaurant.swift in Sources */,
+				3FA341252850612E003FABB4 /* RestaurantContainer.swift in Sources */,
 				3FB09FFB284E0A4C00ADA6DF /* RootCordinator.swift in Sources */,
 				3FA3411F28505595003FABB4 /* MapViewModel.swift in Sources */,
 				3FA3411528505171003FABB4 /* RemoteRestaurantCoordinator.swift in Sources */,
