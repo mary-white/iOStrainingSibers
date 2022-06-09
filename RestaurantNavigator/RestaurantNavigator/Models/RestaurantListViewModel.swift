@@ -10,7 +10,8 @@ import UIKit
 
 class RestaurantListViewModel  {
     var dataService : DataService?
-    var delegate : DisplayRestaurantListViewModelDelegate?
+    var displayDelegate : DisplayRestaurantListViewModelDelegate?
+    var actionDelegate : ActionRestaurantListViewModelDelegate?
     var dataContainer : RestaurantContainer?
     
     func containerCount() -> Int? {
@@ -29,7 +30,14 @@ class RestaurantListViewModel  {
     }
     
     func dataDidLoad() {
-        delegate?.dataDidLoad()
+        displayDelegate?.dataDidLoad()
+    }
+    
+    func showRestaurantPage(_ index : Int) {
+        guard let currentRestaurant = dataContainer?.element(at: index) else {
+            return
+        }
+        actionDelegate?.willShow(restaurant: currentRestaurant)
     }
 }
 
@@ -41,4 +49,8 @@ protocol DataService {
 
 protocol DisplayRestaurantListViewModelDelegate : AnyObject {
     func dataDidLoad()
+}
+
+protocol ActionRestaurantListViewModelDelegate : AnyObject {
+    func willShow(restaurant : Restaurant)
 }

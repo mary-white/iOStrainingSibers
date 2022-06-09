@@ -52,5 +52,9 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
         
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.showRestaurantPage(indexPath.row)
+    }
 }
 
