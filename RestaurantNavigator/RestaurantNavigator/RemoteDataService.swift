@@ -41,8 +41,9 @@ class RemoteDataService : DataService {
                     self.restaurantArray.append(Restaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!)))
                 }
                 
-                print(dataString)
-                self.delegate?.dataDidLoad(loadedData: dataString)
+                DispatchQueue.main.async {
+                    self.delegate?.dataDidLoad(loadedData: dataString)
+                }
             }
         }
 
