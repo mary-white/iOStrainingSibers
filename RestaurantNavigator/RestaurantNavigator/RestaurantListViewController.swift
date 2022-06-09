@@ -45,7 +45,7 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCell
             
         // Cell content
-        let element = viewModel?.dataContainer?.element(at: indexPath.row)
+        let element = viewModel?.containerElement(at: indexPath.row)
         cell.restaurantTitle?.text = (element?.title)!
         cell.restaurantDescription?.text = (element?.description)!
         //cell.restaurantImage = UIImageView()

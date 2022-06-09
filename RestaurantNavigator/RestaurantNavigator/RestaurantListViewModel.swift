@@ -16,6 +16,13 @@ class RestaurantListViewModel  {
         return dataContainer?.count
     }
     
+    func containerElement(at index : Int) -> (title : String, description : String) {
+        guard let element = dataContainer?.element(at: index) else {
+            return (title : "", description : "")
+        }
+        return (title : element.title, description : element.description)
+    }
+    
     func dataDidLoad(loadedData: String) {
         delegate?.dataDidLoad()
     }
