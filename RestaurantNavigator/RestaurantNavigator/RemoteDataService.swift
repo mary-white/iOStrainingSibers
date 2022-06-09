@@ -15,8 +15,33 @@ class RemoteDataService : DataService {
     var dataContainer : RestaurantContainer = RestaurantContainer()
     var delegate : RestaurantListViewModel?
     
-    func updateDataOfrestaurant() {
-        guard let url = URL(string: "https://restaurants-f64d7.firebaseio.com/restaurants.json") else {
+    enum URLAddresses {
+        case allRestaurants, defaultMean
+        func urlString() -> String {
+            switch self {
+            case .allRestaurants :
+                return "https://restaurants-f64d7.firebaseio.com/restaurants.json"
+            default :
+                return ""
+            }
+        }
+    }
+    
+    func updateRestaurantData() {
+        stringDataFromURLAddress(requestType: URLAddresses.allRestaurants) { str in
+            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(str)
+            for restaurant in resultDictionaryOfRestaurants {
+                self.dataContainer.addRestaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!))
+            }
+            
+            DispatchQueue.main.async {
+                self.delegate?.dataDidLoad()
+            }
+        }
+    }
+    
+    func stringDataFromURLAddress(requestType : URLAddresses, requestHappened : @escaping (String) -> Void) {
+        guard let url = URL(string: requestType.urlString()) else {
             return
         }
 
@@ -36,14 +61,7 @@ class RemoteDataService : DataService {
             }
             
             if let firstData = data, let dataString = String(data: firstData, encoding: .utf8) {
-                let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
-                for restaurant in resultDictionaryOfRestaurants {
-                    self.dataContainer.addRestaurant(title: String(describing: (restaurant["name"])!), address: String(describing: (restaurant["address"])!), description: String(describing: (restaurant["description"])!))
-                }
-                
-                DispatchQueue.main.async {
-                    self.delegate?.dataDidLoad(loadedData: dataString)
-                }
+                requestHappened(dataString)
             }
         }
 
@@ -135,5 +153,5 @@ func convertJSONStringToDictionary(_ str : String) -> [String: Any] {
 }
 
 protocol DataServiceDelegate : AnyObject {
-    func didDataLoad(loadedData : String)
+    func didDataLoad()
 }

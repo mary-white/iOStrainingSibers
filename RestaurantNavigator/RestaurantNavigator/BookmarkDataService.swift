@@ -10,7 +10,7 @@ import Foundation
 class BookmarkDataService : DataService {
     var dataContainer: RestaurantContainer = RestaurantContainer()
     
-    func updateDataOfrestaurant() {
+    func updateRestaurantData() {
     }
     
     var delegate: RestaurantListViewModel?

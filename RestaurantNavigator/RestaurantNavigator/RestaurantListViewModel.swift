@@ -23,7 +23,7 @@ class RestaurantListViewModel  {
         return (title : element.title, description : element.description)
     }
     
-    func dataDidLoad(loadedData: String) {
+    func dataDidLoad() {
         delegate?.dataDidLoad()
     }
 }
@@ -31,7 +31,7 @@ class RestaurantListViewModel  {
 protocol DataService {
     var delegate : RestaurantListViewModel? { get set }
     var dataContainer : RestaurantContainer { get set }
-    func updateDataOfrestaurant()
+    func updateRestaurantData()
 }
 
 protocol DisplayRestaurantListViewModelDelegate : AnyObject {
