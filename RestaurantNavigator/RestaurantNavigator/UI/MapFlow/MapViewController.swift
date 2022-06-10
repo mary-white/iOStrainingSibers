@@ -16,6 +16,11 @@ class MapViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        mapBox?.delegate = self
+        
+        // init location for the map
+        let initialLocation = CLLocation(latitude: 54.868705, longitude: 83.122559)
+        mapBox?.centerToLocation(initialLocation)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -24,11 +29,16 @@ class MapViewController: UIViewController {
             return
         }
         mapBox?.addAnnotations(restaurantAnnotations)
-        
-        // init location for the map
-        let firstLocation = restaurantAnnotations[0].coordinate
-        let initialLocation = CLLocation(latitude: firstLocation.latitude, longitude: firstLocation.longitude)
-        mapBox?.centerToLocation(initialLocation)
+    }
+}
+
+extension MapViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        guard let restaurant = view.annotation else {
+            return
+        }
+        let annotation = restaurant as! RestaurantAnnotation
+        viewModel?.showRestaurantPage(id: annotation.id)
     }
 }
 

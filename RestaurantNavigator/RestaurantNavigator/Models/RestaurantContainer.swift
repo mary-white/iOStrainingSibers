@@ -62,13 +62,21 @@ class RestaurantContainer : DataContainerToRead {
     }
     
     // protocol functions
-    func restaurantListCoordinats() -> [(title: String, latitudinal: Double, longitudinal: Double)] {
-        var result : [(title: String, latitudinal: Double, longitudinal: Double)] = []
+    func restaurantListCoordinats() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double)] {
+        var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double)] = []
         for restaurant in container {
             if let location = restaurant.location {
-                result.append((title: restaurant.title, latitudinal: location.lat, longitudinal: location.lon))
+                result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.lat, longitudinal: location.lon))
             }
         }
         return result
+    }
+    
+    func element(at_id id : Int) -> Restaurant? {
+        guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
+            return nil
+        }
+        
+        return container[index]
     }
 }
