@@ -24,7 +24,8 @@ class RestaurantPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //reviewsTable?.delegate = self
+        reviewsTable?.delegate = self
+        reviewsTable?.dataSource = self
         
         guard let viewModel = viewModel else {
             return
@@ -46,31 +47,50 @@ class RestaurantPageViewController: UIViewController {
 }
 
 // don't show my table
-/*extension RestaurantPageViewController : UITableViewDelegate {
+extension RestaurantPageViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        /*guard let viewmodel = viewModel, let count = viewmodel.containerCount() else {
+        guard let viewmodel = viewModel else {
             return 0
         }
-        return count*/
-        print("call")
-        return 3
+        return viewmodel.reviewsCount
     }
     
     // fill the table
-    private func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Ask for a cell of the appropriate type.
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
             
         // Cell content
-        /*let element = viewModel?.containerElement(at: indexPath.row)
-        cell.restaurantTitle?.text = (element?.title)!
-        cell.restaurantDescription?.text = (element?.description)!
-        cell.restaurantImage?.image = element?.image*/
-        cell.author?.text = "asd"
-        cell.date?.text = "sdf"
-        cell.reviewText?.text = "sfsf"
+        let review = viewModel?.review(at: indexPath.row)
+        cell.author?.text = review?.author
+        cell.date?.text = review?.date
+        cell.reviewText?.text = review?.reviewText
         
         return cell
     }
-}*/
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellMarginSize : CGFloat  = 4.0
+       // Choose an appropriate default cell size.
+       var cellSize = UITableView.automaticDimension
+            
+       // The first cell is always a title cell. Other cells use the Basic style.
+       if indexPath.row == 0 {
+          //Title cells consist of one large title row and two body text rows.
+          let largeTitleFont = UIFont.preferredFont(forTextStyle: .largeTitle)
+          let bodyFont = UIFont.preferredFont(forTextStyle: .body)
+                
+          // Get the height of a single line of text in each font.
+          let largeTitleHeight = largeTitleFont.lineHeight + largeTitleFont.leading
+          let bodyHeight = bodyFont.lineHeight + bodyFont.leading
+                
+          // Sum the line heights plus top and bottom margins to get the final height.
+          let titleCellSize = largeTitleHeight + (bodyHeight * 2.0) + (cellMarginSize * 2)
 
+          // Update the estimated cell size.
+          cellSize = titleCellSize
+       }
+            
+       return cellSize
+    }
+}

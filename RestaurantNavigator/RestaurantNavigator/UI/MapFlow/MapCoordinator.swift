@@ -33,8 +33,7 @@ class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
     
     func willShow(restaurant: Restaurant) {
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
-        let restaurantPageViewModel = RestaurantPageViewModel()
-        restaurantPageViewModel.currentRestaurant = restaurant
+        let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
         restaurantPageViewController.viewModel = restaurantPageViewModel
         
         navigationController.pushViewController(restaurantPageViewController, animated: true)
