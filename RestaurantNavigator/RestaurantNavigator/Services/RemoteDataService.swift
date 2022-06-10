@@ -121,6 +121,51 @@ class RemoteDataService : DataService {
 
         task.resume()
     }
+    
+    func addReview(author : String, text : String, restaurantId : Int, date : String) {
+        if restaurantId == -1 {
+            return
+        }
+        
+        let rowData: [String: Any] = [
+            "restaurantId": restaurantId,
+            "author": author,
+            "reviewText": text,
+            "date": date
+        ]
+
+        let jsonDataToWrite = try? JSONSerialization.data(withJSONObject: rowData)
+
+        guard let url = URL(string: URLAddresses.reviews.stringFormat()) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody = jsonDataToWrite
+
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("URL response error: \(error)")
+                return
+            }
+            
+            if let response = response as? HTTPURLResponse, let responseError = errorStatusCode[response.statusCode] {
+                print("Response HTTP Status code: \(response.statusCode)")
+                print("Response error: " + responseError)
+                return
+            }
+            
+            if let firstData = data {
+                let responseJSON = try? JSONSerialization.jsonObject(with: firstData, options: [])
+                if let responseJSON = responseJSON as? [String: Any] {
+                    print(responseJSON)
+                }
+            }
+        }
+
+        task.resume()
+    }
 }
 
 protocol RemoteDataServiceDelegate : AnyObject {
@@ -207,8 +252,4 @@ func parseReviewStringToJSONElements(_ str : String) -> [String] {
         data = String(data[afterSecondIndex...])
     }
     return result
-}
-
-protocol DataServiceDelegate : AnyObject {
-    func didDataLoad()
 }

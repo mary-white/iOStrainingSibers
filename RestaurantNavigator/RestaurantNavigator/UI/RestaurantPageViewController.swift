@@ -13,12 +13,13 @@ class ReviewCell : UITableViewCell {
     @IBOutlet var reviewText : UILabel?
 }
 
-class RestaurantPageViewController: UIViewController {
+class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewModelDelegate {
     
     @IBOutlet var restaurantImage : UIImageView?
     @IBOutlet var restaurantTitle : UILabel?
     @IBOutlet var restaurantDescription : UILabel?
     @IBOutlet var reviewsTable : UITableView?
+    @IBOutlet var addingReview : UIButton?
     
     var viewModel : RestaurantPageViewModel?
 
@@ -38,6 +39,36 @@ class RestaurantPageViewController: UIViewController {
         
         restaurantTitle?.text = restaurantInfo.title
         restaurantDescription?.text = restaurantInfo.description
+    }
+    
+    @IBAction func addNewReview() {
+        let defaultTextInNametextFeild = "Your name"
+        let defaultTestInReviewTextField = "Review text"
+        
+        let alert = UIAlertController(title: "To add new review", message: "Enter a review text", preferredStyle: .alert)
+
+        alert.addTextField { (textField) in textField.text = defaultTextInNametextFeild }
+        alert.addTextField { (textField) in textField.text = defaultTestInReviewTextField }
+
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+            guard let alert = alert, let textFields = alert.textFields, let author = textFields[0].text, let text = textFields[1].text else {
+                return
+            }
+            if author == defaultTextInNametextFeild || text == defaultTestInReviewTextField {
+                return
+            }
+            
+            self.viewModel?.addNewReview(author: author, text: text)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in }))
+
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    // protocol function
+    func reviewDidLoad() {
+        reviewsTable?.reloadData()
     }
 }
 

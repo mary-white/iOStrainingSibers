@@ -44,12 +44,6 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
     }
 }
 
-protocol DataService : AnyObject {
-    var delegate : RemoteDataServiceDelegate? { get set }
-    var dataContainer : RestaurantContainer { get set }
-    func updateRestaurantData()
-}
-
 protocol DisplayRestaurantListViewModelDelegate : AnyObject {
     func dataDidLoad()
 }

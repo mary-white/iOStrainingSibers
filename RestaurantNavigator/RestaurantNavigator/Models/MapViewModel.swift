@@ -44,11 +44,6 @@ class MapViewModel {
     }
 }
 
-protocol DataContainerToRead {
-    func restaurantCoordinatsList() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double)]
-    func element(at_id id : Int) -> Restaurant?
-}
-
 protocol ActionMapViewModelDelegate : AnyObject {
     func willShow(restaurant : Restaurant)
 }

@@ -196,6 +196,14 @@
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZG5-gh-KWV">
+                                                <rect key="frame" x="159" y="761" width="96" height="31"/>
+                                                <state key="normal" title="Button"/>
+                                                <buttonConfiguration key="configuration" style="plain" title="Add review"/>
+                                                <connections>
+                                                    <action selector="addNewReview" destination="aIV-ID-wIm" eventType="touchDown" id="XRF-2i-dZU"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -207,12 +215,14 @@
                                             <constraint firstItem="yFw-GM-oSX" firstAttribute="centerX" secondItem="sTJ-kk-66C" secondAttribute="centerX" id="IuQ-o6-zpD"/>
                                             <constraint firstItem="yFw-GM-oSX" firstAttribute="leading" secondItem="sTJ-kk-66C" secondAttribute="leading" constant="10" id="JaU-Rh-0wz"/>
                                             <constraint firstItem="sLy-K4-o6E" firstAttribute="top" secondItem="yFw-GM-oSX" secondAttribute="bottom" constant="30" id="YWX-Xo-w0B"/>
+                                            <constraint firstItem="ZG5-gh-KWV" firstAttribute="centerX" secondItem="sTJ-kk-66C" secondAttribute="centerX" id="a0M-ka-N53"/>
                                             <constraint firstItem="nYW-of-tNH" firstAttribute="leading" secondItem="sTJ-kk-66C" secondAttribute="leading" id="a6N-tU-w9w"/>
                                             <constraint firstItem="yFw-GM-oSX" firstAttribute="top" secondItem="nYW-of-tNH" secondAttribute="bottom" constant="30" id="g0P-7e-1A7"/>
                                             <constraint firstItem="UIE-cH-R00" firstAttribute="top" secondItem="sLy-K4-o6E" secondAttribute="bottom" constant="40" id="hQR-6R-Zf3"/>
                                             <constraint firstItem="UIE-cH-R00" firstAttribute="centerX" secondItem="sTJ-kk-66C" secondAttribute="centerX" id="i4h-Vu-2G9"/>
                                             <constraint firstAttribute="trailing" secondItem="guP-gm-CrM" secondAttribute="trailing" id="kSK-5j-mbR"/>
                                             <constraint firstItem="guP-gm-CrM" firstAttribute="top" secondItem="UIE-cH-R00" secondAttribute="bottom" constant="10" id="prc-ij-uc0"/>
+                                            <constraint firstAttribute="bottom" secondItem="ZG5-gh-KWV" secondAttribute="bottom" constant="1" id="uR8-nl-xYf"/>
                                             <constraint firstItem="sLy-K4-o6E" firstAttribute="leading" secondItem="sTJ-kk-66C" secondAttribute="leading" constant="30" id="usJ-Kb-x4r"/>
                                         </constraints>
                                     </view>
@@ -240,6 +250,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addingReview" destination="ZG5-gh-KWV" id="wUE-0I-bgP"/>
                         <outlet property="restaurantDescription" destination="sLy-K4-o6E" id="Bco-0T-5XJ"/>
                         <outlet property="restaurantImage" destination="nYW-of-tNH" id="Ysl-W8-AeH"/>
                         <outlet property="restaurantTitle" destination="yFw-GM-oSX" id="vOJ-rh-4Ha"/>
