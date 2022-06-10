@@ -34,12 +34,15 @@ class RemoteDataService : DataService {
             }
             let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
             for restaurant in resultDictionaryOfRestaurants {
-                guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"] else {
+                guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"], let locationAnyType = restaurant["location"]  else {
                     continue
                 }
                 
                 let restaurantId = Int(String(describing: id_str)) ?? 0
                 self.dataContainer.addRestaurant(title: String(describing: title), address: String(describing: address), description: String(describing: description), id: restaurantId)
+                
+                let location = locationAnyType as! [String:Double]
+                self.dataContainer.setRestaurantCoordinats((lat: location["lat"] ?? 0.0, lon: location["lon"] ?? 0.0), at_id: restaurantId)
                 
                 self.restaurantPictures(urlAddresses: (restaurant["imagePaths"])! as! [String], restaurantId: restaurantId)
             }

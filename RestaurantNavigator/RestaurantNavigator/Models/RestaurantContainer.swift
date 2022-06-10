@@ -20,7 +20,7 @@ struct Restaurant {
     var location : (lat : Double, lon : Double)?
 }
 
-class RestaurantContainer {
+class RestaurantContainer : DataContainerToRead {
     var container : Array<Restaurant> = []
     
     var count : Int {
@@ -51,5 +51,24 @@ class RestaurantContainer {
         }
         
         container[index].galery.append(newImage)
+    }
+    
+    func setRestaurantCoordinats(_ coordinats : (lat : Double, lon : Double), at_id id : Int) {
+        guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
+            return
+        }
+        
+        container[index].location = coordinats
+    }
+    
+    // protocol functions
+    func restaurantListCoordinats() -> [(title: String, latitudinal: Double, longitudinal: Double)] {
+        var result : [(title: String, latitudinal: Double, longitudinal: Double)] = []
+        for restaurant in container {
+            if let location = restaurant.location {
+                result.append((title: restaurant.title, latitudinal: location.lat, longitudinal: location.lon))
+            }
+        }
+        return result
     }
 }
