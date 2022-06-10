@@ -10,9 +10,9 @@ import MapKit
 
 class RestaurantAnnotation: NSObject, MKAnnotation {
     var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D()
-    var title : String? = ""
+    var title : String?
 
-    var id : Int = 0
+    var id : Int = -1
 }
 
 class MapViewModel {
@@ -20,7 +20,7 @@ class MapViewModel {
     var actionDelegate : ActionMapViewModelDelegate?
     
     func restaurantAnnotations() -> [RestaurantAnnotation] {
-        guard let restaurantLocations = dataContainer?.restaurantListCoordinats() else {
+        guard let restaurantLocations = dataContainer?.restaurantCoordinatsList() else {
             return []
         }
         
@@ -30,6 +30,7 @@ class MapViewModel {
             annotaion.title = restaurant.title
             annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.latitudinal, longitude: restaurant.longitudinal)
             annotaion.id = restaurant.id
+            
             annotaions.append(annotaion)
         }
         return annotaions
@@ -44,7 +45,7 @@ class MapViewModel {
 }
 
 protocol DataContainerToRead {
-    func restaurantListCoordinats() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double)]
+    func restaurantCoordinatsList() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double)]
     func element(at_id id : Int) -> Restaurant?
 }
 

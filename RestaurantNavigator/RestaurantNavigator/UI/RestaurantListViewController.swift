@@ -15,28 +15,25 @@ class RestaurantCell : UITableViewCell {
 
 class RestaurantListViewController: UIViewController, DisplayRestaurantListViewModelDelegate {
 
-    @IBOutlet var table : UITableView?
+    @IBOutlet var restaurantTable : UITableView?
     
     var viewModel : RestaurantListViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        table?.delegate = self
-        table?.dataSource = self
+        restaurantTable?.delegate = self
+        restaurantTable?.dataSource = self
     }
     
     func dataDidLoad() {
-        table?.reloadData()
+        restaurantTable?.reloadData()
     }
 }
 
 extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewmodel = viewModel, let count = viewmodel.containerCount() else {
-            return 0
-        }
-        return count
+        return viewModel?.containerCount ?? 0
     }
     
     // fill the table
@@ -45,16 +42,19 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCell
             
         // Cell content
-        let element = viewModel?.containerElement(at: indexPath.row)
-        cell.restaurantTitle?.text = (element?.title)!
-        cell.restaurantDescription?.text = (element?.description)!
-        cell.restaurantImage?.image = element?.image
+        guard let element = viewModel?.containerElement(at: indexPath.row) else {
+            return cell
+        }
+        
+        cell.restaurantTitle?.text = element.title
+        cell.restaurantDescription?.text = element.description
+        cell.restaurantImage?.image = element.image
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        viewModel?.showRestaurantPage(indexPath.row)
+        viewModel?.showRestaurantPage(at : indexPath.row)
     }
 }
 

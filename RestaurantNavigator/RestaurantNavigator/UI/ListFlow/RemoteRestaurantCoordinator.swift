@@ -25,9 +25,9 @@ class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDe
         viewModel.dataService?.dataContainer = dataContainer
         viewModel.dataContainer = dataContainer
         viewModel.displayDelegate = viewController
+        viewModel.actionDelegate = self
         
         viewController.viewModel = viewModel
-        viewController.viewModel?.actionDelegate = self
         viewController.viewModel?.dataService?.delegate = viewModel
         viewController.viewModel?.dataService?.updateRestaurantData()
         

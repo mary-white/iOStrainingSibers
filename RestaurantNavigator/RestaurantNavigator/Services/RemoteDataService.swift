@@ -10,73 +10,78 @@ import UIKit
 
 let errorStatusCode = [404 : "Bad request", 401 : "Unauthorized", 403 : "Forbidden", 500 : "Internal Server Error", 503 : "Service Unavailable"]
 
+enum URLAddresses {
+    case restaurants, reviews, defaultMean
+    func stringFormat() -> String {
+        switch self {
+        case .restaurants :
+            return "https://restaurants-f64d7.firebaseio.com/restaurants.json"
+        case .reviews :
+            return "https://restaurants-f64d7.firebaseio.com/reviews.json"
+        default :
+            return ""
+        }
+    }
+}
+
 class RemoteDataService : DataService {
     
     var dataContainer : RestaurantContainer = RestaurantContainer()
-    var delegate : RestaurantListViewModel?
-    
-    enum URLAddresses {
-        case allRestaurants, allReviews, defaultMean
-        func urlString() -> String {
-            switch self {
-            case .allRestaurants :
-                return "https://restaurants-f64d7.firebaseio.com/restaurants.json"
-            case .allReviews :
-                return "https://restaurants-f64d7.firebaseio.com/reviews.json"
-            default :
-                return ""
-            }
-        }
-    }
+    weak var delegate : RemoteDataServiceDelegate?
     
     func updateRestaurantData() {
-        stringDataFromURLAddress(urlAddress: URLAddresses.allRestaurants.urlString()) { firstData in
-            guard let dataString = String(data: firstData, encoding: .utf8) else {
+        // load all information about restaurants
+        processDataFromURLAddress(from: URLAddresses.restaurants.stringFormat()) { firstData in
+            guard let dataInStringFormat = String(data: firstData, encoding: .utf8) else {
                 return
             }
-            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString, parser : parseStringToJSONElements)
+            
+            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataInStringFormat, parser : parseStringToJSONElements)
             for restaurant in resultDictionaryOfRestaurants {
-                guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"], let locationAnyType = restaurant["location"]  else {
+                guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"], let location_anyType = restaurant["location"], let imagePaths = restaurant["imagePaths"]  else {
                     continue
                 }
                 
                 let restaurantId = Int(String(describing: id_str)) ?? 0
                 self.dataContainer.addRestaurant(title: String(describing: title), address: String(describing: address), description: String(describing: description), id: restaurantId)
                 
-                let location = locationAnyType as! [String:Double]
-                self.dataContainer.setRestaurantCoordinats((lat: location["lat"] ?? 0.0, lon: location["lon"] ?? 0.0), at_id: restaurantId)
+                // set restaurants coordinats
+                let location = location_anyType as! [String:Double]
+                self.dataContainer.setRestaurantCoordinats(lat: location["lat"] ?? 0.0, lon: location["lon"] ?? 0.0, for: restaurantId)
                 
-                self.restaurantPictures(urlAddresses: (restaurant["imagePaths"])! as! [String], restaurantId: restaurantId)
+                // load pictures
+                self.loadRestaurantPictures(from: imagePaths as! [String], for: restaurantId)
             }
             
             DispatchQueue.main.async {
                 self.delegate?.dataDidLoad()
             }
         }
-        restaurantReviews()
+        // load reviews
+        loadRestaurantReviews()
     }
     
-    func restaurantPictures(urlAddresses : [String], restaurantId : Int){
+    func loadRestaurantPictures(from urlAddresses : [String], for restaurantId : Int){
         for address in urlAddresses{
-            stringDataFromURLAddress(urlAddress : address) { firstData in
-                guard let image = UIImage(data: firstData) else {
+            processDataFromURLAddress(from: address) { firstImage in
+                guard let image = UIImage(data: firstImage) else {
                     return
                 }
                 
                 DispatchQueue.main.async {
-                    self.dataContainer.addImageToGalery(at_id: restaurantId, newImage: image)
+                    self.dataContainer.addImageToGalery(for: restaurantId, newImage: image)
                     self.delegate?.dataDidLoad()
                 }
             }
         }
     }
     
-    func restaurantReviews() {
-        stringDataFromURLAddress(urlAddress: URLAddresses.allReviews.urlString()) {firstData in
-            guard let dataString = String(data: firstData, encoding: .utf8) else {
+    func loadRestaurantReviews() {
+        processDataFromURLAddress(from: URLAddresses.reviews.stringFormat()) {firstData in
+            guard let dataInStringFormat = String(data: firstData, encoding: .utf8) else {
                 return
             }
-            let resultDictionaryOfReviews = convertJSONStringToArrayOfDictionaries(dataString, parser : parseReviewStringToJSONElements)
+            let resultDictionaryOfReviews = convertJSONStringToArrayOfDictionaries(dataInStringFormat, parser : parseReviewStringToJSONElements)
             
             for review in resultDictionaryOfReviews {
                 guard let id_str = review["restaurantId"], let author = review["author"], let text = review["reviewText"], let date = review["date"] else {
@@ -84,12 +89,12 @@ class RemoteDataService : DataService {
                 }
                 
                 let restaurantId = Int(String(describing: id_str)) ?? 0
-                self.dataContainer.addReview(at_id: restaurantId, review: Review(author: String(describing: author), reviewText: String(describing: text), date: String(describing: date)))
+                self.dataContainer.addReview(for: restaurantId, newReview: Review(author: String(describing: author), reviewText: String(describing: text), date: String(describing: date)))
             }
         }
     }
     
-    func stringDataFromURLAddress(urlAddress : String, requestHappened : @escaping (Data) -> Void) {
+    func processDataFromURLAddress(from urlAddress : String, with processFunction : @escaping (Data) -> Void) {
         guard let url = URL(string: urlAddress) else {
             return
         }
@@ -110,7 +115,7 @@ class RemoteDataService : DataService {
             }
             
             if let firstData = data {
-                requestHappened(firstData)
+                processFunction(firstData)
             }
         }
 
@@ -118,49 +123,9 @@ class RemoteDataService : DataService {
     }
 }
 
-// json parser
-/*struct Root: Codable {
-    let result: [Result]
-    let status: Status
+protocol RemoteDataServiceDelegate : AnyObject {
+    func dataDidLoad()
 }
-
-struct Result: Codable {
-    let id: Int
-    let name, description: String
-    let imagePaths : [String]
-    let location_lat : Double
-    let location_lon : Double
-    
-    let rating : Double
-
-    enum CodingKeys: String, CodingKey {
-        case id = "id"
-        case name = "name"
-        case description = "description"
-        case imagePaths = "imagePaths"
-        case location_lat = "lat"
-        case location_lon = "lon"
-        case rating = "rating"
-    }
-}
-
-struct Status: Codable {
-    let httpStatusCode: Int
-}
-
-func decode(data : Data) {
-    do {
-        let decoder = JSONDecoder()
-        let response = try decoder.decode(Root.self, from: data)
-        print("cant")
-        var allRes = response.result
-        print(allRes)
-    } catch {
-        print(error)
-    }
-}*/
-
-// my json parser
 
 func parseStringToJSONElements(_ str : String) -> [String] {
     var result : [String] = []
@@ -169,23 +134,24 @@ func parseStringToJSONElements(_ str : String) -> [String] {
     data.remove(at: data.startIndex) // delete '['
     
     while true {
-        if let firstIndex = data.firstIndex(of: "}") { // because we have location {}
-            let dataSecondPart = String(data[data.index(after: firstIndex)..<data.endIndex])
-            if let lastIndex = dataSecondPart.firstIndex(of: "}") {
-                let firstPart = String(data[..<data.index(after: firstIndex)])
-                let secondPart = String(dataSecondPart[..<data.index(after: lastIndex)])
-                let newElement = firstPart + secondPart
-                
-                result.append(newElement)
-                
-                data = String(dataSecondPart[data.index(after: lastIndex)...]) // delete added element
-                data.remove(at: data.startIndex) // delete ','
-            } else {
-                break
-            }
-        } else {
+        guard let firstIndex = data.firstIndex(of: "}") else { // because we have location {}
             break
         }
+
+        let dataSecondPart = String(data[data.index(after: firstIndex)..<data.endIndex])
+        
+        guard let lastIndex = dataSecondPart.firstIndex(of: "}") else {
+            break
+        }
+        
+        let firstPart = String(data[..<data.index(after: firstIndex)])
+        let secondPart = String(dataSecondPart[..<data.index(after: lastIndex)])
+        let newElement = firstPart + secondPart
+                
+        result.append(newElement)
+                
+        data = String(dataSecondPart[data.index(after: lastIndex)...]) // delete added element
+        data.remove(at: data.startIndex) // delete ','
     }
     
     return result
@@ -224,21 +190,21 @@ func parseReviewStringToJSONElements(_ str : String) -> [String] {
     data.remove(at: data.startIndex) // delete '{'
     
     while true {
-        if let firstIndex = data.firstIndex(of: "{") {
-            // delete review id
-            data = String(data[firstIndex...])
-            if let secondIndex = data.firstIndex(of: "}") {
-                let afterSecondIndex = data.index(after: secondIndex)
-                let newElement = String(data[..<afterSecondIndex])
-                result.append(newElement)
-                
-                data = String(data[afterSecondIndex...])
-            } else {
-                break
-            }
-        } else {
+        guard let firstIndex = data.firstIndex(of: "{") else {
             break
         }
+        // delete review id
+        data = String(data[firstIndex...])
+        
+        guard let secondIndex = data.firstIndex(of: "}") else {
+            break
+        }
+        
+        let afterSecondIndex = data.index(after: secondIndex)
+        let newElement = String(data[..<afterSecondIndex])
+        result.append(newElement)
+                
+        data = String(data[afterSecondIndex...])
     }
     return result
 }

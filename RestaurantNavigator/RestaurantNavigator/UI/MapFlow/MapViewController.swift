@@ -10,17 +10,17 @@ import MapKit
 
 class MapViewController: UIViewController {
     
-    @IBOutlet var mapBox : MKMapView?
+    @IBOutlet var mapView : MKMapView?
     
     var viewModel : MapViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        mapBox?.delegate = self
+        mapView?.delegate = self
         
         // init location for the map
-        let initialLocation = CLLocation(latitude: 54.868705, longitude: 83.122559)
-        mapBox?.centerToLocation(initialLocation)
+        let initLocation = CLLocation(latitude: 54.868705, longitude: 83.122559) // maybe set user location???
+        mapView?.centerToLocation(initLocation)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,7 +28,7 @@ class MapViewController: UIViewController {
         guard let restaurantAnnotations = viewModel?.restaurantAnnotations() else {
             return
         }
-        mapBox?.addAnnotations(restaurantAnnotations)
+        mapView?.addAnnotations(restaurantAnnotations)
     }
 }
 

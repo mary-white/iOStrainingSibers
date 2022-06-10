@@ -8,10 +8,10 @@
 import Foundation
 
 class BookmarkDataService : DataService {
+    weak var delegate: RemoteDataServiceDelegate?
+    
     var dataContainer: RestaurantContainer = RestaurantContainer()
     
     func updateRestaurantData() {
     }
-    
-    var delegate: RestaurantListViewModel?
 }

@@ -8,14 +8,16 @@
 import Foundation
 import UIKit
 
-class RestaurantListViewModel  {
+class RestaurantListViewModel : RemoteDataServiceDelegate  {
     var dataService : DataService?
-    var displayDelegate : DisplayRestaurantListViewModelDelegate?
+    weak var displayDelegate : DisplayRestaurantListViewModelDelegate?
     var actionDelegate : ActionRestaurantListViewModelDelegate?
     var dataContainer : RestaurantContainer?
     
-    func containerCount() -> Int? {
-        return dataContainer?.count
+    var containerCount : Int {
+        get {
+            return dataContainer?.count ?? 0
+        }
     }
     
     func containerElement(at index : Int) -> (title : String, description : String, image : UIImage) {
@@ -29,20 +31,21 @@ class RestaurantListViewModel  {
         return (title : element.title, description : element.description, image : image)
     }
     
-    func dataDidLoad() {
-        displayDelegate?.dataDidLoad()
-    }
-    
-    func showRestaurantPage(_ index : Int) {
+    func showRestaurantPage(at index : Int) {
         guard let currentRestaurant = dataContainer?.element(at: index) else {
             return
         }
         actionDelegate?.willShow(restaurant: currentRestaurant)
     }
+    
+    // protocol function
+    func dataDidLoad() {
+        displayDelegate?.dataDidLoad()
+    }
 }
 
-protocol DataService {
-    var delegate : RestaurantListViewModel? { get set }
+protocol DataService : AnyObject {
+    var delegate : RemoteDataServiceDelegate? { get set }
     var dataContainer : RestaurantContainer { get set }
     func updateRestaurantData()
 }

@@ -27,7 +27,8 @@ class RestaurantPageViewModel {
         }
     }
     
-    func review(at index : Int) -> Review {
-        return restaurantReviews[index]
+    func review(at index : Int) -> (author : String,  date : String, text : String) {
+        let review = restaurantReviews[index]
+        return (author : review.author, date : review.date, text : review.reviewText)
     }
 }

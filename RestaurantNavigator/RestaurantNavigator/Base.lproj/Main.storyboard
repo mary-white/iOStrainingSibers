@@ -93,7 +93,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="RestaurantList" id="jyF-cH-Qba"/>
                     <connections>
-                        <outlet property="table" destination="5R9-EB-UEf" id="4Tb-Fv-bRt"/>
+                        <outlet property="restaurantTable" destination="5R9-EB-UEf" id="4Tb-Fv-bRt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -152,7 +152,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vi3-qG-pZe">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vi3-qG-pZe">
                                                                     <rect key="frame" x="20" y="11" width="50" height="23"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" relation="lessThanOrEqual" constant="150" id="vW1-ki-0Vy"/>
@@ -161,13 +161,13 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Data" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFP-1K-arp">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Data" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FFP-1K-arp">
                                                                     <rect key="frame" x="361.5" y="17.5" width="22.5" height="12"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3t-ka-S4Z">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Review" lineBreakMode="wordWrap" numberOfLines="5" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3t-ka-S4Z">
                                                                     <rect key="frame" x="49" y="68.5" width="335" height="20.5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" priority="990" constant="20" id="kVQ-gM-ecK"/>
@@ -178,7 +178,7 @@
                                                                 </label>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="j3t-ka-S4Z" firstAttribute="top" secondItem="Vi3-qG-pZe" secondAttribute="bottom" constant="34.5" id="0xB-ND-riT"/>
+                                                                <constraint firstItem="j3t-ka-S4Z" firstAttribute="top" secondItem="Vi3-qG-pZe" secondAttribute="bottom" constant="34" id="0xB-ND-riT"/>
                                                                 <constraint firstItem="j3t-ka-S4Z" firstAttribute="leading" secondItem="uQg-xq-QpL" secondAttribute="leading" constant="49" id="8aF-fi-Ye0"/>
                                                                 <constraint firstItem="Vi3-qG-pZe" firstAttribute="top" secondItem="uQg-xq-QpL" secondAttribute="topMargin" id="BeV-9o-Cd5"/>
                                                                 <constraint firstAttribute="bottom" secondItem="j3t-ka-S4Z" secondAttribute="bottom" constant="10" id="fje-zc-KOE"/>
@@ -231,15 +231,17 @@
                         <viewLayoutGuide key="safeArea" id="xi4-KE-4cB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="FUa-dp-xd9" firstAttribute="leading" secondItem="xi4-KE-4cB" secondAttribute="leading" id="7M6-jM-Lqv"/>
                             <constraint firstItem="FUa-dp-xd9" firstAttribute="leading" secondItem="bWp-H5-cNZ" secondAttribute="leading" id="Mqd-O6-fTh"/>
+                            <constraint firstItem="xi4-KE-4cB" firstAttribute="trailing" secondItem="FUa-dp-xd9" secondAttribute="trailing" id="Qog-Jt-YxQ"/>
                             <constraint firstItem="FUa-dp-xd9" firstAttribute="top" secondItem="xi4-KE-4cB" secondAttribute="top" id="lqt-Mo-kWM"/>
                             <constraint firstAttribute="trailing" secondItem="FUa-dp-xd9" secondAttribute="trailing" id="pJu-I7-LbY"/>
                             <constraint firstItem="xi4-KE-4cB" firstAttribute="bottom" secondItem="FUa-dp-xd9" secondAttribute="bottom" constant="25" id="vNn-de-ozO"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="image" destination="nYW-of-tNH" id="Ysl-W8-AeH"/>
                         <outlet property="restaurantDescription" destination="sLy-K4-o6E" id="Bco-0T-5XJ"/>
+                        <outlet property="restaurantImage" destination="nYW-of-tNH" id="Ysl-W8-AeH"/>
                         <outlet property="restaurantTitle" destination="yFw-GM-oSX" id="vOJ-rh-4Ha"/>
                         <outlet property="reviewsTable" destination="guP-gm-CrM" id="MW2-h1-t1N"/>
                     </connections>
@@ -271,7 +273,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="nnA-4i-1Qx"/>
                     <connections>
-                        <outlet property="mapBox" destination="7oS-pO-Os8" id="pKW-bZ-zqe"/>
+                        <outlet property="mapView" destination="7oS-pO-Os8" id="pKW-bZ-zqe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3U-qn-D7h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
