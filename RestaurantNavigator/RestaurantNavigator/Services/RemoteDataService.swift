@@ -16,11 +16,13 @@ class RemoteDataService : DataService {
     var delegate : RestaurantListViewModel?
     
     enum URLAddresses {
-        case allRestaurants, defaultMean
+        case allRestaurants, allReviews, defaultMean
         func urlString() -> String {
             switch self {
             case .allRestaurants :
                 return "https://restaurants-f64d7.firebaseio.com/restaurants.json"
+            case .allReviews :
+                return "https://restaurants-f64d7.firebaseio.com/reviews.json"
             default :
                 return ""
             }
@@ -32,7 +34,7 @@ class RemoteDataService : DataService {
             guard let dataString = String(data: firstData, encoding: .utf8) else {
                 return
             }
-            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString)
+            let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataString, parser : parseStringToJSONElements)
             for restaurant in resultDictionaryOfRestaurants {
                 guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"], let locationAnyType = restaurant["location"]  else {
                     continue
@@ -51,6 +53,7 @@ class RemoteDataService : DataService {
                 self.delegate?.dataDidLoad()
             }
         }
+        restaurantReviews()
     }
     
     func restaurantPictures(urlAddresses : [String], restaurantId : Int){
@@ -64,6 +67,24 @@ class RemoteDataService : DataService {
                     self.dataContainer.addImageToGalery(at_id: restaurantId, newImage: image)
                     self.delegate?.dataDidLoad()
                 }
+            }
+        }
+    }
+    
+    func restaurantReviews() {
+        stringDataFromURLAddress(urlAddress: URLAddresses.allReviews.urlString()) {firstData in
+            guard let dataString = String(data: firstData, encoding: .utf8) else {
+                return
+            }
+            let resultDictionaryOfReviews = convertJSONStringToArrayOfDictionaries(dataString, parser : parseReviewStringToJSONElements)
+            
+            for review in resultDictionaryOfReviews {
+                guard let id_str = review["restaurantId"], let author = review["author"], let text = review["reviewText"], let date = review["date"] else {
+                    continue
+                }
+                
+                let restaurantId = Int(String(describing: id_str)) ?? 0
+                self.dataContainer.addReview(at_id: restaurantId, review: Review(author: String(describing: author), reviewText: String(describing: text), date: String(describing: date)))
             }
         }
     }
@@ -170,8 +191,8 @@ func parseStringToJSONElements(_ str : String) -> [String] {
     return result
 }
 
-func convertJSONStringToArrayOfDictionaries(_ str : String) -> [[String : Any]] {
-    let arrayOfStrings : [String] = parseStringToJSONElements(str)
+func convertJSONStringToArrayOfDictionaries(_ str : String, parser : (String) -> [String]) -> [[String : Any]] {
+    let arrayOfStrings : [String] = parser(str)
     
     var result : [[String : Any]] = []
     
@@ -193,6 +214,33 @@ func convertJSONStringToDictionary(_ str : String) -> [String: Any] {
         print("Failed to load: \(error.localizedDescription)")
     }
     return [:]
+}
+
+// convert review
+func parseReviewStringToJSONElements(_ str : String) -> [String] {
+    var result : [String] = []
+    var data = str
+    
+    data.remove(at: data.startIndex) // delete '{'
+    
+    while true {
+        if let firstIndex = data.firstIndex(of: "{") {
+            // delete review id
+            data = String(data[firstIndex...])
+            if let secondIndex = data.firstIndex(of: "}") {
+                let afterSecondIndex = data.index(after: secondIndex)
+                let newElement = String(data[..<afterSecondIndex])
+                result.append(newElement)
+                
+                data = String(data[afterSecondIndex...])
+            } else {
+                break
+            }
+        } else {
+            break
+        }
+    }
+    return result
 }
 
 protocol DataServiceDelegate : AnyObject {

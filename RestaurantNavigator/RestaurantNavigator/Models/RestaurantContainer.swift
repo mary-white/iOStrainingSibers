@@ -8,14 +8,20 @@
 import Foundation
 import UIKit
 
+struct Review {
+    let author: String
+    let reviewText : String
+    let date: String
+}
+
 struct Restaurant {
     var id : Int
     var title : String
     var address : String
     var description : String
     var galery : [UIImage] = []
-    
-    var reviews : [(user : String, review : String)] = []
+    var reviews : [Review] = []
+
     var rating : Int?
     var location : (lat : Double, lon : Double)?
 }
@@ -51,6 +57,14 @@ class RestaurantContainer : DataContainerToRead {
         }
         
         container[index].galery.append(newImage)
+    }
+    
+    func addReview(at_id id : Int, review : Review) {
+        guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
+            return
+        }
+        
+        container[index].reviews.append(review)
     }
     
     func setRestaurantCoordinats(_ coordinats : (lat : Double, lon : Double), at_id id : Int) {
