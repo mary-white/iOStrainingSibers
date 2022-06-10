@@ -172,17 +172,31 @@
             </objects>
             <point key="canvasLocation" x="782.60869565217399" y="83.705357142857139"/>
         </scene>
-        <!--Item-->
+        <!--MapViewController-->
         <scene sceneID="2M6-vW-Vhq">
             <objects>
-                <viewController storyboardIdentifier="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BDY-Pu-qUM" customClass="MapViewController" customModule="RestaurantNavigator" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MapViewController" title="MapViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BDY-Pu-qUM" customClass="MapViewController" customModule="RestaurantNavigator" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gOe-9o-ztl">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7oS-pO-Os8">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </mapView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6NR-UP-zY6"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6NR-UP-zY6" firstAttribute="bottom" secondItem="7oS-pO-Os8" secondAttribute="bottom" id="NZ1-Y2-nQK"/>
+                            <constraint firstItem="7oS-pO-Os8" firstAttribute="leading" secondItem="6NR-UP-zY6" secondAttribute="leading" id="Q8C-SB-jxs"/>
+                            <constraint firstItem="7oS-pO-Os8" firstAttribute="top" secondItem="6NR-UP-zY6" secondAttribute="top" id="UO4-fi-ogt"/>
+                            <constraint firstItem="6NR-UP-zY6" firstAttribute="trailing" secondItem="7oS-pO-Os8" secondAttribute="trailing" id="kuV-0m-Vyg"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="nnA-4i-1Qx"/>
+                    <connections>
+                        <outlet property="mapBox" destination="7oS-pO-Os8" id="pKW-bZ-zqe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U3U-qn-D7h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController {
+    
+    @IBOutlet var mapBox : MKMapView?
     
     var viewModel : MapViewModel?
 
