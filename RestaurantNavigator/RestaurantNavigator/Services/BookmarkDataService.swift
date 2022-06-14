@@ -27,6 +27,7 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
     }
     
     func saveRestaurantData() {
+        print("save")
         var dataToSave : [[String:String]] = []
         for restaurant in dataContainer.shortRestaurantInfo() {
             dataToSave.append(["title" : restaurant.title, "address" : restaurant.address, "description" : restaurant.description, "id" : String(restaurant.id)])
@@ -41,9 +42,11 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
     
     func bookmarkRestaurant(restaurantInfo: (title: String, id: Int, description: String, address: String)) {
         dataContainer.addRestaurant(title: restaurantInfo.title, address: restaurantInfo.address, description: restaurantInfo.description, id: restaurantInfo.id)
+        saveRestaurantData()
     }
     
     func unbookmarkRestaurant(id: Int) {
         dataContainer.remove(id: id)
+        saveRestaurantData()
     }
 }
