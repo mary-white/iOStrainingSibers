@@ -18,15 +18,24 @@ class RootCoordinator {
     let remoteRestaurantContainer : RestaurantContainer
     let bookmarkedRestaurantContainer : RestaurantContainer
     
+    let remoteDataService : RemoteDataService
+    let bookmarkDataService : BookmarkDataService
+    
     init() {
         tabBarController = UITabBarController()
         
         remoteRestaurantContainer = RestaurantContainer()
         bookmarkedRestaurantContainer = RestaurantContainer()
         
-        bookmarkedRestaurantCoordinator = BookmarkedRestaurantCoordinator(dataContainer: bookmarkedRestaurantContainer)
-        remoteRestaurantCoordinator = RemoteRestaurantCoordinator(dataContainer: remoteRestaurantContainer)
-        mapCoordinator = MapCoordinator(dataContainer: remoteRestaurantContainer)
+        remoteDataService = RemoteDataService()
+        remoteDataService.dataContainer = remoteRestaurantContainer
+        
+        bookmarkDataService = BookmarkDataService()
+        bookmarkDataService.dataContainer = bookmarkedRestaurantContainer
+        
+        bookmarkedRestaurantCoordinator = BookmarkedRestaurantCoordinator(dataContainer: bookmarkedRestaurantContainer, dataService : bookmarkDataService)
+        remoteRestaurantCoordinator = RemoteRestaurantCoordinator(dataContainer: remoteRestaurantContainer, remoteDataService : remoteDataService, bookmarkDataService : bookmarkDataService)
+        mapCoordinator = MapCoordinator(dataContainer: remoteRestaurantContainer, remoteDataService : remoteDataService, bookmarkDataService : bookmarkDataService)
         
         let bookmarkedRestaurantViewController = bookmarkedRestaurantCoordinator.rootViewController()
         let remoteRestaurantViewController = remoteRestaurantCoordinator.rootViewController()

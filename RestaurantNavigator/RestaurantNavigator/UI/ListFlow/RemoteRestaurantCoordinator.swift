@@ -14,19 +14,20 @@ class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDe
     let viewController : RestaurantListViewController
     let viewModel : RestaurantListViewModel
     
-    let dataService : RemoteDataService
+    let remoteDataService : RemoteDataService
+    let bookmarkDataService : BookmarkDataService
     
-    init(dataContainer : RestaurantContainer) {
+    init(dataContainer : RestaurantContainer, remoteDataService : RemoteDataService, bookmarkDataService : BookmarkDataService) {
         navigationController = UINavigationController()
         
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
         viewController.title = "Restaurant list"
         
-        dataService = RemoteDataService()
-        dataService.dataContainer = dataContainer
+        self.remoteDataService = remoteDataService
+        self.bookmarkDataService = bookmarkDataService
         
         viewModel = RestaurantListViewModel()
-        viewModel.dataService = dataService
+        viewModel.dataService = remoteDataService
         viewModel.dataContainer = dataContainer
         viewModel.displayDelegate = viewController
         viewModel.actionDelegate = self
@@ -46,7 +47,8 @@ class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDe
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
         let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
         restaurantPageViewModel.displayDelegate = restaurantPageViewController
-        restaurantPageViewModel.dataService = dataService
+        restaurantPageViewModel.remoteDataService = remoteDataService
+        restaurantPageViewModel.bookmarkDataService = bookmarkDataService
         restaurantPageViewController.viewModel = restaurantPageViewModel
         
         navigationController.pushViewController(restaurantPageViewController, animated: true)

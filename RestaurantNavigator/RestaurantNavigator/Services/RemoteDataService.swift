@@ -24,7 +24,7 @@ enum URLAddresses {
     }
 }
 
-class RemoteDataService : DataService, RestaurantPageDataService {
+class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     
     var dataContainer : RestaurantContainer = RestaurantContainer()
     weak var delegate : RemoteDataServiceDelegate?

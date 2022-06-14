@@ -74,16 +74,24 @@ class RestaurantContainer : DataContainerToRead {
         container[index].location = (lat : lat, lon : lon)
     }
     
+    func shortRestaurantInfo() -> [(title: String, id : Int, description : String, address : String)] {
+        var result : [(title: String, id : Int, description : String, address : String)] = []
+        for restaurant in container {
+            result.append((title : restaurant.title, id : restaurant.id, description : restaurant.description, address : restaurant.address))
+        }
+        return result
+    }
+    
     // protocol functions
-    func restaurantInfo() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage)] {
-        var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage)] = []
+    func restaurantInfo() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] {
+        var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] = []
         for restaurant in container {
             let location = restaurant.location
             var image : UIImage = UIImage()
             if !restaurant.gallery.isEmpty {
                 image = restaurant.gallery[0]
             }
-            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.lat, longitudinal: location.lon, description : restaurant.description, image : image))
+            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.lat, longitudinal: location.lon, description : restaurant.description, image : image, address : restaurant.address))
         }
         return result
     }

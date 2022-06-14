@@ -16,11 +16,17 @@ class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
     
     let dataContainer : RestaurantContainer
     
-    init(dataContainer : RestaurantContainer) {
+    let remoteDataService : RemoteDataService
+    let bookmarkDataService : BookmarkDataService
+    
+    init(dataContainer : RestaurantContainer, remoteDataService : RemoteDataService, bookmarkDataService : BookmarkDataService) {
         navigationController = UINavigationController()
         self.dataContainer = dataContainer
         
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        
+        self.remoteDataService = remoteDataService
+        self.bookmarkDataService = bookmarkDataService
         
         viewModel = MapViewModel()
         viewModel.actionDelegate = self
@@ -40,7 +46,8 @@ class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
         
         let dataService = RemoteDataService()
         dataService.dataContainer = dataContainer
-        restaurantPageViewModel.dataService = dataService
+        restaurantPageViewModel.remoteDataService = remoteDataService
+        restaurantPageViewModel.bookmarkDataService = bookmarkDataService
         
         restaurantPageViewController.viewModel = restaurantPageViewModel
         

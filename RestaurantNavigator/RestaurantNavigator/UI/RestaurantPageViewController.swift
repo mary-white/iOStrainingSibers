@@ -24,6 +24,8 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
     @IBOutlet var reviewsTable : UITableView?
     @IBOutlet var addingReview : UIButton?
     @IBOutlet var photoGalery : UICollectionView?
+    @IBOutlet var restaurantAddress : UILabel?
+    @IBOutlet var bookmarkingRestaurantButton : UIButton?
     
     var viewModel : RestaurantPageViewModel?
 
@@ -42,15 +44,21 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
         let images = restaurantInfo.gallery
         if !images.isEmpty {
             restaurantImage?.image = images[0]
-            
-            
         }
         
         restaurantTitle?.text = restaurantInfo.title
         restaurantDescription?.text = restaurantInfo.description
+        restaurantAddress?.text = restaurantInfo.address
         
         photoGalery?.delegate = self
         photoGalery?.dataSource = self
+        
+        if viewModel?.isBookmark() ?? false {
+            bookmarkingRestaurantButton?.setTitle("\u{2764}", for: .normal)
+        }
+        else {
+            bookmarkingRestaurantButton?.setTitle("\u{1F494}", for: .normal)
+        }
     }
     
     @IBAction func addNewReview() {
@@ -76,6 +84,10 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in }))
 
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func bookmarkRestaurant() {
+        viewModel?.bookmarkrRestaurant()
     }
     
     // protocol function
