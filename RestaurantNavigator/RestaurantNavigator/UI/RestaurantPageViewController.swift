@@ -20,6 +20,7 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
     @IBOutlet var restaurantDescription : UILabel?
     @IBOutlet var reviewsTable : UITableView?
     @IBOutlet var addingReview : UIButton?
+    @IBOutlet var photoGalery : UICollectionView?
     
     var viewModel : RestaurantPageViewModel?
 
@@ -35,10 +36,15 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
         let images = restaurantInfo.gallery
         if !images.isEmpty {
             restaurantImage?.image = images[0]
+            
+            
         }
         
         restaurantTitle?.text = restaurantInfo.title
         restaurantDescription?.text = restaurantInfo.description
+        
+        photoGalery?.delegate = self
+        photoGalery?.dataSource = self
     }
     
     @IBAction func addNewReview() {
@@ -90,5 +96,30 @@ extension RestaurantPageViewController : UITableViewDelegate, UITableViewDataSou
         cell.reviewText?.text = review?.text
         
         return cell
+    }
+}
+
+class RestaurantPhotoCell : UICollectionViewCell {
+    @IBOutlet var photo : UIImageView?
+}
+
+extension RestaurantPageViewController : UICollectionViewDataSource, UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return viewModel?.photoCount ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath ) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RestaurantPhotoCell", for: indexPath) as! RestaurantPhotoCell
+        
+        cell.photo?.image = viewModel?.photoFromGalery(at: indexPath.row)
+        cell.backgroundColor = .white
+
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? RestaurantPhotoCell {
+            restaurantImage?.image = cell.photo?.image
+        }
     }
 }

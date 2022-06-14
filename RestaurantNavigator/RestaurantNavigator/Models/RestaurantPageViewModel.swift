@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-class RestaurantPageViewModel {
+class RestaurantPageViewModel: RemoteDataServiceDelegate {
     var currentRestaurant : Restaurant?
     var restaurantReviews : [Review]
     
     var displayDelegate : DisplayRestaurantPageViewModelDelegate?
-    var actionDelegate : ActionRestaurantPageViewModelDelegate?
+    var dataService : RestaurantPageDataService?
     
     init(restaurant : Restaurant) {
         currentRestaurant = restaurant
@@ -35,20 +35,42 @@ class RestaurantPageViewModel {
         return (author : review.author, date : review.date, text : review.reviewText)
     }
     
+    var photoCount : Int {
+        get {
+            return currentRestaurant?.galery.count ?? 0
+        }
+    }
+    
+    func photoFromGalery(at index : Int) -> UIImage {
+        guard let galery = currentRestaurant?.galery else {
+            return UIImage()
+        }
+        if index >= photoCount || index < 0 {
+            return UIImage()
+        }
+        return galery[index]
+    }
+    
     func addNewReview(author : String, text : String) {
-        guard let id = currentRestaurant?.id else {
+        guard let id = currentRestaurant?.id, var dataService = dataService else {
             return
         }
         
-        actionDelegate?.addNewReview(author: author, text: text, restaurantId : id, date : String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970)))
+        dataService.reviewDelegate = self
+        
+        dataService.addNewReview(author: author, text: text, restaurantId : id, date : String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970)))
+    }
+    
+    func dataDidLoad() {
         displayDelegate?.reviewDidLoad()
     }
 }
 
-protocol ActionRestaurantPageViewModelDelegate {
-    func addNewReview(author : String, text : String, restaurantId : Int, date : String)
-}
-
 protocol DisplayRestaurantPageViewModelDelegate {
     func reviewDidLoad()
+}
+
+protocol RestaurantPageDataService {
+    var reviewDelegate : RemoteDataServiceDelegate? {get set}
+    func addNewReview(author : String, text : String, restaurantId : Int, date : String)
 }

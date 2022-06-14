@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate, ActionRestaurantPageViewModelDelegate {
+class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
     let navigationController : UINavigationController
     
     let viewController : RestaurantListViewController
@@ -46,14 +46,9 @@ class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDe
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
         let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
         restaurantPageViewModel.displayDelegate = restaurantPageViewController
-        restaurantPageViewModel.actionDelegate = self
+        restaurantPageViewModel.dataService = dataService
         restaurantPageViewController.viewModel = restaurantPageViewModel
         
         navigationController.pushViewController(restaurantPageViewController, animated: true)
-    }
-    
-    func addNewReview(author : String, text : String, restaurantId : Int, date : String) {
-        dataService.addReview(author : author, text : text, restaurantId : restaurantId, date : date)
-        dataService.updateRestaurantData()
     }
 }

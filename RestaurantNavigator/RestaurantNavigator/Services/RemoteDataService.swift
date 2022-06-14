@@ -24,10 +24,11 @@ enum URLAddresses {
     }
 }
 
-class RemoteDataService : DataService {
+class RemoteDataService : DataService, RestaurantPageDataService {
     
     var dataContainer : RestaurantContainer = RestaurantContainer()
     weak var delegate : RemoteDataServiceDelegate?
+    weak var reviewDelegate : RemoteDataServiceDelegate?
     
     func updateRestaurantData() {
         // load all information about restaurants
@@ -122,7 +123,7 @@ class RemoteDataService : DataService {
         task.resume()
     }
     
-    func addReview(author : String, text : String, restaurantId : Int, date : String) {
+    func addNewReview(author : String, text : String, restaurantId : Int, date : String) {
         if restaurantId == -1 {
             return
         }
@@ -157,10 +158,15 @@ class RemoteDataService : DataService {
             }
             
             if let firstData = data {
-                let responseJSON = try? JSONSerialization.jsonObject(with: firstData, options: [])
-                if let responseJSON = responseJSON as? [String: Any] {
-                    print(responseJSON)
+                DispatchQueue.main.async {
+                    self.updateRestaurantData()
+                    self.reviewDelegate?.dataDidLoad()
                 }
+                
+                /*let responseJSON = try? JSONSerialization.jsonObject(with: firstData, options: [])
+                if let res = responseJSON as? [String: Any] {
+                    print(res)
+                }*/
             }
         }
 
