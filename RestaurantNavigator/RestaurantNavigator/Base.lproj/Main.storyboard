@@ -109,7 +109,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FUa-dp-xd9">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FUa-dp-xd9">
                                 <rect key="frame" x="0.0" y="44" width="414" height="793"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sTJ-kk-66C">
@@ -133,8 +133,8 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIE-cH-R00">
-                                                <rect key="frame" x="176" y="525" width="63" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UIE-cH-R00">
+                                                <rect key="frame" x="175.5" y="514.5" width="63" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -279,7 +279,6 @@
                                     <constraint firstAttribute="trailing" secondItem="sTJ-kk-66C" secondAttribute="trailing" id="1Cf-KT-kjl"/>
                                     <constraint firstItem="X5V-gd-3Lg" firstAttribute="trailing" secondItem="sTJ-kk-66C" secondAttribute="trailing" id="85t-8u-xhI"/>
                                     <constraint firstItem="sTJ-kk-66C" firstAttribute="leading" secondItem="X5V-gd-3Lg" secondAttribute="leading" id="hgo-yz-QyT"/>
-                                    <constraint firstAttribute="bottom" secondItem="sTJ-kk-66C" secondAttribute="bottom" constant="23" id="uEM-f6-QPQ"/>
                                     <constraint firstItem="X5V-gd-3Lg" firstAttribute="bottom" secondItem="sTJ-kk-66C" secondAttribute="bottom" id="uoi-X4-RvQ"/>
                                     <constraint firstItem="sTJ-kk-66C" firstAttribute="top" secondItem="X5V-gd-3Lg" secondAttribute="top" id="vSQ-IF-IQQ"/>
                                 </constraints>

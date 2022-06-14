@@ -21,7 +21,7 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     }
     
     func restaurantInfo() -> (title : String, description : String, gallery : [UIImage]) {
-        return (title: currentRestaurant?.title ?? "", description: currentRestaurant?.description ?? "", gallery: currentRestaurant?.galery ?? [])
+        return (title: currentRestaurant?.title ?? "", description: currentRestaurant?.description ?? "", gallery: currentRestaurant?.gallery ?? [])
     }
     
     var reviewsCount: Int {
@@ -37,18 +37,18 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     
     var photoCount : Int {
         get {
-            return currentRestaurant?.galery.count ?? 0
+            return currentRestaurant?.gallery.count ?? 0
         }
     }
     
     func photoFromGalery(at index : Int) -> UIImage {
-        guard let galery = currentRestaurant?.galery else {
+        guard let gallery = currentRestaurant?.gallery else {
             return UIImage()
         }
         if index >= photoCount || index < 0 {
             return UIImage()
         }
-        return galery[index]
+        return gallery[index]
     }
     
     func addNewReview(author : String, text : String) {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol DataService : AnyObject {
     var delegate : RemoteDataServiceDelegate? { get set }
@@ -14,6 +15,6 @@ protocol DataService : AnyObject {
 }
 
 protocol DataContainerToRead {
-    func restaurantCoordinatsList() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double)]
+    func restaurantInfo() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double, description : String, image : UIImage)]
     func element(at_id id : Int) -> Restaurant?
 }

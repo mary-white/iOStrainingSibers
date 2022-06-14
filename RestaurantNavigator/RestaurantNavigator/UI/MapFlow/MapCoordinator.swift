@@ -14,8 +14,11 @@ class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
     let viewController : MapViewController
     let viewModel : MapViewModel
     
+    let dataContainer : RestaurantContainer
+    
     init(dataContainer : RestaurantContainer) {
         navigationController = UINavigationController()
+        self.dataContainer = dataContainer
         
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
@@ -34,6 +37,11 @@ class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
     func willShow(restaurant: Restaurant) {
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
         let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
+        
+        let dataService = RemoteDataService()
+        dataService.dataContainer = dataContainer
+        restaurantPageViewModel.dataService = dataService
+        
         restaurantPageViewController.viewModel = restaurantPageViewModel
         
         navigationController.pushViewController(restaurantPageViewController, animated: true)

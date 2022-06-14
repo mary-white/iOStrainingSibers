@@ -8,9 +8,10 @@
 import Foundation
 import MapKit
 
-class RestaurantAnnotation: NSObject, MKAnnotation {
+class RestaurantAnnotation: MKPinAnnotationView, MKAnnotation {
     var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D()
     var title : String?
+    var subtitle: String?
 
     var id : Int = -1
 }
@@ -20,7 +21,7 @@ class MapViewModel {
     var actionDelegate : ActionMapViewModelDelegate?
     
     func restaurantAnnotations() -> [RestaurantAnnotation] {
-        guard let restaurantLocations = dataContainer?.restaurantCoordinatsList() else {
+        guard let restaurantLocations = dataContainer?.restaurantInfo() else {
             return []
         }
         
@@ -28,8 +29,10 @@ class MapViewModel {
         for restaurant in restaurantLocations {
             let annotaion = RestaurantAnnotation()
             annotaion.title = restaurant.title
+            annotaion.subtitle = restaurant.description
             annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.latitudinal, longitude: restaurant.longitudinal)
             annotaion.id = restaurant.id
+            annotaion.image = restaurant.image
             
             annotaions.append(annotaion)
         }

@@ -19,7 +19,7 @@ struct Restaurant {
     var title : String
     var address : String
     var description : String
-    var galery : [UIImage] = []
+    var gallery : [UIImage] = []
     var reviews : [Review] = []
 
     //var rating : Int?
@@ -55,7 +55,7 @@ class RestaurantContainer : DataContainerToRead {
             return
         }
         
-        container[index].galery.append(newImage)
+        container[index].gallery.append(newImage)
     }
     
     func addReview(for id : Int, newReview : Review) {
@@ -75,11 +75,15 @@ class RestaurantContainer : DataContainerToRead {
     }
     
     // protocol functions
-    func restaurantCoordinatsList() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double)] {
-        var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double)] = []
+    func restaurantInfo() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage)] {
+        var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage)] = []
         for restaurant in container {
             let location = restaurant.location
-            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.lat, longitudinal: location.lon))
+            var image : UIImage = UIImage()
+            if !restaurant.gallery.isEmpty {
+                image = restaurant.gallery[0]
+            }
+            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.lat, longitudinal: location.lon, description : restaurant.description, image : image))
         }
         return result
     }

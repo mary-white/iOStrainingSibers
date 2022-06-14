@@ -157,7 +157,7 @@ class RemoteDataService : DataService, RestaurantPageDataService {
                 return
             }
             
-            if let firstData = data {
+            if let _ = data {
                 DispatchQueue.main.async {
                     self.updateRestaurantData()
                     self.reviewDelegate?.dataDidLoad()

@@ -25,8 +25,8 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
             return (title : "", description : "", image : UIImage())
         }
         var image = UIImage()
-        if !element.galery.isEmpty {
-            image = element.galery[0]
+        if !element.gallery.isEmpty {
+            image = element.gallery[0]
         }
         return (title : element.title, description : element.description, image : image)
     }
