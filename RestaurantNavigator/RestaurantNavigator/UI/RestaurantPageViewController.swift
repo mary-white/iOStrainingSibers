@@ -87,7 +87,14 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
     }
     
     @IBAction func bookmarkRestaurant() {
-        viewModel?.bookmarkrRestaurant()
+        viewModel?.bookmarkRestaurant()
+        
+        if viewModel?.isBookmark() ?? false {
+            bookmarkingRestaurantButton?.setTitle("\u{2764}", for: .normal)
+        }
+        else {
+            bookmarkingRestaurantButton?.setTitle("\u{1F494}", for: .normal)
+        }
     }
     
     // protocol function

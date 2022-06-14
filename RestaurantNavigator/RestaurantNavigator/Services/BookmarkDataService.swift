@@ -38,4 +38,8 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
     func isBookmarked(id : Int) -> Bool {
         return dataContainer.container.contains(where: {element in element.id == id})
     }
+    
+    func bookmarkRestaurant(restaurantInfo: (title: String, id: Int, description: String, address: String)) {
+        dataContainer.addRestaurant(title: restaurantInfo.title, address: restaurantInfo.address, description: restaurantInfo.description, id: restaurantInfo.id)
+    }
 }

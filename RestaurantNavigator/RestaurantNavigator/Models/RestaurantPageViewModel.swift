@@ -65,8 +65,13 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         displayDelegate?.reviewDidLoad()
     }
     
-    func bookmarkrRestaurant() {
-        
+    func bookmarkRestaurant() {
+        guard let restaurant = currentRestaurant else {
+            return
+        }
+        if !isBookmark() {
+            bookmarkDataService?.bookmarkRestaurant(restaurantInfo: (title: restaurant.title, id: restaurant.id, description: restaurant.description, address: restaurant.address))
+        }
     }
     
     func dataDidLoad() {
@@ -90,4 +95,5 @@ protocol RestaurantPageRemoteDataService {
 
 protocol RestaurantPageBookmarkDataService {
     func isBookmarked(id : Int) -> Bool
+    func bookmarkRestaurant(restaurantInfo : (title : String, id : Int, description : String, address : String))
 }
