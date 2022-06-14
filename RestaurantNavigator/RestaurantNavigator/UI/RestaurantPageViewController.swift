@@ -15,6 +15,9 @@ class ReviewCell : UITableViewCell {
 
 class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewModelDelegate {
     
+    @IBOutlet var tableHeaderView : UIView?
+    @IBOutlet var tableFooterView : UIView?
+    
     @IBOutlet var restaurantImage : UIImageView?
     @IBOutlet var restaurantTitle : UILabel?
     @IBOutlet var restaurantDescription : UILabel?
@@ -26,6 +29,9 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        reviewsTable?.tableHeaderView = tableHeaderView
+        reviewsTable?.tableFooterView = tableFooterView
+        
         reviewsTable?.delegate = self
         reviewsTable?.dataSource = self
         

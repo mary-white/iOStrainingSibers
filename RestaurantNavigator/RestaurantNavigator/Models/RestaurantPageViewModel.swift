@@ -58,7 +58,10 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         
         dataService.reviewDelegate = self
         
-        dataService.addNewReview(author: author, text: text, restaurantId : id, date : String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970)))
+        let currentDate  = String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970))
+        dataService.addNewReview(author: author, text: text, restaurantId : id, date : currentDate)
+        restaurantReviews.append(Review(author: author, reviewText: text, date: currentDate))
+        displayDelegate?.reviewDidLoad()
     }
     
     func dataDidLoad() {
