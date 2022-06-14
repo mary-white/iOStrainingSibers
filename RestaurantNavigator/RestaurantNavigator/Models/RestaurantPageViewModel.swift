@@ -71,6 +71,8 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         }
         if !isBookmark() {
             bookmarkDataService?.bookmarkRestaurant(restaurantInfo: (title: restaurant.title, id: restaurant.id, description: restaurant.description, address: restaurant.address))
+        } else {
+            bookmarkDataService?.unbookmarkRestaurant(id: restaurant.id)
         }
     }
     
@@ -96,4 +98,5 @@ protocol RestaurantPageRemoteDataService {
 protocol RestaurantPageBookmarkDataService {
     func isBookmarked(id : Int) -> Bool
     func bookmarkRestaurant(restaurantInfo : (title : String, id : Int, description : String, address : String))
+    func unbookmarkRestaurant(id : Int)
 }

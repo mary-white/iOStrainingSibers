@@ -50,6 +50,13 @@ class RestaurantContainer : DataContainerToRead {
         container.removeAll()
     }
     
+    func remove(id : Int) {
+        guard let index = container.firstIndex(where: {element in element.id == id}) else {
+            return
+        }
+        container.remove(at: index)
+    }
+    
     func addImageToGalery(for id : Int, newImage : UIImage) {
         guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
             return

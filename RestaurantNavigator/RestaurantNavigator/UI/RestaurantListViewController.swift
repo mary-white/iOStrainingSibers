@@ -26,6 +26,10 @@ class RestaurantListViewController: UIViewController, DisplayRestaurantListViewM
         restaurantTable?.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) { // delete!!!!
+        restaurantTable?.reloadData()
+    }
+    
     func dataDidLoad() {
         restaurantTable?.reloadData()
     }
