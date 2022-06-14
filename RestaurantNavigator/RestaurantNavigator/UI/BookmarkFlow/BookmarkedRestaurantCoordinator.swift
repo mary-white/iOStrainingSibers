@@ -8,22 +8,46 @@
 import Foundation
 import UIKit
 
-class BookmarkedRestaurantCoordinator : Coordinator {
+class BookmarkedRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
+    let navigationController : UINavigationController
+    
     let viewController : RestaurantListViewController
     let viewModel : RestaurantListViewModel
     
-    init(dataContainer : RestaurantContainer, dataService : BookmarkDataService) {
+    let remoteDataService : RemoteDataService
+    let bookmarkDataService : BookmarkDataService
+    
+    init(dataContainer : RestaurantContainer, remoteDataService : RemoteDataService, bookmarkDataService : BookmarkDataService) {
+        navigationController = UINavigationController()
+        
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
         
         viewModel = RestaurantListViewModel()
         
+        self.remoteDataService = remoteDataService
+        self.bookmarkDataService = bookmarkDataService
+        
         viewModel.dataContainer = dataContainer
         viewModel.dataService?.updateRestaurantData()
+        viewModel.actionDelegate = self
         
         viewController.viewModel = viewModel
+        
+        navigationController.pushViewController(viewController, animated: true)
     }
     
     func rootViewController() -> UIViewController {
-        return viewController
+        return navigationController
+    }
+    
+    func willShow(restaurant: Restaurant) {
+        let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
+        let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
+        restaurantPageViewModel.displayDelegate = restaurantPageViewController
+        restaurantPageViewModel.remoteDataService = remoteDataService
+        restaurantPageViewModel.bookmarkDataService = bookmarkDataService
+        restaurantPageViewController.viewModel = restaurantPageViewModel
+        
+        navigationController.pushViewController(restaurantPageViewController, animated: true)
     }
 }

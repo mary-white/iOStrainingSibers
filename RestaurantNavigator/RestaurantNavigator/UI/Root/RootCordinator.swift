@@ -34,7 +34,7 @@ class RootCoordinator {
         bookmarkDataService.dataContainer = bookmarkedRestaurantContainer
         bookmarkDataService.updateRestaurantData()
         
-        bookmarkedRestaurantCoordinator = BookmarkedRestaurantCoordinator(dataContainer: bookmarkedRestaurantContainer, dataService : bookmarkDataService)
+        bookmarkedRestaurantCoordinator = BookmarkedRestaurantCoordinator(dataContainer: bookmarkedRestaurantContainer, remoteDataService : remoteDataService, bookmarkDataService : bookmarkDataService)
         remoteRestaurantCoordinator = RemoteRestaurantCoordinator(dataContainer: remoteRestaurantContainer, remoteDataService : remoteDataService, bookmarkDataService : bookmarkDataService)
         mapCoordinator = MapCoordinator(dataContainer: remoteRestaurantContainer, remoteDataService : remoteDataService, bookmarkDataService : bookmarkDataService)
         
