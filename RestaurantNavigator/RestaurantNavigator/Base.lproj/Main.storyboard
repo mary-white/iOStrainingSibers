@@ -179,8 +179,8 @@
                                             <color key="textColor" systemColor="systemBlueColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnk-ae-FJK">
-                                            <rect key="frame" x="176" y="399" width="62.5" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Address" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gnk-ae-FJK">
+                                            <rect key="frame" x="30" y="399" width="354" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" systemColor="systemGray2Color"/>
                                             <nil key="highlightedColor"/>
@@ -216,6 +216,7 @@
                                         <constraint firstItem="nYW-of-tNH" firstAttribute="top" secondItem="EZo-LZ-vpV" secondAttribute="top" id="Kg0-c3-VfB"/>
                                         <constraint firstItem="vWK-Ot-V8N" firstAttribute="top" secondItem="nYW-of-tNH" secondAttribute="bottom" constant="10" id="Kmd-N3-jcz"/>
                                         <constraint firstItem="sLy-K4-o6E" firstAttribute="leading" secondItem="EZo-LZ-vpV" secondAttribute="leading" constant="30" id="LlW-Zn-KaL"/>
+                                        <constraint firstItem="gnk-ae-FJK" firstAttribute="leading" secondItem="EZo-LZ-vpV" secondAttribute="leading" constant="30" id="QFo-8u-cOR"/>
                                         <constraint firstItem="xza-1w-oZn" firstAttribute="top" secondItem="EZo-LZ-vpV" secondAttribute="top" id="QVK-Hd-Oqr"/>
                                         <constraint firstAttribute="bottom" secondItem="UIE-cH-R00" secondAttribute="bottom" constant="20" id="QhN-3a-Po4"/>
                                         <constraint firstItem="sLy-K4-o6E" firstAttribute="top" secondItem="gnk-ae-FJK" secondAttribute="bottom" constant="15" id="UJQ-Ac-jmS"/>
