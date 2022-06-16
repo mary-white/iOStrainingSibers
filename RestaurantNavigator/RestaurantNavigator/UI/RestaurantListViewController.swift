@@ -24,6 +24,12 @@ class RestaurantListViewController: UIViewController, DisplayRestaurantListViewM
         
         restaurantTable?.delegate = self
         restaurantTable?.dataSource = self
+        
+        restaurantTable?.refreshControl = UIRefreshControl()
+        restaurantTable?.refreshControl?.addTarget(self, action: #selector(updateRestaurantListInfo), for: .valueChanged)
+        
+        restaurantTable?.refreshControl?.tintColor = .systemMint
+        restaurantTable?.refreshControl?.attributedTitle = NSAttributedString(string: "Update restaurant data")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +38,15 @@ class RestaurantListViewController: UIViewController, DisplayRestaurantListViewM
     
     func dataDidLoad() {
         restaurantTable?.reloadData()
+    }
+    
+    @objc func updateRestaurantListInfo() {
+        viewModel?.updateRestaurantListInfo()
+        
+        DispatchQueue.main.async {
+            self.restaurantTable?.reloadData()
+            self.restaurantTable?.refreshControl?.endRefreshing()
+        }
     }
 }
 

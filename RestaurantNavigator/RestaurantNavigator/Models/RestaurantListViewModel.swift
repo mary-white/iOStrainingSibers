@@ -38,6 +38,10 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
         actionDelegate?.willShow(restaurant: currentRestaurant)
     }
     
+    func updateRestaurantListInfo() {
+        dataService?.updateRestaurantData()
+    }
+    
     // protocol function
     func dataDidLoad() {
         displayDelegate?.dataDidLoad()
