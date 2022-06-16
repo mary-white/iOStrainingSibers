@@ -18,11 +18,14 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     
     init(restaurant : Restaurant) {
         currentRestaurant = restaurant
-        restaurantReviews = currentRestaurant?.reviews ?? []
+        restaurantReviews = restaurant.reviews
     }
     
-    func restaurantInfo() -> (title : String, description : String, gallery : [UIImage], address : String) {
-        return (title: currentRestaurant?.title ?? "", description: currentRestaurant?.description ?? "", gallery: currentRestaurant?.gallery ?? [], address : currentRestaurant?.address ?? "")
+    func restaurantInfo() -> (title : String, description : String, photo : UIImage, address : String) {
+        guard let restaurant = currentRestaurant else {
+            return (title : "", description : "", photo : UIImage(), address :"")
+        }
+        return (title: restaurant.title, description: restaurant.description, photo: restaurant.gallery.isEmpty ? UIImage() : restaurant.gallery[0], address : restaurant.address)
     }
     
     var reviewsCount: Int {
@@ -69,7 +72,7 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         guard let restaurant = currentRestaurant else {
             return
         }
-        if !isBookmark() {
+        if !isBookmarked() {
             bookmarkDataService?.bookmarkRestaurant(restaurantInfo: (title: restaurant.title, id: restaurant.id, description: restaurant.description, address: restaurant.address))
         } else {
             bookmarkDataService?.unbookmarkRestaurant(id: restaurant.id)
@@ -80,8 +83,12 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         displayDelegate?.reviewDidLoad()
     }
     
-    func isBookmark() -> Bool {
+    func isBookmarked() -> Bool {
         return bookmarkDataService?.isBookmarked(id: currentRestaurant?.id ?? -1) ?? false
+    }
+    
+    func isRemotedService() -> Bool {
+        return remoteDataService != nil
     }
 }
 
@@ -93,7 +100,6 @@ protocol RestaurantPageRemoteDataService {
     var reviewDelegate : RemoteDataServiceDelegate? {get set}
     func addNewReview(author : String, text : String, restaurantId : Int, date : String)
 }
-
 
 protocol RestaurantPageBookmarkDataService {
     func isBookmarked(id : Int) -> Bool

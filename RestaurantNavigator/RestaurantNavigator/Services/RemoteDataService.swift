@@ -43,7 +43,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
                     continue
                 }
                 
-                let restaurantId = Int(String(describing: id_str)) ?? 0
+                let restaurantId = Int(String(describing: id_str)) ?? -1
                 self.dataContainer.addRestaurant(title: String(describing: title), address: String(describing: address), description: String(describing: description), id: restaurantId)
                 
                 // set restaurants coordinats
@@ -89,7 +89,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
                     continue
                 }
                 
-                let restaurantId = Int(String(describing: id_str)) ?? 0
+                let restaurantId = Int(String(describing: id_str)) ?? -1
                 self.dataContainer.addReview(for: restaurantId, newReview: Review(author: String(describing: author), reviewText: String(describing: text), date: String(describing: date)))
             }
         }
@@ -201,7 +201,7 @@ func parseStringToJSONElements(_ str : String) -> [String] {
                 
         result.append(newElement)
                 
-        data = String(dataSecondPart[data.index(after: lastIndex)...]) // delete added element
+        data = String(dataSecondPart[data.index(after: lastIndex)...]) // delete added element from string
         data.remove(at: data.startIndex) // delete ','
     }
     

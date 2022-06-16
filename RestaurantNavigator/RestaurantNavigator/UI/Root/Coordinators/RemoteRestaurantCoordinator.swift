@@ -1,5 +1,5 @@
 //
-//  BookmarkedRestaurantCoordinator.swift
+//  RemoteRestaurantCoordinator.swift
 //  RestaurantNavigator
 //
 //  Created by student on 08.06.2022.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BookmarkedRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
+class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
     let navigationController : UINavigationController
     
     let viewController : RestaurantListViewController
@@ -21,14 +21,15 @@ class BookmarkedRestaurantCoordinator : Coordinator, ActionRestaurantListViewMod
         navigationController = UINavigationController()
         
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
-        
-        viewModel = RestaurantListViewModel()
+        viewController.title = "Restaurant list"
         
         self.remoteDataService = remoteDataService
         self.bookmarkDataService = bookmarkDataService
         
+        viewModel = RestaurantListViewModel()
+        viewModel.dataService = remoteDataService
         viewModel.dataContainer = dataContainer
-        viewModel.dataService?.updateRestaurantData()
+        viewModel.displayDelegate = viewController
         viewModel.actionDelegate = self
         
         viewController.viewModel = viewModel

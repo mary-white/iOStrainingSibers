@@ -15,6 +15,6 @@ protocol DataService : AnyObject {
 }
 
 protocol DataContainerToRead {
-    func restaurantInfo() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double, description : String, image : UIImage, address : String)]
+    func restaurantsInfo() -> [(title : String, id : Int, latitudinal : Double, longitudinal : Double, description : String, image : UIImage, address : String)]
     func element(at_id id : Int) -> Restaurant?
 }

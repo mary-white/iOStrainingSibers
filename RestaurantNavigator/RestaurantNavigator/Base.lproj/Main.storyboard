@@ -321,9 +321,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="addingReview" destination="Ve7-Qf-PMK" id="n8d-kI-xdk"/>
-                        <outlet property="bookmarkingRestaurantButton" destination="xza-1w-oZn" id="Egg-hE-Q78"/>
-                        <outlet property="photoGalery" destination="vWK-Ot-V8N" id="jtO-MT-SGO"/>
+                        <outlet property="buttonToAddReview" destination="Ve7-Qf-PMK" id="n8d-kI-xdk"/>
+                        <outlet property="buttonToBookmarkRestaurant" destination="xza-1w-oZn" id="Egg-hE-Q78"/>
+                        <outlet property="photoGallery" destination="vWK-Ot-V8N" id="jtO-MT-SGO"/>
                         <outlet property="restaurantAddress" destination="gnk-ae-FJK" id="AmZ-6g-zYB"/>
                         <outlet property="restaurantDescription" destination="sLy-K4-o6E" id="jok-ja-w5d"/>
                         <outlet property="restaurantImage" destination="nYW-of-tNH" id="A5g-Vf-gLR"/>

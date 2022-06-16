@@ -50,7 +50,7 @@ extension MapViewController : MKMapViewDelegate {
             // add restaurant image
             let restaurantImage = annotationInRestaurantAnnotationFormat.image
             let newImageSize = CGSize(width: 60, height: 60)
-            let render = UIGraphicsImageRenderer(size: newImageSize)
+            let render = UIGraphicsImageRenderer(size: newImageSize) // resize image
             let scaledRestaurantImage = render.image() { _ in restaurantImage?.draw(in: CGRect( origin: .zero, size: newImageSize))}
             annotationView?.leftCalloutAccessoryView = UIImageView(image: scaledRestaurantImage)
         } else {

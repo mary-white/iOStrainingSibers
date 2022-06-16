@@ -21,12 +21,12 @@ class MapViewModel {
     var actionDelegate : ActionMapViewModelDelegate?
     
     func restaurantAnnotations() -> [RestaurantAnnotation] {
-        guard let restaurantLocations = dataContainer?.restaurantInfo() else {
+        guard let restaurantsInfo = dataContainer?.restaurantsInfo() else {
             return []
         }
         
         var annotaions : [RestaurantAnnotation] = []
-        for restaurant in restaurantLocations {
+        for restaurant in restaurantsInfo {
             let annotaion = RestaurantAnnotation()
             annotaion.title = restaurant.title
             annotaion.subtitle = restaurant.description

@@ -1,5 +1,5 @@
 //
-//  MapCoordinator.swift
+//  BookmarkedRestaurantCoordinator.swift
 //  RestaurantNavigator
 //
 //  Created by student on 08.06.2022.
@@ -8,29 +8,27 @@
 import Foundation
 import UIKit
 
-class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
+class BookmarkedRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
     let navigationController : UINavigationController
     
-    let viewController : MapViewController
-    let viewModel : MapViewModel
+    let viewController : RestaurantListViewController
+    let viewModel : RestaurantListViewModel
     
-    let dataContainer : RestaurantContainer
-    
-    let remoteDataService : RemoteDataService
     let bookmarkDataService : BookmarkDataService
     
-    init(dataContainer : RestaurantContainer, remoteDataService : RemoteDataService, bookmarkDataService : BookmarkDataService) {
+    init(dataContainer : RestaurantContainer, bookmarkDataService : BookmarkDataService) {
         navigationController = UINavigationController()
-        self.dataContainer = dataContainer
         
-        viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
         
-        self.remoteDataService = remoteDataService
+        viewModel = RestaurantListViewModel()
+        
         self.bookmarkDataService = bookmarkDataService
         
-        viewModel = MapViewModel()
-        viewModel.actionDelegate = self
         viewModel.dataContainer = dataContainer
+        viewModel.dataService?.updateRestaurantData()
+        viewModel.actionDelegate = self
+        
         viewController.viewModel = viewModel
         
         navigationController.pushViewController(viewController, animated: true)
@@ -43,12 +41,8 @@ class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
     func willShow(restaurant: Restaurant) {
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
         let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
-        
-        let dataService = RemoteDataService()
-        dataService.dataContainer = dataContainer
-        restaurantPageViewModel.remoteDataService = remoteDataService
+        restaurantPageViewModel.displayDelegate = restaurantPageViewController
         restaurantPageViewModel.bookmarkDataService = bookmarkDataService
-        
         restaurantPageViewController.viewModel = restaurantPageViewModel
         
         navigationController.pushViewController(restaurantPageViewController, animated: true)

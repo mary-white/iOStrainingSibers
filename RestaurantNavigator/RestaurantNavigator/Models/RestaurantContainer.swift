@@ -22,7 +22,6 @@ struct Restaurant {
     var gallery : [UIImage] = []
     var reviews : [Review] = []
 
-    //var rating : Int?
     var location : (lat : Double, lon : Double) = (lat:0, lon:0)
 }
 
@@ -44,10 +43,6 @@ class RestaurantContainer : DataContainerToRead {
             return nil
         }
         return container[index]
-    }
-    
-    func removeAll() {
-        container.removeAll()
     }
     
     func remove(id : Int) {
@@ -90,7 +85,7 @@ class RestaurantContainer : DataContainerToRead {
     }
     
     // protocol functions
-    func restaurantInfo() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] {
+    func restaurantsInfo() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] {
         var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] = []
         for restaurant in container {
             let location = restaurant.location

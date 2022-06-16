@@ -7,12 +7,6 @@
 
 import UIKit
 
-class RestaurantCell : UITableViewCell {
-    @IBOutlet var restaurantImage : UIImageView?
-    @IBOutlet var restaurantTitle : UILabel?
-    @IBOutlet var restaurantDescription : UILabel?
-}
-
 class RestaurantListViewController: UIViewController, DisplayRestaurantListViewModelDelegate {
 
     @IBOutlet var restaurantTable : UITableView?
@@ -50,6 +44,12 @@ class RestaurantListViewController: UIViewController, DisplayRestaurantListViewM
     }
 }
 
+class RestaurantCell : UITableViewCell {
+    @IBOutlet var restaurantImage : UIImageView?
+    @IBOutlet var restaurantTitle : UILabel?
+    @IBOutlet var restaurantDescription : UILabel?
+}
+
 extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.containerCount ?? 0
@@ -57,7 +57,6 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
     
     // fill the table
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Ask for a cell of the appropriate type.
         let cell = tableView.dequeueReusableCell(withIdentifier: "RestaurantCell", for: indexPath) as! RestaurantCell
             
         // Cell content

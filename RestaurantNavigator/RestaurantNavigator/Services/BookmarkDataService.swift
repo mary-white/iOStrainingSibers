@@ -8,7 +8,7 @@
 import Foundation
 
 class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
-    weak var delegate: RemoteDataServiceDelegate?
+    weak var delegate: RemoteDataServiceDelegate? // don't use
     
     var dataContainer: RestaurantContainer = RestaurantContainer()
     
@@ -21,13 +21,11 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
             guard let title = restaurant["title"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"] else {
                 continue
             }
-            let id = Int(id_str) ?? 0
-            dataContainer.addRestaurant(title: title, address: address, description: description, id: id)
+            dataContainer.addRestaurant(title: title, address: address, description: description, id: Int(id_str) ?? 0)
         }
     }
     
     func saveRestaurantData() {
-        print("save")
         var dataToSave : [[String:String]] = []
         for restaurant in dataContainer.shortRestaurantInfo() {
             dataToSave.append(["title" : restaurant.title, "address" : restaurant.address, "description" : restaurant.description, "id" : String(restaurant.id)])

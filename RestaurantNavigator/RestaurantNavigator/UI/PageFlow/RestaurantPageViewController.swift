@@ -7,74 +7,74 @@
 
 import UIKit
 
-class ReviewCell : UITableViewCell {
-    @IBOutlet var author : UILabel?
-    @IBOutlet var date : UILabel?
-    @IBOutlet var reviewText : UILabel?
-}
-
 class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewModelDelegate {
+    
+    let bookmarkedRestaurantSymbol = "\u{2764}"
+    let unbookmarkedRestaurantSumbol = "\u{1F494}"
     
     @IBOutlet var tableHeaderView : UIView?
     @IBOutlet var tableFooterView : UIView?
     
     @IBOutlet var restaurantImage : UIImageView?
     @IBOutlet var restaurantTitle : UILabel?
-    @IBOutlet var restaurantDescription : UILabel?
-    @IBOutlet var reviewsTable : UITableView?
-    @IBOutlet var addingReview : UIButton?
-    @IBOutlet var photoGalery : UICollectionView?
     @IBOutlet var restaurantAddress : UILabel?
-    @IBOutlet var bookmarkingRestaurantButton : UIButton?
+    @IBOutlet var restaurantDescription : UILabel?
+    @IBOutlet var photoGallery : UICollectionView?
+    @IBOutlet var reviewsTable : UITableView?
+    @IBOutlet var buttonToAddReview : UIButton?
+    @IBOutlet var buttonToBookmarkRestaurant : UIButton?
     
     var viewModel : RestaurantPageViewModel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // tune table
         reviewsTable?.tableHeaderView = tableHeaderView
         reviewsTable?.tableFooterView = tableFooterView
         
         reviewsTable?.delegate = self
         reviewsTable?.dataSource = self
         
+        // tune restaurant info
         guard let restaurantInfo = viewModel?.restaurantInfo() else {
             return
         }
         
-        let images = restaurantInfo.gallery
-        if !images.isEmpty {
-            restaurantImage?.image = images[0]
-        }
-        
+        restaurantImage?.image = restaurantInfo.photo
         restaurantTitle?.text = restaurantInfo.title
-        restaurantDescription?.text = restaurantInfo.description
         restaurantAddress?.text = restaurantInfo.address
+        restaurantDescription?.text = restaurantInfo.description
         
-        photoGalery?.delegate = self
-        photoGalery?.dataSource = self
+        // tune gallery
+        photoGallery?.delegate = self
+        photoGallery?.dataSource = self
         
-        if viewModel?.isBookmark() ?? false {
-            bookmarkingRestaurantButton?.setTitle("\u{2764}", for: .normal)
-        }
-        else {
-            bookmarkingRestaurantButton?.setTitle("\u{1F494}", for: .normal)
-        }
+        // tune bookmark button
+        updateBookmarkButtonState()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        updateBookmarkButtonState()
     }
     
     @IBAction func addNewReview() {
+        if !(viewModel?.isRemotedService() ?? false) {
+            return
+        }
+        
         let defaultTextInNametextFeild = "Your name"
-        let defaultTestInReviewTextField = "Review text"
+        let defaultTextInReviewTextField = "Review text"
         
         let alert = UIAlertController(title: "To add new review", message: "Enter a review text", preferredStyle: .alert)
 
         alert.addTextField { (textField) in textField.text = defaultTextInNametextFeild }
-        alert.addTextField { (textField) in textField.text = defaultTestInReviewTextField }
+        alert.addTextField { (textField) in textField.text = defaultTextInReviewTextField }
 
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
             guard let alert = alert, let textFields = alert.textFields, let author = textFields[0].text, let text = textFields[1].text else {
                 return
             }
-            if author == defaultTextInNametextFeild || text == defaultTestInReviewTextField {
+            if author == defaultTextInNametextFeild || text == defaultTextInReviewTextField {
                 return
             }
             
@@ -88,13 +88,12 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
     
     @IBAction func bookmarkRestaurant() {
         viewModel?.bookmarkRestaurant()
-        
-        if viewModel?.isBookmark() ?? false {
-            bookmarkingRestaurantButton?.setTitle("\u{2764}", for: .normal)
-        }
-        else {
-            bookmarkingRestaurantButton?.setTitle("\u{1F494}", for: .normal)
-        }
+        updateBookmarkButtonState()
+    }
+    
+    func updateBookmarkButtonState() {
+        let bookmarkStateSymbol = viewModel?.isBookmarked() ?? false ? bookmarkedRestaurantSymbol : unbookmarkedRestaurantSumbol
+        buttonToBookmarkRestaurant?.setTitle(bookmarkStateSymbol, for: .normal)
     }
     
     // protocol function
@@ -103,14 +102,19 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
     }
 }
 
+// review table
+class ReviewCell : UITableViewCell {
+    @IBOutlet var author : UILabel?
+    @IBOutlet var date : UILabel?
+    @IBOutlet var reviewText : UILabel?
+}
+
 extension RestaurantPageViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel?.reviewsCount ?? 0
     }
-    
-    // fill the table
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        // Ask for a cell of the appropriate type.
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewCell", for: indexPath) as! ReviewCell
             
         // Cell content
@@ -124,6 +128,7 @@ extension RestaurantPageViewController : UITableViewDelegate, UITableViewDataSou
     }
 }
 
+// gallery
 class RestaurantPhotoCell : UICollectionViewCell {
     @IBOutlet var photo : UIImageView?
 }
@@ -137,7 +142,6 @@ extension RestaurantPageViewController : UICollectionViewDataSource, UICollectio
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RestaurantPhotoCell", for: indexPath) as! RestaurantPhotoCell
         
         cell.photo?.image = viewModel?.photoFromGalery(at: indexPath.row)
-        cell.backgroundColor = .white
 
         return cell
     }
