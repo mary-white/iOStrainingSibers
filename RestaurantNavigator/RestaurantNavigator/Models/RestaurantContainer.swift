@@ -29,9 +29,7 @@ class RestaurantContainer : DataContainerToRead {
     var container : Array<Restaurant> = []
     
     var count : Int {
-        get {
-            return container.count
-        }
+        return container.count
     }
     
     func addRestaurant(title : String, address : String, description : String, id : Int) {

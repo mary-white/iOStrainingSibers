@@ -29,9 +29,7 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     }
     
     var reviewsCount: Int {
-        get {
-            return restaurantReviews.count
-        }
+        return restaurantReviews.count
     }
     
     func review(at index : Int) -> (author : String,  date : String, text : String) {
@@ -40,9 +38,7 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     }
     
     var photoCount : Int {
-        get {
-            return currentRestaurant?.gallery.count ?? 0
-        }
+        return currentRestaurant?.gallery.count ?? 0
     }
     
     func photoFromGalery(at index : Int) -> UIImage {
