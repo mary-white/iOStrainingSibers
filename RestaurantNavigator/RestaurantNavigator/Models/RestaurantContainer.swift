@@ -36,7 +36,7 @@ class RestaurantContainer : DataContainerToRead {
         container.append(Restaurant(id: id, title: title, address: address, description: description))
     }
     
-    func element(at index : Int) -> Restaurant? {
+    subscript(index : Int) -> Restaurant? {
         if index >= container.count || index < 0 {
             return nil
         }
@@ -96,7 +96,7 @@ class RestaurantContainer : DataContainerToRead {
         return result
     }
     
-    func element(at_id id : Int) -> Restaurant? {
+    func element(id : Int) -> Restaurant? {
         guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
             return nil
         }

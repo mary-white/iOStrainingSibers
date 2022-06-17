@@ -21,7 +21,7 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
     }
     
     func containerElement(at index : Int) -> (title : String, description : String, image : UIImage) {
-        guard let element = dataContainer?.element(at: index) else {
+        guard let element = dataContainer?[index] else {
             return (title : "", description : "", image : UIImage())
         }
         var image = UIImage()
@@ -32,7 +32,7 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
     }
     
     func showRestaurantPage(at index : Int) {
-        guard let currentRestaurant = dataContainer?.element(at: index) else {
+        guard let currentRestaurant = dataContainer?[index] else {
             return
         }
         actionDelegate?.willShow(restaurant: currentRestaurant)

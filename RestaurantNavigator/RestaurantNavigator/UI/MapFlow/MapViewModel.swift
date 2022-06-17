@@ -40,7 +40,7 @@ class MapViewModel {
     }
     
     func showRestaurantPage(id : Int) {
-        guard let restaurant = dataContainer?.element(at_id: id) else {
+        guard let restaurant = dataContainer?.element(id: id) else {
             return
         }
         actionDelegate?.willShow(restaurant: restaurant)
