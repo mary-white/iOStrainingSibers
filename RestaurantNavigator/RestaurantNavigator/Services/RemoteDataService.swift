@@ -39,19 +39,17 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
             
             let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataInStringFormat, parser : parseStringToJSONElements)
             for restaurant in resultDictionaryOfRestaurants {
-                guard let title = restaurant["name"], let address = restaurant["address"], let description = restaurant["description"], let id_str = restaurant["id"], let location_anyType = restaurant["location"], let imagePaths = restaurant["imagePaths"]  else {
+                guard let title = restaurant.name, let address = restaurant.address, let description = restaurant.description, let id = restaurant.id,
+                      let lat = restaurant.lat, let lon = restaurant.lon, let imagePaths = restaurant.imagePaths else {
                     continue
                 }
-                
-                let restaurantId = Int(String(describing: id_str)) ?? -1
-                self.dataContainer.addRestaurant(title: String(describing: title), address: String(describing: address), description: String(describing: description), id: restaurantId)
+                self.dataContainer.addRestaurant(title: title, address: address, description: description, id: id)
                 
                 // set restaurants coordinats
-                let location = location_anyType as! [String:Double]
-                self.dataContainer.setRestaurantCoordinats(lat: location["lat"] ?? 0.0, lon: location["lon"] ?? 0.0, for: restaurantId)
+                self.dataContainer.setRestaurantCoordinats(lat: Double(lat), lon: Double(lon), for: id)
                 
                 // load pictures
-                self.loadRestaurantPictures(from: imagePaths as! [String], for: restaurantId)
+                self.loadRestaurantPictures(from: imagePaths, for: id)
             }
             
             DispatchQueue.main.async {
@@ -85,12 +83,11 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
             let resultDictionaryOfReviews = convertJSONStringToArrayOfDictionaries(dataInStringFormat, parser : parseReviewStringToJSONElements)
             
             for review in resultDictionaryOfReviews {
-                guard let id_str = review["restaurantId"], let author = review["author"], let text = review["reviewText"], let date = review["date"] else {
+                guard let id = review.restaurantId, let author = review.author, let text = review.reviewText, let date = review.date else {
                     continue
                 }
                 
-                let restaurantId = Int(String(describing: id_str)) ?? -1
-                self.dataContainer.addReview(for: restaurantId, newReview: Review(author: String(describing: author), reviewText: String(describing: text), date: String(describing: date)))
+                self.dataContainer.addReview(for: id, newReview: Review(author: author, reviewText: text, date: date))
             }
         }
     }
@@ -208,7 +205,7 @@ func parseStringToJSONElements(_ str : String) -> [String] {
     return result
 }
 
-func convertJSONStringToArrayOfDictionaries(_ str : String, parser : (String) -> [String]) -> [[String : Any]] {
+/*func convertJSONStringToArrayOfDictionaries(_ str : String, parser : (String) -> [String]) -> [[String : Any]] {
     let arrayOfStrings : [String] = parser(str)
     
     var result : [[String : Any]] = []
@@ -231,6 +228,107 @@ func convertJSONStringToDictionary(_ str : String) -> [String: Any] {
         print("Failed to load: \(error.localizedDescription)")
     }
     return [:]
+}*/
+
+struct JSONDictionary : Decodable {
+    // review
+    var restaurantId : Int?
+    var author : String?
+    var date : String?
+    var reviewText : String?
+
+    // restaurant
+    var id: Int?
+    var name: String?
+    var description: String?
+    var address: String?
+    var lat: Float?
+    var lon: Float?
+    var imagePaths : [String]?
+    
+    enum CodingKeys : String, CodingKey {
+        case restaurantId = "restaurantId"
+        case author = "author"
+        case date = "date"
+        case reviewText = "reviewText"
+
+        // restaurant
+        case id = "id"
+        case name = "name"
+        case description = "description"
+        case address = "address"
+        case location = "location"
+        case lat = "lat"
+        case lon = "lon"
+        case imagePaths = "imagePaths"
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        do {
+            restaurantId = try container.decode(Int.self, forKey: .restaurantId)
+            author = try container.decode(String.self, forKey: .author)
+            date = try container.decode(String.self, forKey: .date)
+            reviewText = try container.decode(String.self, forKey: .reviewText)
+            
+        } catch {
+            restaurantId = nil
+            author = nil
+            date = nil
+            reviewText = nil
+        }
+        
+        do {
+            id = try container.decode(Int.self, forKey: .id)
+            name = try container.decode(String.self, forKey: .name)
+            description = try container.decode(String.self, forKey: .description)
+            address = try container.decode(String.self, forKey: .address)
+        
+            let location = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .location)
+            lat = try location.decode(Float.self, forKey: .lat)
+            lon = try location.decode(Float.self, forKey: .lon)
+            imagePaths = try container.decode([String].self, forKey: .imagePaths)
+        } catch {
+            id = nil
+            name = nil
+            description = nil
+            address = nil
+            lat = nil
+            lon = nil
+            imagePaths = nil
+        }
+    }
+}
+
+func convertJSONStringToDictionary(_ str : String) -> JSONDictionary? {
+    let jsonData = Data(str.utf8)
+    
+    let decoder = JSONDecoder()
+    decoder.keyDecodingStrategy = .convertFromSnakeCase
+    
+    var info : JSONDictionary?
+    do {
+        info = try decoder.decode(JSONDictionary.self, from: jsonData)
+    } catch {
+        print("Failed to decode JSON")
+    }
+
+    return info
+}
+
+func convertJSONStringToArrayOfDictionaries(_ str : String, parser : (String) -> [String]) -> [JSONDictionary] {
+    let arrayOfStrings : [String] = parser(str)
+    
+    var result : [JSONDictionary] = []
+    
+    for element in arrayOfStrings {
+        if let jsonDictionary = convertJSONStringToDictionary(element) {
+            result.append(jsonDictionary)
+        }
+    }
+    
+    return result
 }
 
 // convert review
