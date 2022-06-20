@@ -121,9 +121,6 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     }
     
     func addNewReview(author : String, text : String, restaurantId : Int, date : String) {
-        if restaurantId == -1 {
-            return
-        }
         
         let rowData: [String: Any] = [
             "restaurantId": restaurantId,

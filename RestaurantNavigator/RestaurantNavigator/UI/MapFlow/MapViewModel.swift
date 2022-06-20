@@ -13,7 +13,7 @@ class RestaurantAnnotation: MKPinAnnotationView, MKAnnotation {
     var title : String?
     var subtitle: String?
 
-    var id : Int = -1
+    var id : Int?
 }
 
 class MapViewModel {

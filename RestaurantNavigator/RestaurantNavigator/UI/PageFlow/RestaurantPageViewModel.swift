@@ -80,7 +80,10 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     }
     
     func isBookmarked() -> Bool {
-        return bookmarkDataService?.isBookmarked(id: currentRestaurant?.id ?? -1) ?? false
+        guard let restaurantId = currentRestaurant?.id else {
+            return false
+        }
+        return bookmarkDataService?.isBookmarked(id: restaurantId) ?? false
     }
     
     func isRemotedService() -> Bool {

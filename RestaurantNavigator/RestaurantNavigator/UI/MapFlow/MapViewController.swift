@@ -44,7 +44,10 @@ extension MapViewController : MKMapViewDelegate {
 
             let annotationInRestaurantAnnotationFormat = annotation as! RestaurantAnnotation
             // add info button
-            let restaurantInfoButton = UIButton(type: .detailDisclosure, primaryAction: UIAction() {_ in self.openRestaurantPage(restaurantId: annotationInRestaurantAnnotationFormat.id)})
+            guard let restaurantId = annotationInRestaurantAnnotationFormat.id else {
+                return nil
+            }
+            let restaurantInfoButton = UIButton(type: .detailDisclosure, primaryAction: UIAction() {_ in self.openRestaurantPage(restaurantId: restaurantId)})
             annotationView?.rightCalloutAccessoryView = restaurantInfoButton
             
             // add restaurant image
