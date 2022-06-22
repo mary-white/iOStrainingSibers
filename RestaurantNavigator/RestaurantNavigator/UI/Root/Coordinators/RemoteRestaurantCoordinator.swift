@@ -36,7 +36,7 @@ class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDe
         
         viewController.viewModel = viewModel
         
-        navigationController.pushViewController(viewController, animated: true)
+        navigationController.pushViewController(viewController, animated: false)
     }
     
     func rootViewController() -> UIViewController {
