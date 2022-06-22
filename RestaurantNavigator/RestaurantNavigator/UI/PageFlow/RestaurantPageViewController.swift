@@ -163,8 +163,6 @@ extension RestaurantPageViewController : UICollectionViewDataSource, UICollectio
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? RestaurantPhotoCell {
-            restaurantImage?.image = cell.photo?.image
-        }
+        restaurantImage?.image = viewModel?.photoFromGalery(at: indexPath.row)
     }
 }
