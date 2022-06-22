@@ -44,7 +44,6 @@ class RemoteRestaurantCoordinator : Coordinator, RestaurantListViewModelActionDe
     func willShow(restaurant: Restaurant) {
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
         let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
-        restaurantPageViewModel.displayDelegate = restaurantPageViewController
         restaurantPageViewModel.remoteDataService = remoteDataService
         restaurantPageViewModel.bookmarkDataService = bookmarkDataService
         restaurantPageViewController.viewModel = restaurantPageViewModel

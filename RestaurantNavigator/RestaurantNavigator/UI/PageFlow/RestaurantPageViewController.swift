@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantPageViewController: UIViewController, RestaurantPageViewModelDisplayDelegate {
+class RestaurantPageViewController: UIViewController {
     
     let bookmarkedRestaurantSymbol = "\u{2764}"
     let unbookmarkedRestaurantSumbol = "\u{1F494}"
@@ -94,7 +94,9 @@ class RestaurantPageViewController: UIViewController, RestaurantPageViewModelDis
                 return
             }
             
-            self.viewModel?.addNewReview(author: author, text: text)
+            self.viewModel?.addNewReview(author: author, text: text) {
+                self.reviewsTable?.reloadData()
+            }
         }))
         
         alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { [weak alert] (_) in }))
@@ -110,11 +112,6 @@ class RestaurantPageViewController: UIViewController, RestaurantPageViewModelDis
     func updateBookmarkButtonState() {
         let bookmarkStateSymbol = viewModel?.isBookmarked() ?? false ? bookmarkedRestaurantSymbol : unbookmarkedRestaurantSumbol
         buttonToBookmarkRestaurant?.setTitle(bookmarkStateSymbol, for: .normal)
-    }
-    
-    // protocol function
-    func reviewDidLoad() {
-        reviewsTable?.reloadData()
     }
 }
 

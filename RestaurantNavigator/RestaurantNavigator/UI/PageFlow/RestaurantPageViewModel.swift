@@ -12,7 +12,6 @@ class RestaurantPageViewModel {
     var currentRestaurant : Restaurant?
     var restaurantReviews : [Review]
     
-    var displayDelegate : RestaurantPageViewModelDisplayDelegate?
     var remoteDataService : RestaurantPageRemoteDataService?
     var bookmarkDataService : RestaurantPageBookmarkDataService?
     
@@ -51,7 +50,7 @@ class RestaurantPageViewModel {
         return gallery[index]
     }
     
-    func addNewReview(author : String, text : String) {
+    func addNewReview(author : String, text : String, afterAdd : @escaping () -> Void) {
         guard let id = currentRestaurant?.id, let dataService = remoteDataService else {
             return
         }
@@ -59,7 +58,7 @@ class RestaurantPageViewModel {
         let currentDate  = String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970))
         dataService.addNewReview(author: author, text: text, restaurantId : id, date : currentDate)
         restaurantReviews.append(Review(author: author, reviewText: text, date: currentDate))
-        displayDelegate?.reviewDidLoad()
+        afterAdd()
     }
     
     func bookmarkRestaurant() {
@@ -83,10 +82,6 @@ class RestaurantPageViewModel {
     func canAddComment() -> Bool {
         return remoteDataService != nil
     }
-}
-
-protocol RestaurantPageViewModelDisplayDelegate {
-    func reviewDidLoad()
 }
 
 protocol RestaurantPageRemoteDataService {
