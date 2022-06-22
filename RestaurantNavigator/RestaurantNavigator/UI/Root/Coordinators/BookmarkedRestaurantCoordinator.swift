@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class BookmarkedRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
+class BookmarkedRestaurantCoordinator : Coordinator, RestaurantListViewModelActionDelegate {
     let navigationController : UINavigationController
     
     let viewController : RestaurantListViewController

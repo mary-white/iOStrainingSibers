@@ -12,7 +12,7 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     var currentRestaurant : Restaurant?
     var restaurantReviews : [Review]
     
-    var displayDelegate : DisplayRestaurantPageViewModelDelegate?
+    var displayDelegate : RestaurantPageViewModelDisplayDelegate?
     var remoteDataService : RestaurantPageRemoteDataService?
     var bookmarkDataService : RestaurantPageBookmarkDataService?
     
@@ -86,12 +86,12 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         return bookmarkDataService?.isBookmarked(id: restaurantId) ?? false
     }
     
-    func isRemotedService() -> Bool {
+    func canAddComment() -> Bool {
         return remoteDataService != nil
     }
 }
 
-protocol DisplayRestaurantPageViewModelDelegate {
+protocol RestaurantPageViewModelDisplayDelegate {
     func reviewDidLoad()
 }
 

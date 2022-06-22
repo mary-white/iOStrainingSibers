@@ -18,7 +18,7 @@ class RestaurantAnnotation: MKPinAnnotationView, MKAnnotation {
 
 class MapViewModel {
     var dataContainer : DataContainerToRead?
-    var actionDelegate : ActionMapViewModelDelegate?
+    var actionDelegate : MapViewModelActionDelegate?
     
     func restaurantAnnotations() -> [RestaurantAnnotation] {
         guard let restaurantsInfo = dataContainer?.restaurantsInfo() else {
@@ -47,6 +47,6 @@ class MapViewModel {
     }
 }
 
-protocol ActionMapViewModelDelegate : AnyObject {
+protocol MapViewModelActionDelegate : AnyObject {
     func willShow(restaurant : Restaurant)
 }

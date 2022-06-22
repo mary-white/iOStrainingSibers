@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RemoteRestaurantCoordinator : Coordinator, ActionRestaurantListViewModelDelegate {
+class RemoteRestaurantCoordinator : Coordinator, RestaurantListViewModelActionDelegate {
     let navigationController : UINavigationController
     
     let viewController : RestaurantListViewController

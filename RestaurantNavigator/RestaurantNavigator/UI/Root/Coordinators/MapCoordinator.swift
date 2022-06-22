@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class MapCoordinator : Coordinator, ActionMapViewModelDelegate {
+class MapCoordinator : Coordinator, MapViewModelActionDelegate {
     let navigationController : UINavigationController
     
     let viewController : MapViewController

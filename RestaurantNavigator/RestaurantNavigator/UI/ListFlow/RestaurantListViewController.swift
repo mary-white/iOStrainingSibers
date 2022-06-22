@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantListViewController: UIViewController, DisplayRestaurantListViewModelDelegate {
+class RestaurantListViewController: UIViewController, RestaurantListViewModelDisplayDelegate {
 
     @IBOutlet var restaurantTable : UITableView?
     

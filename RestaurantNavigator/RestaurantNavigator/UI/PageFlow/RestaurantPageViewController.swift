@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewModelDelegate {
+class RestaurantPageViewController: UIViewController, RestaurantPageViewModelDisplayDelegate {
     
     let bookmarkedRestaurantSymbol = "\u{2764}"
     let unbookmarkedRestaurantSumbol = "\u{1F494}"
@@ -74,7 +74,7 @@ class RestaurantPageViewController: UIViewController, DisplayRestaurantPageViewM
     }
     
     @IBAction func addNewReview() {
-        if !(viewModel?.isRemotedService() ?? false) {
+        if !(viewModel?.canAddComment() ?? false) {
             return
         }
         

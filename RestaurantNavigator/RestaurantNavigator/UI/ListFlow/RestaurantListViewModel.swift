@@ -10,8 +10,8 @@ import UIKit
 
 class RestaurantListViewModel : RemoteDataServiceDelegate  {
     var dataService : DataService?
-    weak var displayDelegate : DisplayRestaurantListViewModelDelegate?
-    var actionDelegate : ActionRestaurantListViewModelDelegate?
+    weak var displayDelegate : RestaurantListViewModelDisplayDelegate?
+    var actionDelegate : RestaurantListViewModelActionDelegate?
     var dataContainer : RestaurantContainer?
     
     var containerCount : Int {
@@ -48,10 +48,10 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
     }
 }
 
-protocol DisplayRestaurantListViewModelDelegate : AnyObject {
+protocol RestaurantListViewModelDisplayDelegate : AnyObject {
     func dataDidLoad()
 }
 
-protocol ActionRestaurantListViewModelDelegate : AnyObject {
+protocol RestaurantListViewModelActionDelegate : AnyObject {
     func willShow(restaurant : Restaurant)
 }
