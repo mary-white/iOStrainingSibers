@@ -8,18 +8,19 @@
 import Foundation
 import MapKit
 
-class RestaurantAnnotation: MKPinAnnotationView, MKAnnotation {
+class RestaurantAnnotation: NSObject, MKAnnotation {
     var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D()
     var title : String?
     var subtitle: String?
+    var image : UIImage?
 
     var id : Int?
 }
 
 class MapViewModel {
     var dataService : RemoteDataService? {
-        didSet {
-            dataService?.updateRestaurantData {
+        didSet { // not right - load twice!!
+            dataService?.updateRestaurantData() {
                 guard let restaurantsInfo = self.dataContainer?.restaurantsInfo() else {
                     return
                 }

@@ -166,10 +166,6 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     }
 }
 
-protocol RemoteDataServiceDelegate : AnyObject {
-    func dataDidLoad()
-}
-
 func parseStringToJSONElements(_ str : String) -> [String] {
     var result : [String] = []
     var data = str

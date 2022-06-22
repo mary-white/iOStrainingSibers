@@ -11,6 +11,7 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
     var dataContainer: RestaurantContainer = RestaurantContainer()
     
     func updateRestaurantData(afterUpdate : @escaping () -> Void) {
+        dataContainer.removeAll()
         guard let bookmarkedRestaurants = UserDefaults.standard.object(forKey: "BookmarkedRestaurants") as? [[String : String]] else {
             return
         }
