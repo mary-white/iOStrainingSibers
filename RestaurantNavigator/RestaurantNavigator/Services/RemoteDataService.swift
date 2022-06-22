@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-let errorStatusCode = [404 : "Bad request", 401 : "Unauthorized", 403 : "Forbidden", 500 : "Internal Server Error", 503 : "Service Unavailable"]
+let errorStatusCode = [404 : "Bad request", 401 : "Unauthorized", 403 : "Forbidden", 500 : "Internal Server Error", 503 : "Service Unavailable", 402 : "Quota has been exceeded for this project"]
 
 enum URLAddresses {
     case restaurants, reviews, defaultMean
