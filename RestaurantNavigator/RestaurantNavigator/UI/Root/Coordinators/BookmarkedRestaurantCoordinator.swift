@@ -26,10 +26,11 @@ class BookmarkedRestaurantCoordinator : Coordinator, RestaurantListViewModelActi
         self.bookmarkDataService = bookmarkDataService
         
         viewModel.dataContainer = dataContainer
-        viewModel.dataService?.updateRestaurantData()
+        viewModel.dataService = bookmarkDataService
         viewModel.actionDelegate = self
         
         viewController.viewModel = viewModel
+        bookmarkDataService.delegate = viewModel
         
         navigationController.pushViewController(viewController, animated: false)
     }

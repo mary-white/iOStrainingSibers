@@ -24,7 +24,6 @@ class RemoteRestaurantCoordinator : Coordinator, RestaurantListViewModelActionDe
         viewController.title = "Restaurant list"
         
         self.remoteDataService = remoteDataService
-        remoteDataService.updateRestaurantData()
         self.bookmarkDataService = bookmarkDataService
         
         viewModel = RestaurantListViewModel()

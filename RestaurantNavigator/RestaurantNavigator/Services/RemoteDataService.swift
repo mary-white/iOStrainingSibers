@@ -27,7 +27,12 @@ enum URLAddresses {
 class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     
     var dataContainer : RestaurantContainer = RestaurantContainer()
-    weak var delegate : RemoteDataServiceDelegate?
+    weak var delegate : RemoteDataServiceDelegate? {
+        didSet {
+            updateRestaurantData()
+        }
+    }
+    
     weak var reviewDelegate : RemoteDataServiceDelegate?
     
     func updateRestaurantData() {
