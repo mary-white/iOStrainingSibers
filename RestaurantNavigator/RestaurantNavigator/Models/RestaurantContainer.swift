@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 struct Review {
     let author: String
@@ -22,7 +23,7 @@ struct Restaurant {
     var gallery : [UIImage] = []
     var reviews : [Review] = []
 
-    var location : (lat : Double, lon : Double) = (lat:0, lon:0)
+    var location : CLLocationCoordinate2D = CLLocationCoordinate2D()
 }
 
 class RestaurantContainer : DataContainerToRead {
@@ -71,7 +72,7 @@ class RestaurantContainer : DataContainerToRead {
             return
         }
         
-        container[index].location = (lat : lat, lon : lon)
+        container[index].location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
     func shortRestaurantInfo() -> [(title: String, id : Int, description : String, address : String)] {
@@ -91,7 +92,7 @@ class RestaurantContainer : DataContainerToRead {
             if !restaurant.gallery.isEmpty {
                 image = restaurant.gallery[0]
             }
-            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.lat, longitudinal: location.lon, description : restaurant.description, image : image, address : restaurant.address))
+            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.latitude, longitudinal: location.longitude, description : restaurant.description, image : image, address : restaurant.address))
         }
         return result
     }
