@@ -8,15 +8,9 @@
 import Foundation
 
 class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
-    weak var delegate: RemoteDataServiceDelegate? {
-        didSet {
-            updateRestaurantData()
-        }
-    }
-    
     var dataContainer: RestaurantContainer = RestaurantContainer()
     
-    func updateRestaurantData() {
+    func updateRestaurantData(afterUpdate : @escaping () -> Void) {
         guard let bookmarkedRestaurants = UserDefaults.standard.object(forKey: "BookmarkedRestaurants") as? [[String : String]] else {
             return
         }
@@ -27,7 +21,7 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
             }
             dataContainer.addRestaurant(title: title, address: address, description: description, id: Int(id_str) ?? 0)
         }
-        delegate?.dataDidLoad()
+        afterUpdate()
     }
     
     func saveRestaurantData() {

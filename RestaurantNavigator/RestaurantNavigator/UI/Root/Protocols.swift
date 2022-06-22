@@ -9,9 +9,8 @@ import Foundation
 import UIKit
 
 protocol DataService : AnyObject {
-    var delegate : RemoteDataServiceDelegate? { get set }
     var dataContainer : RestaurantContainer { get set }
-    func updateRestaurantData()
+    func updateRestaurantData(afterUpdate : @escaping () -> Void)
 }
 
 protocol DataContainerToRead {

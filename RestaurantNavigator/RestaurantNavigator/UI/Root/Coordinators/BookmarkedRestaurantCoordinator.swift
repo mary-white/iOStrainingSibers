@@ -30,7 +30,6 @@ class BookmarkedRestaurantCoordinator : Coordinator, RestaurantListViewModelActi
         viewModel.actionDelegate = self
         
         viewController.viewModel = viewModel
-        bookmarkDataService.delegate = viewModel
         
         navigationController.pushViewController(viewController, animated: false)
     }

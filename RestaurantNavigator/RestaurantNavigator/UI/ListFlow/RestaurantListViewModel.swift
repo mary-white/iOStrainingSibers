@@ -8,8 +8,14 @@
 import Foundation
 import UIKit
 
-class RestaurantListViewModel : RemoteDataServiceDelegate  {
-    var dataService : DataService?
+class RestaurantListViewModel {
+    var dataService : DataService? {
+        didSet {
+            dataService?.updateRestaurantData {
+                self.displayDelegate?.dataDidLoad()
+            }
+        }
+    }
     weak var displayDelegate : RestaurantListViewModelDisplayDelegate?
     var actionDelegate : RestaurantListViewModelActionDelegate?
     var dataContainer : RestaurantContainer?
@@ -39,12 +45,9 @@ class RestaurantListViewModel : RemoteDataServiceDelegate  {
     }
     
     func updateRestaurantListInfo() {
-        dataService?.updateRestaurantData()
-    }
-    
-    // protocol function
-    func dataDidLoad() {
-        displayDelegate?.dataDidLoad()
+        dataService?.updateRestaurantData() {
+            self.displayDelegate?.dataDidLoad()
+        }
     }
 }
 

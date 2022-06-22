@@ -17,6 +17,7 @@ class RestaurantAnnotation: MKPinAnnotationView, MKAnnotation {
 }
 
 class MapViewModel {
+    var dataService : RemoteDataService?
     var dataContainer : DataContainerToRead?
     var actionDelegate : MapViewModelActionDelegate?
     

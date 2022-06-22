@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class RestaurantPageViewModel: RemoteDataServiceDelegate {
+class RestaurantPageViewModel {
     var currentRestaurant : Restaurant?
     var restaurantReviews : [Review]
     
@@ -52,14 +52,14 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
     }
     
     func addNewReview(author : String, text : String) {
-        guard let id = currentRestaurant?.id, var dataService = remoteDataService else {
+        guard let id = currentRestaurant?.id, let dataService = remoteDataService else {
             return
         }
         
-        dataService.reviewDelegate = self
-        
         let currentDate  = String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970))
-        dataService.addNewReview(author: author, text: text, restaurantId : id, date : currentDate)
+        dataService.addNewReview(author: author, text: text, restaurantId : id, date : currentDate) {
+            self.displayDelegate?.reviewDidLoad()
+        }
         restaurantReviews.append(Review(author: author, reviewText: text, date: currentDate))
         displayDelegate?.reviewDidLoad()
     }
@@ -73,10 +73,6 @@ class RestaurantPageViewModel: RemoteDataServiceDelegate {
         } else {
             bookmarkDataService?.unbookmarkRestaurant(id: restaurant.id)
         }
-    }
-    
-    func dataDidLoad() {
-        displayDelegate?.reviewDidLoad()
     }
     
     func isBookmarked() -> Bool {
@@ -96,8 +92,7 @@ protocol RestaurantPageViewModelDisplayDelegate {
 }
 
 protocol RestaurantPageRemoteDataService {
-    var reviewDelegate : RemoteDataServiceDelegate? {get set}
-    func addNewReview(author : String, text : String, restaurantId : Int, date : String)
+    func addNewReview(author : String, text : String, restaurantId : Int, date : String, afterAdd : @escaping () -> Void)
 }
 
 protocol RestaurantPageBookmarkDataService {

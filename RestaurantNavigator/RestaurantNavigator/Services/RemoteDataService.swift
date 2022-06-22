@@ -27,15 +27,8 @@ enum URLAddresses {
 class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     
     var dataContainer : RestaurantContainer = RestaurantContainer()
-    weak var delegate : RemoteDataServiceDelegate? {
-        didSet {
-            updateRestaurantData()
-        }
-    }
     
-    weak var reviewDelegate : RemoteDataServiceDelegate?
-    
-    func updateRestaurantData() {
+    func updateRestaurantData(afterUpdate : @escaping () -> Void) {
         // load all information about restaurants
         processDataFromURLAddress(from: URLAddresses.restaurants.stringFormat()) { firstData in
             guard let dataInStringFormat = String(data: firstData, encoding: .utf8) else {
@@ -54,18 +47,18 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
                 self.dataContainer.setRestaurantCoordinats(lat: Double(lat), lon: Double(lon), for: id)
                 
                 // load pictures
-                self.loadRestaurantPictures(from: imagePaths, for: id)
+                self.loadRestaurantPictures(from: imagePaths, for: id, afterUpdated: afterUpdate)
             }
             
             DispatchQueue.main.async {
-                self.delegate?.dataDidLoad()
+                afterUpdate()
             }
         }
         // load reviews
         loadRestaurantReviews()
     }
     
-    func loadRestaurantPictures(from urlAddresses : [String], for restaurantId : Int){
+    func loadRestaurantPictures(from urlAddresses : [String], for restaurantId : Int, afterUpdated : @escaping () -> Void) {
         for address in urlAddresses{
             processDataFromURLAddress(from: address) { firstImage in
                 guard let image = UIImage(data: firstImage) else {
@@ -74,7 +67,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
                 
                 DispatchQueue.main.async {
                     self.dataContainer.addImageToGalery(for: restaurantId, newImage: image)
-                    self.delegate?.dataDidLoad()
+                    afterUpdated()
                 }
             }
         }
@@ -125,7 +118,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
         task.resume()
     }
     
-    func addNewReview(author : String, text : String, restaurantId : Int, date : String) {
+    func addNewReview(author : String, text : String, restaurantId : Int, date : String, afterAdd : @escaping () -> Void) {
         
         let rowData: [String: Any] = [
             "restaurantId": restaurantId,
@@ -158,8 +151,8 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
             
             if let _ = data {
                 DispatchQueue.main.async {
-                    self.updateRestaurantData()
-                    self.reviewDelegate?.dataDidLoad()
+                    self.updateRestaurantData() {}
+                    afterAdd()
                 }
                 
                 /*let responseJSON = try? JSONSerialization.jsonObject(with: firstData, options: [])
