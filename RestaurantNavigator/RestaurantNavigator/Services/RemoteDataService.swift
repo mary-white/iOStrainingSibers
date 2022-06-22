@@ -118,7 +118,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
         task.resume()
     }
     
-    func addNewReview(author : String, text : String, restaurantId : Int, date : String, afterAdd : @escaping () -> Void) {
+    func addNewReview(author : String, text : String, restaurantId : Int, date : String) {
         
         let rowData: [String: Any] = [
             "restaurantId": restaurantId,
@@ -152,7 +152,6 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
             if let _ = data {
                 DispatchQueue.main.async {
                     self.updateRestaurantData() {}
-                    afterAdd()
                 }
                 
                 /*let responseJSON = try? JSONSerialization.jsonObject(with: firstData, options: [])

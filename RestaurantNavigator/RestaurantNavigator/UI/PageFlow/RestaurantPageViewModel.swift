@@ -57,9 +57,7 @@ class RestaurantPageViewModel {
         }
         
         let currentDate  = String(describing: NSDate(timeIntervalSince1970: NSDate().timeIntervalSince1970))
-        dataService.addNewReview(author: author, text: text, restaurantId : id, date : currentDate) {
-            self.displayDelegate?.reviewDidLoad()
-        }
+        dataService.addNewReview(author: author, text: text, restaurantId : id, date : currentDate)
         restaurantReviews.append(Review(author: author, reviewText: text, date: currentDate))
         displayDelegate?.reviewDidLoad()
     }
@@ -92,7 +90,7 @@ protocol RestaurantPageViewModelDisplayDelegate {
 }
 
 protocol RestaurantPageRemoteDataService {
-    func addNewReview(author : String, text : String, restaurantId : Int, date : String, afterAdd : @escaping () -> Void)
+    func addNewReview(author : String, text : String, restaurantId : Int, date : String)
 }
 
 protocol RestaurantPageBookmarkDataService {
