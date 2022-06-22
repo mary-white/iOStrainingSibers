@@ -36,6 +36,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
             }
             
             let resultDictionaryOfRestaurants = convertJSONStringToArrayOfDictionaries(dataInStringFormat, parser : parseStringToJSONElements)
+            self.dataContainer.removeAll()
             for restaurant in resultDictionaryOfRestaurants {
                 guard let title = restaurant.name, let address = restaurant.address, let description = restaurant.description, let id = restaurant.id,
                       let lat = restaurant.lat, let lon = restaurant.lon, let imagePaths = restaurant.imagePaths else {

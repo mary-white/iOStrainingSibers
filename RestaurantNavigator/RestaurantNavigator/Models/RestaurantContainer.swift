@@ -44,6 +44,10 @@ class RestaurantContainer : DataContainerToRead {
         return container[index]
     }
     
+    func removeAll() {
+        container.removeAll()
+    }
+    
     func remove(id : Int) {
         guard let index = container.firstIndex(where: {element in element.id == id}) else {
             return
