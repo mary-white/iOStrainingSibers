@@ -38,7 +38,7 @@ class BookmarkDataService : DataService, RestaurantPageBookmarkDataService {
         return dataContainer.container.contains(where: {element in element.id == id})
     }
     
-    func bookmarkRestaurant(restaurantInfo: (title: String, id: Int, description: String, address: String)) {
+    func bookmarkRestaurant(restaurantInfo: ShortRestaurantInfo) {
         dataContainer.addRestaurant(title: restaurantInfo.title, address: restaurantInfo.address, description: restaurantInfo.description, id: restaurantInfo.id)
         saveRestaurantData()
     }
