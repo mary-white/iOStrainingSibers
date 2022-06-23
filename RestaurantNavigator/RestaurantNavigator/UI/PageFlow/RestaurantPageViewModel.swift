@@ -20,11 +20,11 @@ class RestaurantPageViewModel {
         restaurantReviews = reviews
     }
     
-    func restaurantInfo() -> (title : String, description : String, photo : UIImage, address : String) {
+    func restaurantInfo() -> RestaurantInfoViewModel {
         guard let restaurant = currentRestaurant else {
-            return (title : "", description : "", photo : UIImage(), address :"")
+            return RestaurantInfoViewModel()
         }
-        return (title: restaurant.title ?? "", description: restaurant.restaurantDescription, photo: restaurant.gallery.isEmpty ? UIImage() : restaurant.gallery[0], address : restaurant.address)
+        return RestaurantInfoViewModel(restaurant: restaurant)
     }
     
     var reviewsCount: Int {
@@ -66,7 +66,7 @@ class RestaurantPageViewModel {
             return
         }
         if !isBookmarked() {
-            bookmarkDataService?.bookmarkRestaurant(restaurantInfo: ShortRestaurantInfo(id: restaurant.id, title: restaurant.title ?? "", address: restaurant.address, description: restaurant.description))
+            bookmarkDataService?.bookmarkRestaurant(restaurantInfo: ShortRestaurantInfo(id: restaurant.id, title: restaurant.title ?? "", address: restaurant.address, description: restaurant.restaurantDescription))
         } else {
             bookmarkDataService?.unbookmarkRestaurant(id: restaurant.id)
         }
@@ -92,4 +92,11 @@ protocol RestaurantPageBookmarkDataService {
     func isBookmarked(id : Int) -> Bool
     func bookmarkRestaurant(restaurantInfo : ShortRestaurantInfo)
     func unbookmarkRestaurant(id : Int)
+}
+
+protocol RestaurantPageInfoViewModelProtocol {
+    var title : String {get set}
+    var description : String {get set}
+    var image : UIImage {get set}
+    var address : String {get set}
 }

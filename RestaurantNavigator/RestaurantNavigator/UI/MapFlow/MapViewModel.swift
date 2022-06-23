@@ -9,14 +9,6 @@ import Foundation
 import MapKit
 
 extension Restaurant : MKAnnotation {
-    var coordinate : CLLocationCoordinate2D {
-        get {
-            return location
-        }
-        set {
-            location = newValue
-        }
-    }
     var subtitle: String? {
         get {
             return restaurantDescription
@@ -42,7 +34,7 @@ class MapViewModel : RemoteDataServiceDelegate {
             let annotaion = Restaurant()
             annotaion.title = restaurant.title
             annotaion.subtitle = restaurant.restaurantDescription
-            annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
+            annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.coordinate.latitude, longitude: restaurant.coordinate.longitude)
             annotaion.id = restaurant.id
             annotaion.image = restaurant.image
             

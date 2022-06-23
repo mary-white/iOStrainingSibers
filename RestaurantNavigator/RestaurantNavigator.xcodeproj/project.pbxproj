@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F0DCE53286452E600B95453 /* RestaurantCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0DCE52286452E600B95453 /* RestaurantCellViewModel.swift */; };
+		3F0DCE552864718600B95453 /* RestaurantPageInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0DCE542864718600B95453 /* RestaurantPageInfoViewModel.swift */; };
 		3F3680612851FDFB0066A50E /* RestaurantPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */; };
 		3F3680632851FE950066A50E /* RestaurantPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */; };
 		3FA3411528505171003FABB4 /* RemoteRestaurantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */; };
@@ -31,6 +32,7 @@
 
 /* Begin PBXFileReference section */
 		3F0DCE52286452E600B95453 /* RestaurantCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellViewModel.swift; sourceTree = "<group>"; };
+		3F0DCE542864718600B95453 /* RestaurantPageInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageInfoViewModel.swift; sourceTree = "<group>"; };
 		3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageViewController.swift; sourceTree = "<group>"; };
 		3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageViewModel.swift; sourceTree = "<group>"; };
 		3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRestaurantCoordinator.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */,
 				3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */,
+				3F0DCE542864718600B95453 /* RestaurantPageInfoViewModel.swift */,
 			);
 			path = PageFlow;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 			files = (
 				3FA341252850612E003FABB4 /* RestaurantContainer.swift in Sources */,
 				3FB09FFB284E0A4C00ADA6DF /* RootCordinator.swift in Sources */,
+				3F0DCE552864718600B95453 /* RestaurantPageInfoViewModel.swift in Sources */,
 				3FA3411F28505595003FABB4 /* MapViewModel.swift in Sources */,
 				3FA3411528505171003FABB4 /* RemoteRestaurantCoordinator.swift in Sources */,
 				3FB09FEB284E08CD00ADA6DF /* RestaurantListViewController.swift in Sources */,

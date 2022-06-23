@@ -30,7 +30,6 @@ class MapViewController: UIViewController, MapViewModelDisplayDelegate {
     
     // protocol function
     func dataDidLoad(annotations: [Restaurant]) {
-        print("update annotations")
         if let oldAnnotations = mapView?.annotations {
             mapView?.removeAnnotations(oldAnnotations)
         }
@@ -65,7 +64,7 @@ extension MapViewController : MKMapViewDelegate {
         view?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure, primaryAction: UIAction() {_ in self.openRestaurantPage(restaurantId: annotationInRestaurantAnnotationFormat.id)})
         
         // add restaurant image
-        let restaurantImage = annotationInRestaurantAnnotationFormat.image ?? UIImage()
+        let restaurantImage = annotationInRestaurantAnnotationFormat.image
         let scaledRestaurantImage = resizeImage(restaurantImage, newSize : CGSize(width: 60, height: 60))
         view?.leftCalloutAccessoryView = UIImageView(image: scaledRestaurantImage)
     }

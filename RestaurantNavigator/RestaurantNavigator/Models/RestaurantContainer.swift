@@ -22,7 +22,7 @@ class Restaurant : NSObject {
     var restaurantDescription : String
     var gallery : [UIImage] = []
 
-    var location : CLLocationCoordinate2D = CLLocationCoordinate2D()
+    var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D()
     
     var image : UIImage {
         get {
@@ -114,7 +114,7 @@ class RestaurantContainer : DataContainerToRead {
             return
         }
         
-        container[index].location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+        container[index].coordinate = CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
     func shortRestaurantInfo() -> [ShortRestaurantInfo] {

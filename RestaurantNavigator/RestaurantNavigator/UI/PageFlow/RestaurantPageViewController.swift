@@ -56,7 +56,7 @@ class RestaurantPageViewController: UIViewController {
             return
         }
         
-        restaurantImage?.image = restaurantInfo.photo
+        restaurantImage?.image = restaurantInfo.image
         restaurantTitle?.text = restaurantInfo.title
         restaurantAddress?.text = restaurantInfo.address
         restaurantDescription?.text = restaurantInfo.description
