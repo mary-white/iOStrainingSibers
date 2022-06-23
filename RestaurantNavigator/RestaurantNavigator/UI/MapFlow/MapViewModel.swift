@@ -8,13 +8,23 @@
 import Foundation
 import MapKit
 
-class RestaurantAnnotation: NSObject, MKAnnotation {
-    var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D()
-    var title : String?
-    var subtitle: String?
-    var image : UIImage?
-
-    var id : Int?
+extension Restaurant : MKAnnotation {
+    var coordinate : CLLocationCoordinate2D {
+        get {
+            return location
+        }
+        set {
+            location = newValue
+        }
+    }
+    var subtitle: String? {
+        get {
+            return restaurantDescription
+        }
+        set {
+            restaurantDescription = newValue ?? ""
+        }
+    }
 }
 
 class MapViewModel : RemoteDataServiceDelegate {
@@ -22,16 +32,16 @@ class MapViewModel : RemoteDataServiceDelegate {
     var actionDelegate : MapViewModelActionDelegate?
     var displayDelegate : MapViewModelDisplayDelegate?
     
-    func restaurantAnnotations() -> [RestaurantAnnotation] {
+    func restaurantAnnotations() -> [Restaurant] {
         guard let restaurantsInfo = dataContainer?.restaurantsInfo() else {
             return []
         }
         
-        var annotaions : [RestaurantAnnotation] = []
+        var annotaions : [Restaurant] = []
         for restaurant in restaurantsInfo {
-            let annotaion = RestaurantAnnotation()
+            let annotaion = Restaurant()
             annotaion.title = restaurant.title
-            annotaion.subtitle = restaurant.description
+            annotaion.subtitle = restaurant.restaurantDescription
             annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
             annotaion.id = restaurant.id
             annotaion.image = restaurant.image
@@ -59,5 +69,5 @@ protocol MapViewModelActionDelegate : AnyObject {
 }
 
 protocol MapViewModelDisplayDelegate {
-    func dataDidLoad(annotations: [RestaurantAnnotation])
+    func dataDidLoad(annotations: [Restaurant])
 }

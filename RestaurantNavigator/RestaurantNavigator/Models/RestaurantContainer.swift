@@ -15,11 +15,11 @@ struct Review {
     let date: String
 }
 
-struct Restaurant {
+class Restaurant : NSObject {
     var id : Int
-    var title : String
+    var title : String?
     var address : String
-    var description : String
+    var restaurantDescription : String
     var gallery : [UIImage] = []
 
     var location : CLLocationCoordinate2D = CLLocationCoordinate2D()
@@ -31,7 +31,28 @@ struct Restaurant {
             }
             return gallery[0]
         }
+        set {
+            gallery = [newValue]
+        }
     }
+    
+    init(id: Int, title: String, address: String, description: String) {
+        self.id = id
+        self.title = title
+        self.address = address
+        self.restaurantDescription = description
+    }
+    
+    convenience override init() {
+        self.init(id: 0, title: "", address: "", description: "")
+    }
+}
+
+struct ShortRestaurantInfo {
+    var id : Int
+    var title : String
+    var address : String
+    var description : String
 }
 
 class RestaurantContainer : DataContainerToRead {
@@ -96,10 +117,10 @@ class RestaurantContainer : DataContainerToRead {
         container[index].location = CLLocationCoordinate2D(latitude: lat, longitude: lon)
     }
     
-    func shortRestaurantInfo() -> [(title: String, id : Int, description : String, address : String)] {
-        var result : [(title: String, id : Int, description : String, address : String)] = []
+    func shortRestaurantInfo() -> [ShortRestaurantInfo] {
+        var result : [ShortRestaurantInfo] = []
         for restaurant in container {
-            result.append((title : restaurant.title, id : restaurant.id, description : restaurant.description, address : restaurant.address))
+            result.append(ShortRestaurantInfo(id: restaurant.id, title: restaurant.title ?? "", address: restaurant.address, description: restaurant.restaurantDescription))
         }
         return result
     }

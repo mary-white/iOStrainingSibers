@@ -14,8 +14,8 @@ struct RestaurantCellViewModel : RestaurantCellViewProtocol {
     var image : UIImage
     
     init(restaurant : Restaurant) {
-        title = restaurant.title
-        description = restaurant.description
+        title = restaurant.title ?? ""
+        description = restaurant.restaurantDescription
         image = restaurant.gallery.isEmpty ? UIImage() : restaurant.gallery[0]
     }
 }
