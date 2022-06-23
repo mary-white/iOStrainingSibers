@@ -71,3 +71,9 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
         viewModel?.showRestaurantPage(at : indexPath.row)
     }
 }
+
+protocol RestaurantCellViewProtocol {
+    var title : String {get set}
+    var description : String { get set }
+    var image : UIImage { get set }
+}
