@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F0DCE53286452E600B95453 /* RestaurantCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0DCE52286452E600B95453 /* RestaurantCellViewModel.swift */; };
 		3F3680612851FDFB0066A50E /* RestaurantPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */; };
 		3F3680632851FE950066A50E /* RestaurantPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */; };
 		3FA3411528505171003FABB4 /* RemoteRestaurantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3F0DCE52286452E600B95453 /* RestaurantCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantCellViewModel.swift; sourceTree = "<group>"; };
 		3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageViewController.swift; sourceTree = "<group>"; };
 		3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageViewModel.swift; sourceTree = "<group>"; };
 		3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRestaurantCoordinator.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			children = (
 				3FB09FEA284E08CD00ADA6DF /* RestaurantListViewController.swift */,
 				3FA3411C285054D6003FABB4 /* RestaurantListViewModel.swift */,
+				3F0DCE52286452E600B95453 /* RestaurantCellViewModel.swift */,
 			);
 			path = ListFlow;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 				3FA3411B28505418003FABB4 /* BookmarkedRestaurantCoordinator.swift in Sources */,
 				3F3680632851FE950066A50E /* RestaurantPageViewModel.swift in Sources */,
 				3FA3412128505652003FABB4 /* RemoteDataService.swift in Sources */,
+				3F0DCE53286452E600B95453 /* RestaurantCellViewModel.swift in Sources */,
 				3FB09FE7284E08CD00ADA6DF /* AppDelegate.swift in Sources */,
 				3FB09FE9284E08CD00ADA6DF /* SceneDelegate.swift in Sources */,
 				3FA341192850534A003FABB4 /* MapViewController.swift in Sources */,

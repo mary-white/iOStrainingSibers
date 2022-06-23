@@ -26,15 +26,11 @@ class RestaurantListViewModel {
         }
     }
     
-    func containerElement(at index : Int) -> (title : String, description : String, image : UIImage) {
+    func containerElement(at index : Int) -> RestaurantCellViewModel? {
         guard let element = dataContainer?[index] else {
-            return (title : "", description : "", image : UIImage())
+            return nil
         }
-        var image = UIImage()
-        if !element.gallery.isEmpty {
-            image = element.gallery[0]
-        }
-        return (title : element.title, description : element.description, image : image)
+        return RestaurantCellViewModel(restaurant: element)
     }
     
     func showRestaurantPage(at index : Int) {

@@ -71,4 +71,3 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
         viewModel?.showRestaurantPage(at : indexPath.row)
     }
 }
-
