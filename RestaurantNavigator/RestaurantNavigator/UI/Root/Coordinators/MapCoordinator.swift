@@ -11,9 +11,6 @@ import UIKit
 class MapCoordinator : Coordinator, MapViewModelActionDelegate {
     let navigationController : UINavigationController
     
-    let viewController : MapViewController
-    let viewModel : MapViewModel
-    
     let dataContainer : RestaurantContainer
     
     let remoteDataService : RemoteDataService
@@ -26,9 +23,9 @@ class MapCoordinator : Coordinator, MapViewModelActionDelegate {
         self.remoteDataService = remoteDataService
         self.bookmarkDataService = bookmarkDataService
         
-        viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
+        let viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
-        viewModel = MapViewModel()
+        let viewModel = MapViewModel()
         viewModel.displayDelegate = viewController
         viewModel.actionDelegate = self
         viewModel.dataContainer = dataContainer

@@ -11,17 +11,14 @@ import UIKit
 class BookmarkedRestaurantCoordinator : Coordinator, RestaurantListViewModelActionDelegate {
     let navigationController : UINavigationController
     
-    let viewController : RestaurantListViewController
-    let viewModel : RestaurantListViewModel
-    
     let bookmarkDataService : BookmarkDataService
     
     init(dataContainer : RestaurantContainer, bookmarkDataService : BookmarkDataService) {
         navigationController = UINavigationController()
         
-        viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
+        let viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
         
-        viewModel = RestaurantListViewModel()
+        let viewModel = RestaurantListViewModel()
         
         self.bookmarkDataService = bookmarkDataService
         

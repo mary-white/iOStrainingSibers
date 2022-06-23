@@ -11,22 +11,19 @@ import UIKit
 class RemoteRestaurantCoordinator : Coordinator, RestaurantListViewModelActionDelegate {
     let navigationController : UINavigationController
     
-    let viewController : RestaurantListViewController
-    let viewModel : RestaurantListViewModel
-    
     let remoteDataService : RemoteDataService
     let bookmarkDataService : BookmarkDataService
     
     init(dataContainer : RestaurantContainer, remoteDataService : RemoteDataService, bookmarkDataService : BookmarkDataService) {
         navigationController = UINavigationController()
         
-        viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
+        let viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantListViewController") as! RestaurantListViewController
         viewController.title = "Restaurant list"
         
         self.remoteDataService = remoteDataService
         self.bookmarkDataService = bookmarkDataService
         
-        viewModel = RestaurantListViewModel()
+        let viewModel = RestaurantListViewModel()
         viewModel.dataService = remoteDataService
         viewModel.dataContainer = dataContainer
         viewModel.displayDelegate = viewController
