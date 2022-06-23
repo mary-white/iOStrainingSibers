@@ -15,9 +15,9 @@ class RestaurantPageViewModel {
     var remoteDataService : RestaurantPageRemoteDataService?
     var bookmarkDataService : RestaurantPageBookmarkDataService?
     
-    init(restaurant : Restaurant) {
+    init(restaurant : Restaurant, reviews : [Review]) {
         currentRestaurant = restaurant
-        restaurantReviews = restaurant.reviews
+        restaurantReviews = reviews
     }
     
     func restaurantInfo() -> (title : String, description : String, photo : UIImage, address : String) {

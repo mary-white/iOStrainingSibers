@@ -38,9 +38,9 @@ class BookmarkedRestaurantCoordinator : Coordinator, RestaurantListViewModelActi
         return navigationController
     }
     
-    func willShow(restaurant: Restaurant) {
+    func willShow(_ viewModel : RestaurantListViewModel, restaurant: Restaurant) {
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
-        let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
+        let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant, reviews: [])
         restaurantPageViewModel.bookmarkDataService = bookmarkDataService
         restaurantPageViewController.viewModel = restaurantPageViewModel
         

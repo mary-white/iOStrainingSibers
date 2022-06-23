@@ -37,7 +37,7 @@ class RestaurantListViewModel {
         guard let currentRestaurant = dataContainer?[index] else {
             return
         }
-        actionDelegate?.willShow(restaurant: currentRestaurant)
+        actionDelegate?.willShow(self, restaurant: currentRestaurant)
     }
     
     func updateRestaurantListInfo() {
@@ -52,5 +52,5 @@ protocol RestaurantListViewModelDisplayDelegate : AnyObject {
 }
 
 protocol RestaurantListViewModelActionDelegate : AnyObject {
-    func willShow(restaurant : Restaurant)
+    func willShow(_ viewModel : RestaurantListViewModel, restaurant : Restaurant)
 }

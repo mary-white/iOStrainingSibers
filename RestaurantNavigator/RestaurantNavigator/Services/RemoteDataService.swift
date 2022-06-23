@@ -75,6 +75,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     }
     
     func loadRestaurantReviews() {
+        self.dataContainer.removeAllReviews()
         processDataFromURLAddress(from: URLAddresses.reviews.stringFormat()) {firstData in
             guard let dataInStringFormat = String(data: firstData, encoding: .utf8) else {
                 return

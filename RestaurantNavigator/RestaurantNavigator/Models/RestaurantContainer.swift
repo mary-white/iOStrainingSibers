@@ -21,13 +21,13 @@ struct Restaurant {
     var address : String
     var description : String
     var gallery : [UIImage] = []
-    var reviews : [Review] = []
 
     var location : CLLocationCoordinate2D = CLLocationCoordinate2D()
 }
 
 class RestaurantContainer : DataContainerToRead {
     var container : Array<Restaurant> = []
+    var reviewContainer : [Int : [Review]] = [:]
     
     var count : Int {
         return container.count
@@ -64,11 +64,19 @@ class RestaurantContainer : DataContainerToRead {
     }
     
     func addReview(for id : Int, newReview : Review) {
-        guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
-            return
+        if reviewContainer[id] == nil {
+            reviewContainer[id] = [newReview]
+        } else {
+            reviewContainer[id]?.append(newReview)
         }
-        
-        container[index].reviews.append(newReview)
+    }
+    
+    func reviews(for id : Int) -> [Review] {
+        return reviewContainer[id] ?? []
+    }
+    
+    func removeAllReviews() {
+        reviewContainer.removeAll()
     }
     
     func setRestaurantCoordinats(lat : Double, lon : Double, for id : Int) {
