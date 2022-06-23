@@ -29,7 +29,6 @@ class MapCoordinator : Coordinator, MapViewModelActionDelegate {
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
         viewModel = MapViewModel()
-        viewModel.dataService = remoteDataService
         viewModel.actionDelegate = self
         viewModel.dataContainer = dataContainer
         viewController.viewModel = viewModel
@@ -44,7 +43,7 @@ class MapCoordinator : Coordinator, MapViewModelActionDelegate {
     func willShow(restaurant: Restaurant) {
         let restaurantPageViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "RestaurantPageViewController") as! RestaurantPageViewController
         
-        let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant)
+        let restaurantPageViewModel = RestaurantPageViewModel(restaurant: restaurant, reviews: dataContainer.reviews(for: restaurant.id))
         restaurantPageViewModel.remoteDataService = remoteDataService
         restaurantPageViewModel.bookmarkDataService = bookmarkDataService
         restaurantPageViewController.viewModel = restaurantPageViewModel

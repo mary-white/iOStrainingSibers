@@ -18,33 +18,26 @@ class RestaurantAnnotation: NSObject, MKAnnotation {
 }
 
 class MapViewModel {
-    var dataService : RemoteDataService? {
-        didSet { // not right - load twice!!
-            dataService?.updateRestaurantData() {
-                guard let restaurantsInfo = self.dataContainer?.restaurantsInfo() else {
-                    return
-                }
-                
-                for restaurant in restaurantsInfo {
-                    let annotation = RestaurantAnnotation()
-                    annotation.title = restaurant.title
-                    annotation.subtitle = restaurant.description
-                    annotation.coordinate = CLLocationCoordinate2D(latitude: restaurant.latitudinal, longitude: restaurant.longitudinal)
-                    annotation.id = restaurant.id
-                    annotation.image = restaurant.image
-                    
-                    self.annotations.append(annotation)
-                }
-            }
-        }
-    }
     var dataContainer : DataContainerToRead?
     var actionDelegate : MapViewModelActionDelegate?
     
-    var annotations : [RestaurantAnnotation] = []
-    
     func restaurantAnnotations() -> [RestaurantAnnotation] {
-        return annotations
+        guard let restaurantsInfo = dataContainer?.restaurantsInfo() else {
+            return []
+        }
+        
+        var annotaions : [RestaurantAnnotation] = []
+        for restaurant in restaurantsInfo {
+            let annotaion = RestaurantAnnotation()
+            annotaion.title = restaurant.title
+            annotaion.subtitle = restaurant.description
+            annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.location.latitude, longitude: restaurant.location.longitude)
+            annotaion.id = restaurant.id
+            annotaion.image = restaurant.image
+            
+            annotaions.append(annotaion)
+        }
+        return annotaions
     }
     
     func showRestaurantPage(id : Int) {

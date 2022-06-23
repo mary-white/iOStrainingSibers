@@ -23,10 +23,13 @@ class MapViewController: UIViewController {
         mapView?.centerToLocation(initLocation)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) { // delete this place!!
         // add annotations
         guard let restaurantAnnotations = viewModel?.restaurantAnnotations() else {
             return
+        }
+        if let oldAnnotations = mapView?.annotations {
+            mapView?.removeAnnotations(oldAnnotations)
         }
         mapView?.addAnnotations(restaurantAnnotations)
     }
@@ -41,31 +44,37 @@ extension MapViewController : MKMapViewDelegate {
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: "RestaurantAnnotation")
             annotationView?.canShowCallout = true
-
-            let annotationInRestaurantAnnotationFormat = annotation as! RestaurantAnnotation
-            // add info button
-            guard let restaurantId = annotationInRestaurantAnnotationFormat.id else {
-                return nil
-            }
-            let restaurantInfoButton = UIButton(type: .detailDisclosure, primaryAction: UIAction() {_ in self.openRestaurantPage(restaurantId: restaurantId)})
-            annotationView?.rightCalloutAccessoryView = restaurantInfoButton
-            
-            // add restaurant image
-            let restaurantImage = annotationInRestaurantAnnotationFormat.image
-            let newImageSize = CGSize(width: 60, height: 60)
-            let render = UIGraphicsImageRenderer(size: newImageSize) // resize image
-            let scaledRestaurantImage = render.image() { _ in restaurantImage?.draw(in: CGRect( origin: .zero, size: newImageSize))}
-            annotationView?.leftCalloutAccessoryView = UIImageView(image: scaledRestaurantImage)
-        } else {
-            annotationView?.annotation = annotation
         }
-
+        
+        configureAnnotationView(&annotationView, annotation: annotation)
         return annotationView
     }
     
     func openRestaurantPage(restaurantId : Int) {
         viewModel?.showRestaurantPage(id: restaurantId)
     }
+    
+    func configureAnnotationView(_ view : inout MKAnnotationView?, annotation : MKAnnotation) {
+        view?.annotation = annotation
+        
+        let annotationInRestaurantAnnotationFormat = annotation as! RestaurantAnnotation
+        // add info button
+        guard let restaurantId = annotationInRestaurantAnnotationFormat.id else {
+            return
+        }
+        view?.rightCalloutAccessoryView = UIButton(type: .detailDisclosure, primaryAction: UIAction() {_ in self.openRestaurantPage(restaurantId: restaurantId)})
+        
+        // add restaurant image
+        let restaurantImage = annotationInRestaurantAnnotationFormat.image ?? UIImage()
+        let scaledRestaurantImage = resizeImage(restaurantImage, newSize : CGSize(width: 60, height: 60))
+        view?.leftCalloutAccessoryView = UIImageView(image: scaledRestaurantImage)
+    }
+}
+
+func resizeImage(_ image : UIImage, newSize : CGSize) -> UIImage {
+    let render = UIGraphicsImageRenderer(size: newSize) // resize image
+    let scaledRestaurantImage = render.image() { _ in image.draw(in: CGRect( origin: .zero, size: newSize))}
+    return scaledRestaurantImage
 }
 
 extension MKMapView {
