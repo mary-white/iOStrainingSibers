@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MapViewModelDisplayDelegate {
     
     @IBOutlet var mapView : MKMapView?
     
@@ -21,17 +21,20 @@ class MapViewController: UIViewController {
         // init location for the map
         let initLocation = CLLocation(latitude: 54.868705, longitude: 83.122559) // maybe set user location???
         mapView?.centerToLocation(initLocation)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) { // delete this place!!
-        // add annotations
+        
         guard let restaurantAnnotations = viewModel?.restaurantAnnotations() else {
             return
         }
+        mapView?.addAnnotations(restaurantAnnotations)
+    }
+    
+    // protocol function
+    func dataDidLoad(annotations: [RestaurantAnnotation]) {
+        print("update annotations")
         if let oldAnnotations = mapView?.annotations {
             mapView?.removeAnnotations(oldAnnotations)
         }
-        mapView?.addAnnotations(restaurantAnnotations)
+        mapView?.addAnnotations(annotations)
     }
 }
 

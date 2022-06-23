@@ -17,9 +17,10 @@ class RestaurantAnnotation: NSObject, MKAnnotation {
     var id : Int?
 }
 
-class MapViewModel {
+class MapViewModel : RemoteDataServiceDelegate {
     var dataContainer : DataContainerToRead?
     var actionDelegate : MapViewModelActionDelegate?
+    var displayDelegate : MapViewModelDisplayDelegate?
     
     func restaurantAnnotations() -> [RestaurantAnnotation] {
         guard let restaurantsInfo = dataContainer?.restaurantsInfo() else {
@@ -46,8 +47,17 @@ class MapViewModel {
         }
         actionDelegate?.willShow(restaurant: restaurant)
     }
+    
+    // protocol function
+    func dataDidLoad() {
+        displayDelegate?.dataDidLoad(annotations: restaurantAnnotations())
+    }
 }
 
 protocol MapViewModelActionDelegate : AnyObject {
     func willShow(restaurant : Restaurant)
+}
+
+protocol MapViewModelDisplayDelegate {
+    func dataDidLoad(annotations: [RestaurantAnnotation])
 }

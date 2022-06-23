@@ -27,6 +27,7 @@ enum URLAddresses {
 class RemoteDataService : DataService, RestaurantPageRemoteDataService {
     
     var dataContainer : RestaurantContainer = RestaurantContainer()
+    var delegate : RemoteDataServiceDelegate?
     
     func updateRestaurantData(afterUpdate : @escaping () -> Void) {
         // load all information about restaurants
@@ -57,6 +58,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
         }
         // load reviews
         loadRestaurantReviews()
+        delegate?.dataDidLoad()
     }
     
     func loadRestaurantPictures(from urlAddresses : [String], for restaurantId : Int, afterUpdated : @escaping () -> Void) {
@@ -165,6 +167,10 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
 
         task.resume()
     }
+}
+
+protocol RemoteDataServiceDelegate {
+    func dataDidLoad()
 }
 
 func parseStringToJSONElements(_ str : String) -> [String] {

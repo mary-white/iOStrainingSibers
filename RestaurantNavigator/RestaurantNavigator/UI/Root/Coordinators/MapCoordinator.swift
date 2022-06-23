@@ -29,9 +29,11 @@ class MapCoordinator : Coordinator, MapViewModelActionDelegate {
         viewController =  UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MapViewController") as! MapViewController
         
         viewModel = MapViewModel()
+        viewModel.displayDelegate = viewController
         viewModel.actionDelegate = self
         viewModel.dataContainer = dataContainer
         viewController.viewModel = viewModel
+        self.remoteDataService.delegate = viewModel
         
         navigationController.pushViewController(viewController, animated: false)
     }
