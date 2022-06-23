@@ -23,6 +23,15 @@ struct Restaurant {
     var gallery : [UIImage] = []
 
     var location : CLLocationCoordinate2D = CLLocationCoordinate2D()
+    
+    var image : UIImage {
+        get {
+            if gallery.isEmpty {
+                return UIImage()
+            }
+            return gallery[0]
+        }
+    }
 }
 
 class RestaurantContainer : DataContainerToRead {
@@ -96,17 +105,8 @@ class RestaurantContainer : DataContainerToRead {
     }
     
     // protocol functions
-    func restaurantsInfo() -> [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] {
-        var result : [(title: String, id : Int, latitudinal: Double, longitudinal: Double, description : String, image : UIImage, address : String)] = []
-        for restaurant in container {
-            let location = restaurant.location
-            var image : UIImage = UIImage()
-            if !restaurant.gallery.isEmpty {
-                image = restaurant.gallery[0]
-            }
-            result.append((title: restaurant.title, id : restaurant.id, latitudinal: location.latitude, longitudinal: location.longitude, description : restaurant.description, image : image, address : restaurant.address))
-        }
-        return result
+    func restaurantsInfo() -> [Restaurant] {
+        return container
     }
     
     func element(id : Int) -> Restaurant? {
