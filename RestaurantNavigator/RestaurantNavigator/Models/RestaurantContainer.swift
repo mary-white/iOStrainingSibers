@@ -21,6 +21,7 @@ class Restaurant : NSObject {
     var address : String
     var restaurantDescription : String
     var gallery : [UIImage] = []
+    var rating : RatingView = RatingView(rating: 0)
 
     var coordinate : CLLocationCoordinate2D = CLLocationCoordinate2D()
     
@@ -99,6 +100,14 @@ class RestaurantContainer : DataContainerToRead {
         } else {
             reviewContainer[id]?.append(newReview)
         }
+    }
+    
+    func setRaiting(for id : Int, rating : Double) {
+        guard let index = container.firstIndex(where: {(el : Restaurant) in return el.id == id} ) else {
+            return
+        }
+        
+        container[index].rating = RatingView(rating: 0)
     }
     
     func reviews(for id : Int) -> [Review] {

@@ -47,6 +47,7 @@ class RemoteDataService : DataService, RestaurantPageRemoteDataService {
                 
                 // set restaurants coordinats
                 self.dataContainer.setRestaurantCoordinats(lat: Double(lat), lon: Double(lon), for: id)
+                self.dataContainer.setRaiting(for: id, rating: restaurant.rating)
                 
                 // load pictures
                 self.loadRestaurantPictures(from: imagePaths, for: id, afterUpdated: afterUpdate)
@@ -243,6 +244,7 @@ struct JSONDictionary : Decodable {
     var lat: Float?
     var lon: Float?
     var imagePaths : [String]?
+    var rating : Double
     
     enum CodingKeys : String, CodingKey {
         case restaurantId = "restaurantId"
@@ -259,6 +261,7 @@ struct JSONDictionary : Decodable {
         case lat = "lat"
         case lon = "lon"
         case imagePaths = "imagePaths"
+        case rating = "rating"
     }
     
     init(from decoder: Decoder) throws {
@@ -295,6 +298,12 @@ struct JSONDictionary : Decodable {
             lat = nil
             lon = nil
             imagePaths = nil
+        }
+        
+        do {
+            rating = try container.decode(Double.self, forKey: .rating)
+        } catch {
+            rating = 0
         }
     }
 }

@@ -11,6 +11,7 @@
 		3F0DCE552864718600B95453 /* RestaurantPageInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F0DCE542864718600B95453 /* RestaurantPageInfoViewModel.swift */; };
 		3F3680612851FDFB0066A50E /* RestaurantPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */; };
 		3F3680632851FE950066A50E /* RestaurantPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */; };
+		3F8762BD28659B36000EA19D /* RatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F8762BC28659B36000EA19D /* RatingView.swift */; };
 		3FA3411528505171003FABB4 /* RemoteRestaurantCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */; };
 		3FA3411728505279003FABB4 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA3411628505279003FABB4 /* MapCoordinator.swift */; };
 		3FA341192850534A003FABB4 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA341182850534A003FABB4 /* MapViewController.swift */; };
@@ -35,6 +36,7 @@
 		3F0DCE542864718600B95453 /* RestaurantPageInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageInfoViewModel.swift; sourceTree = "<group>"; };
 		3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageViewController.swift; sourceTree = "<group>"; };
 		3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantPageViewModel.swift; sourceTree = "<group>"; };
+		3F8762BC28659B36000EA19D /* RatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingView.swift; sourceTree = "<group>"; };
 		3FA3411428505171003FABB4 /* RemoteRestaurantCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteRestaurantCoordinator.swift; sourceTree = "<group>"; };
 		3FA3411628505279003FABB4 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		3FA341182850534A003FABB4 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 				3F3680602851FDFB0066A50E /* RestaurantPageViewController.swift */,
 				3F3680622851FE950066A50E /* RestaurantPageViewModel.swift */,
 				3F0DCE542864718600B95453 /* RestaurantPageInfoViewModel.swift */,
+				3F8762BC28659B36000EA19D /* RatingView.swift */,
 			);
 			path = PageFlow;
 			sourceTree = "<group>";
@@ -264,6 +267,7 @@
 				3FB09FE7284E08CD00ADA6DF /* AppDelegate.swift in Sources */,
 				3FB09FE9284E08CD00ADA6DF /* SceneDelegate.swift in Sources */,
 				3FA341192850534A003FABB4 /* MapViewController.swift in Sources */,
+				3F8762BD28659B36000EA19D /* RatingView.swift in Sources */,
 				3FDAA2B428533E9500A85E12 /* Protocols.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
