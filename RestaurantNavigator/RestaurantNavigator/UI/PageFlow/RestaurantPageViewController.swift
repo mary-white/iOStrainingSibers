@@ -33,7 +33,7 @@ class RestaurantPageViewController: UIViewController {
             return
         }
 
-        let currentHeaderSize = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height // tableHeaderView.sizeThatFits(CGSize(width: reviewsTable.frame.width, height: CGFloat.infinity)).height //
+        let currentHeaderSize = tableHeaderView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
         tableHeaderView.frame = CGRect(x:0, y:0, width:reviewsTable.frame.width, height:currentHeaderSize)
 
         let currentFooterSize = tableFooterView.sizeThatFits(CGSize(width: reviewsTable.frame.height, height: CGFloat.infinity))

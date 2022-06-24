@@ -22,25 +22,10 @@ extension Restaurant : MKAnnotation {
 class MapViewModel : RemoteDataServiceDelegate {
     var dataContainer : DataContainerToRead?
     var actionDelegate : MapViewModelActionDelegate?
-    var displayDelegate : MapViewModelDisplayDelegate?
+    weak var displayDelegate : MapViewModelDisplayDelegate?
     
     func restaurantAnnotations() -> [Restaurant] {
-        guard let restaurantsInfo = dataContainer?.restaurantsInfo() else {
-            return []
-        }
-        
-        var annotaions : [Restaurant] = []
-        for restaurant in restaurantsInfo {
-            let annotaion = Restaurant()
-            annotaion.title = restaurant.title
-            annotaion.subtitle = restaurant.restaurantDescription
-            annotaion.coordinate = CLLocationCoordinate2D(latitude: restaurant.coordinate.latitude, longitude: restaurant.coordinate.longitude)
-            annotaion.id = restaurant.id
-            annotaion.image = restaurant.image
-            
-            annotaions.append(annotaion)
-        }
-        return annotaions
+        return dataContainer?.restaurantsInfo() ?? []
     }
     
     func showRestaurantPage(id : Int) {
@@ -60,6 +45,6 @@ protocol MapViewModelActionDelegate : AnyObject {
     func willShow(restaurant : Restaurant)
 }
 
-protocol MapViewModelDisplayDelegate {
+protocol MapViewModelDisplayDelegate : AnyObject {
     func dataDidLoad(annotations: [Restaurant])
 }

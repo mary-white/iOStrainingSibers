@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-struct RestaurantCellViewModel : RestaurantCellViewProtocol {
+struct RestaurantCellViewModel : RestaurantCellViewModelProtocol {
     var title : String
     var description : String
     var image : UIImage

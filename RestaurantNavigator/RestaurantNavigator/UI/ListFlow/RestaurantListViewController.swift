@@ -76,7 +76,7 @@ extension RestaurantListViewController : UITableViewDelegate, UITableViewDataSou
     }
 }
 
-protocol RestaurantCellViewProtocol {
+protocol RestaurantCellViewModelProtocol {
     var title : String {get set}
     var description : String { get set }
     var image : UIImage { get set }
