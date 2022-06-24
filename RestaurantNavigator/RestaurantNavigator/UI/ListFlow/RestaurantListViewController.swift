@@ -26,6 +26,10 @@ class RestaurantListViewController: UIViewController, RestaurantListViewModelDis
         restaurantTable?.refreshControl?.attributedTitle = NSAttributedString(string: "Update restaurant data")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        restaurantTable?.reloadData()
+    }
+    
     func dataDidLoad() {
         restaurantTable?.reloadData()
     }
