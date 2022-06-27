@@ -40,6 +40,10 @@ class RestaurantPageViewModel {
         return currentRestaurant?.gallery.count ?? 0
     }
     
+    var restaurantRating : Double {
+        return currentRestaurant?.rating ?? 0
+    }
+    
     func photoFromGalery(at index : Int) -> UIImage {
         guard let gallery = currentRestaurant?.gallery else {
             return UIImage()

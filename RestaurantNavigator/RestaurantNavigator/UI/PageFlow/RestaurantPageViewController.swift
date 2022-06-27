@@ -23,6 +23,7 @@ class RestaurantPageViewController: UIViewController {
     @IBOutlet var reviewsTable : UITableView?
     @IBOutlet var buttonToAddReview : UIButton?
     @IBOutlet var buttonToBookmarkRestaurant : UIButton?
+    @IBOutlet var ratingView : UIImageView?
     
     var viewModel : RestaurantPageViewModel?
     
@@ -67,6 +68,11 @@ class RestaurantPageViewController: UIViewController {
         
         // tune bookmark button
         updateBookmarkButtonState()
+        
+        guard let ratingView = ratingView else {
+            return
+        }
+        ratingView.image = RatingView(rating: viewModel?.restaurantRating ?? 0).draw(areaSize: ratingView.frame.size)
     }
     
     override func viewWillAppear(_ animated: Bool) {
