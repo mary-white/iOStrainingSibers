@@ -72,12 +72,8 @@ class RatingView {
                     }
                     
                     starPath.addLine(to: point)
-                    
-                    // end point
-                    if i == verticleAngles.count - 1 {
-                        starPath.closeSubpath()
-                    }
                 }
+                starPath.closeSubpath()
 
                 context.cgContext.addPath(starPath)
                 starPaths.append(starPath)
